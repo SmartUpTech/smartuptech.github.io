@@ -1,5 +1,9 @@
-// @ts-check
 import { defineConfig } from 'astro/config';
+import tailwindcss from '@tailwindcss/vite';
 
-// https://astro.build/config
-export default defineConfig({});
+// Official Astro 6 + Tailwind 4 configuration
+export default defineConfig({
+  vite: {
+    plugins: [tailwindcss()],
+  },
+});
