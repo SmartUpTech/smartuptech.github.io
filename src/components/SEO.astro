@@ -1,0 +1,94 @@
+---
+import type { App } from '../data/apps';
+
+interface Props {
+	app?: App;
+	title?: string;
+	description?: string;
+	ogImage?: string;
+	isHomePage?: boolean;
+}
+
+const { app, title, description, ogImage = "/og-image.png", isHomePage = false } = Astro.props;
+
+const seoTitle = app
+  ? (app.seoTitle || `${app.name} App | ${app.tagline}`)
+  : (title ? title : "SmartUp Tech | Quality Android Applications for Everyday Life");
+
+const seoDescription = app
+  ? app.shortDescription
+  : (description || "SmartUp Tech develops high-impact Android applications focused on utility, cultural heritage, and daily productivity for millions of users worldwide.");
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || "https://smartuptech.github.io");
+
+// Structured Data for App
+const appJsonLd = app ? {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": app.name,
+  "operatingSystem": "ANDROID",
+  "applicationCategory": app.category === "Finance" ? "FinanceApplication" : (app.category === "Productivity" ? "UtilitiesApplication" : "LifestyleApplication"),
+  "downloadUrl": app.playStoreUrl,
+  "author": {
+    "@type": "Organization",
+    "name": "SmartUp Tech",
+    "url": "https://smartuptech.github.io"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": app.longDescription,
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.5",
+    "ratingCount": "1000"
+  }
+} : null;
+
+// Organization Schema for Home Page
+const orgJsonLd = isHomePage ? {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "SmartUp Tech",
+  "url": "https://smartuptech.github.io",
+  "logo": "https://smartuptech.github.io/smart-up-tech.webp",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "email": "smartlogic08@gmail.com",
+    "contactType": "customer service"
+  },
+  "sameAs": [
+    "https://play.google.com/store/apps/dev?id=6614685995890456247"
+  ]
+} : null;
+---
+
+<!-- Primary Meta Tags -->
+<title>{seoTitle}</title>
+<meta name="title" content={seoTitle} />
+<meta name="description" content={seoDescription} />
+<link rel="canonical" href={canonicalURL} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:title" content={seoTitle} />
+<meta property="og:description" content={seoDescription} />
+<meta property="og:image" content={new URL(ogImage, Astro.site || "https://smartuptech.github.io")} />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={canonicalURL} />
+<meta property="twitter:title" content={seoTitle} />
+<meta property="twitter:description" content={seoDescription} />
+<meta property="twitter:image" content={new URL(ogImage, Astro.site || "https://smartuptech.github.io")} />
+
+{appJsonLd && (
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(appJsonLd)} />
+)}
+
+{orgJsonLd && (
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(orgJsonLd)} />
+)}

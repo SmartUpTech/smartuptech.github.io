@@ -1,0 +1,68 @@
+---
+import type { App } from '../data/apps';
+
+interface Props {
+	app: App;
+	reverse?: boolean;
+}
+
+const { app, reverse = false } = Astro.props;
+---
+
+<section class="section-spacing overflow-hidden">
+	<div class="max-w-[1400px] mx-auto px-6 md:px-12">
+		<div class={`flex flex-col ${reverse ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-16 md:gap-32`}>
+			<div class="flex-1 space-y-8">
+				<div class="space-y-4">
+					<span class="text-sm font-bold tracking-widest uppercase" style={`color: ${app.themeColor}`}>
+						{app.category}
+					</span>
+					<h2 class="text-5xl md:text-7xl">{app.name}</h2>
+					<p class="text-xl md:text-2xl font-medium" style={`color: ${app.themeColor}`}>{app.tagline}</p>
+				</div>
+
+				<p class="max-w-xl">{app.shortDescription}</p>
+
+				<ul class="space-y-4 pt-4">
+					{app.features.map(feature => (
+						<li class="flex items-center gap-3 text-gray-600">
+							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style={`color: ${app.themeColor}`}><path d="M20 6 9 17l-5-5"/></svg>
+							{feature}
+						</li>
+					))}
+				</ul>
+
+				<div class="pt-8">
+					<a
+						href={app.playStoreUrl}
+						class="inline-flex items-center gap-2 font-semibold text-lg hover:gap-4 transition-all duration-300"
+						style={`color: ${app.themeColor}`}
+					>
+						Get on Play Store
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+					</a>
+				</div>
+			</div>
+
+			<div class="flex-1 w-full">
+				<div
+					class="aspect-[4/5] md:aspect-square rounded-[4rem] bg-gray-50/50 flex items-center justify-center p-12 relative overflow-hidden group border border-gray-100/50"
+				>
+					<img
+						src={app.icon}
+						alt={`${app.name} - ${app.tagline}`}
+						loading="lazy"
+						decoding="async"
+						class="w-1/2 h-auto rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-transform duration-700 group-hover:scale-110 object-cover relative z-10"
+					/>
+
+					<!-- Subtle background glow -->
+					<div
+						class="absolute inset-0 opacity-0 blur-[100px] transition-opacity duration-1000 group-hover:opacity-20 pointer-events-none"
+						style={`background-color: ${app.themeColor}`}
+					></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

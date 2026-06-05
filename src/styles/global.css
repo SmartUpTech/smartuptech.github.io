@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+/* Base Headings & Typography */
+@layer base {
+  h1 {
+    @apply text-6xl md:text-8xl font-extrabold tracking-tight leading-[1.05];
+  }
+
+  h2 {
+    @apply text-4xl md:text-6xl font-bold tracking-tight leading-tight;
+  }
+
+  p {
+    @apply text-lg md:text-xl text-gray-500 leading-relaxed;
+  }
+}
+
+/* Utility Classes */
+@layer utilities {
+  .container-premium {
+    @apply max-w-[1400px] mx-auto px-6 md:px-12;
+  }
+
+  .section-spacing {
+    @apply py-20 md:py-32;
+  }
+}

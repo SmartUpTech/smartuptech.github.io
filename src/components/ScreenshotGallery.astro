@@ -1,0 +1,136 @@
+---
+import type { App } from '../data/apps';
+
+interface Props {
+	app: App;
+}
+
+const { app } = Astro.props;
+const { id: appId, themeColor, screenshots } = app;
+
+const count = screenshots.length;
+---
+
+{count > 0 ? (
+	<div class="relative pt-12 pb-0 -mx-6 md:-mx-12 lg:-mx-24 px-6 md:px-12 lg:px-24 overflow-hidden">
+		<!-- Dynamic Creative Background -->
+		<div
+			class="absolute inset-0 opacity-5 pointer-events-none"
+			style={`background: radial-gradient(circle at 50% 50%, ${themeColor} 0%, transparent 70%);`}
+		></div>
+
+		<div class="relative">
+			<!-- Scroll Controls -->
+			<div class="absolute top-1/2 -left-4 md:-left-8 -translate-y-1/2 z-40 hidden md:block">
+				<button
+					id="prevBtn"
+					class="w-12 h-12 rounded-full bg-white shadow-xl border border-gray-100 flex items-center justify-center text-black hover:scale-110 active:scale-95 transition-all cursor-pointer"
+					aria-label="Previous screenshot"
+				>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+				</button>
+			</div>
+
+			<div class="absolute top-1/2 -right-4 md:-right-8 -translate-y-1/2 z-40 hidden md:block">
+				<button
+					id="nextBtn"
+					class="w-12 h-12 rounded-full bg-white shadow-xl border border-gray-100 flex items-center justify-center text-black hover:scale-110 active:scale-95 transition-all cursor-pointer"
+					aria-label="Next screenshot"
+				>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+				</button>
+			</div>
+
+			<!-- The Scroll Container -->
+			<div
+				id="scrollContainer"
+				class="flex overflow-x-auto snap-x snap-mandatory gap-8 md:gap-12 pb-12 no-scrollbar scroll-smooth"
+			>
+				{screenshots.map((item, i) => (
+					<div class="flex-shrink-0 w-[300px] md:w-[340px] snap-center py-8">
+						<div class="relative group">
+							<!-- The "Creative Background" Block for each card -->
+							<div
+								class="absolute inset-0 -m-6 rounded-[3rem] opacity-0 group-hover:opacity-100 transition-all duration-700 blur-2xl"
+								style={`background-color: ${themeColor}08;`}
+							></div>
+
+							<div class="relative z-10 space-y-8">
+								<!-- Device Frame -->
+								<div
+									class="relative mx-auto border-gray-900 bg-gray-900 border-[6px] rounded-[2.5rem] shadow-2xl overflow-hidden transform transition-all duration-500 group-hover:scale-105 group-hover:-translate-y-4"
+								>
+									<div class="absolute top-4 left-1/2 -translate-x-1/2 w-2 h-2 bg-black rounded-full z-30"></div>
+									<div class="w-full aspect-[9/19] overflow-hidden bg-white">
+										<img
+											src={`/screenshots/${appId}/${item.file}`}
+											alt={`${app.name} - ${item.title}`}
+											class="w-full h-full object-cover object-top"
+											loading="lazy"
+										/>
+									</div>
+								</div>
+
+								<!-- Feature Label -->
+								<div class="text-center px-4 transition-all duration-500 transform group-hover:translate-y-2">
+									<h3 class="text-xl font-bold mb-2">{item.title}</h3>
+									<p class="text-sm text-gray-500 leading-relaxed line-clamp-2">
+										{item.description}
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				))}
+			</div>
+		</div>
+
+		<!-- Scroll Progress Bar -->
+		<div class="flex justify-center items-center gap-3 mt-4">
+			<div class="h-1.5 w-32 bg-gray-100 rounded-full overflow-hidden">
+				<div
+					id="progressBar"
+					class="h-full bg-black w-0 transition-all duration-300"
+					style={`background-color: ${themeColor}`}
+				></div>
+			</div>
+			<span class="text-[10px] font-bold tracking-widest text-gray-400 uppercase">Swipe to Explore</span>
+		</div>
+	</div>
+) : (
+	<div class="py-24 text-center border-2 border-dashed border-gray-100 rounded-[3rem]">
+		<p class="text-gray-300 font-bold uppercase tracking-widest">Experience Coming Soon</p>
+	</div>
+)}
+
+<style>
+	.no-scrollbar::-webkit-scrollbar { display: none; }
+	.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+</style>
+
+<script>
+	const container = document.getElementById('scrollContainer');
+	const prevBtn = document.getElementById('prevBtn');
+	const nextBtn = document.getElementById('nextBtn');
+	const progressBar = document.getElementById('progressBar');
+
+	if (container && prevBtn && nextBtn && progressBar) {
+		const updateProgress = () => {
+			const scrollPercentage = (container.scrollLeft / (container.scrollWidth - container.clientWidth)) * 100;
+			progressBar.style.width = `${scrollPercentage}%`;
+		};
+
+		container.addEventListener('scroll', updateProgress);
+
+		nextBtn.addEventListener('click', () => {
+			container.scrollBy({ left: 340, behavior: 'smooth' });
+		});
+
+		prevBtn.addEventListener('click', () => {
+			container.scrollBy({ left: -340, behavior: 'smooth' });
+		});
+
+		// Initial progress
+		updateProgress();
+	}
+</script>

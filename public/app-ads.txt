@@ -1,0 +1,5 @@
+#For AdMob Test Ads
+google.com, pub-3940256099942544, DIRECT, f08c47fec0942fa0
+
+#For AdMob info.smartupapps@gmail.com
+google.com, pub-9684723354540179, DIRECT, f08c47fec0942fa0
