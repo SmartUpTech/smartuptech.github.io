@@ -13,11 +13,11 @@ const { app, title, description, ogImage = "/og-image.png", isHomePage = false }
 
 const seoTitle = app
   ? (app.seoTitle || `${app.name} App | ${app.tagline}`)
-  : (title ? title : "SmartUp Tech | Software Development & Mobile App Solutions");
+  : (title ? title : "SmartUp Tech | Quality Android Applications for Everyday Life");
 
 const seoDescription = app
   ? app.shortDescription
-  : (description || "SmartUp Tech develops high-impact Android apps and enterprise solutions focused on workflow automation, mobile excellence, and system integration.");
+  : (description || "SmartUp Tech develops high-impact Android applications focused on utility, cultural heritage, and daily productivity for millions of users worldwide.");
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site || "https://smartuptech.github.io");
 
@@ -27,8 +27,13 @@ const appJsonLd = app ? {
   "@type": "SoftwareApplication",
   "name": app.name,
   "operatingSystem": "ANDROID",
-  "applicationCategory": app.category,
+  "applicationCategory": app.category === "Finance" ? "FinanceApplication" : (app.category === "Productivity" ? "UtilitiesApplication" : "LifestyleApplication"),
   "downloadUrl": app.playStoreUrl,
+  "author": {
+    "@type": "Organization",
+    "name": "SmartUp Tech",
+    "url": "https://smartuptech.github.io"
+  },
   "offers": {
     "@type": "Offer",
     "price": "0",

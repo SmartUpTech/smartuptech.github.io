@@ -29,18 +29,18 @@ export interface App {
 
 export const apps: App[] = [
   {
-    id: "vedic-panchang",
+    id: "panchang",
     name: "Vedic Panchang",
     tagline: "Your Daily Spiritual Guide",
     shortDescription: "Comprehensive Hindu Panchang with Tithi, Nakshatra, Muhurat, and Festival information.",
-    longDescription: "Deep dive into ancient wisdom with accurate Tithi, Nakshatra, and Muhurat calculations. Vedic Panchang is designed for clarity and spiritual precision, providing you with all the essential information to align your daily life with cosmic rhythms.",
+    longDescription: "Deep dive into ancient wisdom with accurate Tithi, Nakshatra, and Muhurat calculations. Vedic Panchang provides a comprehensive spiritual experience similar to Drik Panchang and Kalnirnay, but with a focused, minimalist interface. Whether you are looking for a reliable Moon Calendar, insights into Vedang Panchang, or a modern alternative to apps like Moonly, our app is designed for clarity and spiritual precision.",
     themeColor: "#FF9933", // Saffron
     category: "Utility & Lifestyle",
     playStoreUrl: "https://play.google.com/store/apps/details?id=net.smartlogic.hinducalendar",
     icon: "/vedic-panchang.webp",
-    seoTitle: "Vedic Panchang App | Hindu Calendar, Tithi & Muhurat",
+    seoTitle: "Vedic Panchang App | Hindu Calendar, Tithi & Muhurat | SmartUp Tech",
     features: ["Daily Panchang", "Tithi & Nakshatra", "Yoga & Muhurat", "Hindu Festivals", "Sunrise & Sunset", "Multiple Languages", "Offline Access"],
-    seoKeywords: ["Vedic Panchang", "Hindu Calendar", "Panchang App", "Festival Calendar", "Muhurat App"],
+    seoKeywords: ["Vedic Panchang", "Hindu Calendar", "Panchang App", "Festival Calendar", "Muhurat App", "Drik Panchang", "Kalnirnay", "Vedang Panchang", "Moon Calendar", "Moonly"],
     benefits: [
       "Plan your auspicious events with accurate Muhurat timings.",
       "Stay connected to your cultural roots with festival notifications.",
@@ -75,7 +75,7 @@ export const apps: App[] = [
     category: "Information",
     playStoreUrl: "https://play.google.com/store/apps/details?id=net.smartlogic.three65days",
     icon: "/today.webp",
-    seoTitle: "Today App | International Days & Awareness Calendar",
+    seoTitle: "Today App | International Days & Awareness Calendar | SmartUp Tech",
     features: ["International Days", "National Days", "Awareness Events", "Daily Discoveries", "Search Events", "Historical Information"],
     seoKeywords: ["International Days App", "Today Special Day", "Awareness Calendar", "National Days Calendar"],
     benefits: [
@@ -112,7 +112,7 @@ export const apps: App[] = [
     category: "Productivity",
     playStoreUrl: "https://play.google.com/store/apps/details?id=net.smartlogic.unitconverter",
     icon: "/unit-converter.webp",
-    seoTitle: "Unit Converter App | Fast & Accurate Measurement Conversion",
+    seoTitle: "Unit Converter App | Precision Measurement Conversion | SmartUp Tech",
     features: ["Length & Weight", "Temperature & Area", "Volume & Currency", "Scientific Units", "Instant Conversion", "Offline Mode"],
     seoKeywords: ["Unit Converter", "Measurement Converter", "Currency Converter", "Conversion Calculator"],
     benefits: [
@@ -147,7 +147,7 @@ export const apps: App[] = [
     category: "Finance",
     playStoreUrl: "https://play.google.com/store/apps/details?id=net.smartlogic.citizengstcalculator",
     icon: "/citizen-calculator.webp",
-    seoTitle: "Citizen Calculator | GST & Business Calculator",
+    seoTitle: "Citizen Calculator | GST & Business Calculator | SmartUp Tech",
     features: ["GST Add/Remove", "Tax Calculations", "Percentage Calculations", "Business Calculations", "History Tape", "Custom Tax Rates"],
     seoKeywords: ["GST Calculator", "Citizen Calculator", "Business Calculator", "Tax Calculator"],
     benefits: [
@@ -182,7 +182,7 @@ export const apps: App[] = [
     category: "Culture",
     playStoreUrl: "https://play.google.com/store/apps/details?id=net.smartlogic.sindhitipno",
     icon: "/sindhi-tipno.webp",
-    seoTitle: "Sindhi Tipno App | Sindhi Calendar & Cultural Dates",
+    seoTitle: "Sindhi Tipno App | Sindhi Calendar & Cultural Dates | SmartUp Tech",
     features: ["Sindhi Calendar", "Sindhi Festivals", "Cultural Dates", "Traditional Information", "Daily Reference", "Offline Access"],
     seoKeywords: ["Sindhi Tipno", "Sindhi Calendar", "Sindhi Festival Calendar", "Sindhi Panchang"],
     benefits: [
