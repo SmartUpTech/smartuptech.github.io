@@ -13,6 +13,8 @@ const { app } = Astro.props;
 		<img
 			src={app.icon}
 			alt={`${app.name} icon`}
+			loading="lazy"
+			decoding="async"
 			class="w-20 h-20 rounded-3xl shadow-sm object-cover"
 			style={`border: 1px solid ${app.themeColor}20`}
 		/>

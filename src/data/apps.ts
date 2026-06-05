@@ -13,6 +13,7 @@ export interface App {
   category: string;
   playStoreUrl: string;
   icon: string;
+  seoTitle?: string;
   features: string[];
   seoKeywords: string[];
   faqs: FAQ[];
@@ -30,6 +31,7 @@ export const apps: App[] = [
     category: "Utility & Lifestyle",
     playStoreUrl: "https://play.google.com/store/apps/details?id=net.smartlogic.hinducalendar",
     icon: "/vedic-panchang.webp",
+    seoTitle: "Vedic Panchang App | Hindu Calendar, Tithi & Muhurat",
     features: ["Daily Panchang", "Tithi & Nakshatra", "Yoga & Muhurat", "Hindu Festivals", "Sunrise & Sunset", "Multiple Languages", "Offline Access"],
     seoKeywords: ["Vedic Panchang", "Hindu Calendar", "Panchang App", "Festival Calendar", "Muhurat App"],
     benefits: [
@@ -57,6 +59,7 @@ export const apps: App[] = [
     category: "Information",
     playStoreUrl: "https://play.google.com/store/apps/details?id=net.smartlogic.three65days",
     icon: "/today.webp",
+    seoTitle: "Today App | International Days & Awareness Calendar",
     features: ["International Days", "National Days", "Awareness Events", "Daily Discoveries", "Search Events", "Historical Information"],
     seoKeywords: ["International Days App", "Today Special Day", "Awareness Calendar", "National Days Calendar"],
     benefits: [
@@ -84,6 +87,7 @@ export const apps: App[] = [
     category: "Productivity",
     playStoreUrl: "https://play.google.com/store/apps/details?id=net.smartlogic.unitconverter",
     icon: "/unit-converter.webp",
+    seoTitle: "Unit Converter App | Fast & Accurate Measurement Conversion",
     features: ["Length & Weight", "Temperature & Area", "Volume & Currency", "Scientific Units", "Instant Conversion", "Offline Mode"],
     seoKeywords: ["Unit Converter", "Measurement Converter", "Currency Converter", "Conversion Calculator"],
     benefits: [
@@ -111,6 +115,7 @@ export const apps: App[] = [
     category: "Finance",
     playStoreUrl: "https://play.google.com/store/apps/details?id=net.smartlogic.citizengstcalculator",
     icon: "/citizen-calculator.webp",
+    seoTitle: "Citizen Calculator | GST & Business Calculator",
     features: ["GST Add/Remove", "Tax Calculations", "Percentage Calculations", "Business Calculations", "History Tape", "Custom Tax Rates"],
     seoKeywords: ["GST Calculator", "Citizen Calculator", "Business Calculator", "Tax Calculator"],
     benefits: [
@@ -134,10 +139,11 @@ export const apps: App[] = [
     tagline: "Preserving Heritage",
     shortDescription: "Traditional Sindhi calendar application with important dates, festivals, and cultural information.",
     longDescription: "The most authentic Sindhi calendar with all festivals and cultural dates, bringing tradition to your modern device. Sindhi Tipno helps you stay connected with your community's heritage and never miss an important cultural event.",
-    themeColor: "#00A2E8",
+    themeColor: "#F59E0B", // Amber
     category: "Culture",
     playStoreUrl: "https://play.google.com/store/apps/details?id=net.smartlogic.sindhitipno",
     icon: "/sindhi-tipno.webp",
+    seoTitle: "Sindhi Tipno App | Sindhi Calendar & Cultural Dates",
     features: ["Sindhi Calendar", "Sindhi Festivals", "Cultural Dates", "Traditional Information", "Daily Reference", "Offline Access"],
     seoKeywords: ["Sindhi Tipno", "Sindhi Calendar", "Sindhi Festival Calendar", "Sindhi Panchang"],
     benefits: [

@@ -5,21 +5,30 @@ interface Props {
 	app?: App;
 	title?: string;
 	description?: string;
+	ogImage?: string;
+	isHomePage?: boolean;
 }
 
-const { app, title, description } = Astro.props;
+const { app, title, description, ogImage = "/og-image.png", isHomePage = false } = Astro.props;
 
-const seoTitle = app ? `${app.name} - ${app.tagline} | SmartUp Tech` : (title ? `${title} | SmartUp Tech` : "SmartUp Tech");
-const seoDescription = app ? app.shortDescription : (description || "Premium Android Utility Apps by SmartUp Tech");
+const seoTitle = app
+  ? (app.seoTitle || `${app.name} App | ${app.tagline}`)
+  : (title ? title : "SmartUp Tech | Software Development & Mobile App Solutions");
+
+const seoDescription = app
+  ? app.shortDescription
+  : (description || "SmartUp Tech develops high-impact Android apps and enterprise solutions focused on workflow automation, mobile excellence, and system integration.");
+
 const canonicalURL = new URL(Astro.url.pathname, Astro.site || "https://smartuptech.github.io");
 
 // Structured Data for App
-const jsonLd = app ? {
+const appJsonLd = app ? {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   "name": app.name,
   "operatingSystem": "ANDROID",
   "applicationCategory": app.category,
+  "downloadUrl": app.playStoreUrl,
   "offers": {
     "@type": "Offer",
     "price": "0",
@@ -31,6 +40,23 @@ const jsonLd = app ? {
     "ratingValue": "4.5",
     "ratingCount": "1000"
   }
+} : null;
+
+// Organization Schema for Home Page
+const orgJsonLd = isHomePage ? {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "SmartUp Tech",
+  "url": "https://smartuptech.github.io",
+  "logo": "https://smartuptech.github.io/smart-up-tech.webp",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "email": "smartlogic08@gmail.com",
+    "contactType": "customer service"
+  },
+  "sameAs": [
+    "https://play.google.com/store/apps/dev?id=6614685995890456247"
+  ]
 } : null;
 ---
 
@@ -45,15 +71,19 @@ const jsonLd = app ? {
 <meta property="og:url" content={canonicalURL} />
 <meta property="og:title" content={seoTitle} />
 <meta property="og:description" content={seoDescription} />
-<meta property="og:image" content="/og-image.png" />
+<meta property="og:image" content={new URL(ogImage, Astro.site || "https://smartuptech.github.io")} />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={canonicalURL} />
 <meta property="twitter:title" content={seoTitle} />
 <meta property="twitter:description" content={seoDescription} />
-<meta property="twitter:image" content="/og-image.png" />
+<meta property="twitter:image" content={new URL(ogImage, Astro.site || "https://smartuptech.github.io")} />
 
-{jsonLd && (
-  <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+{appJsonLd && (
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(appJsonLd)} />
+)}
+
+{orgJsonLd && (
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(orgJsonLd)} />
 )}

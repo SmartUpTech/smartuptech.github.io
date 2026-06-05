@@ -4,13 +4,19 @@ import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import AppShowcase from '../components/AppShowcase.astro';
 import CTAButton from '../components/CTAButton.astro';
+import SEO from '../components/SEO.astro';
 import { apps } from '../data/apps';
 
 // Main products to showcase individually
 const mainApps = apps.slice(0, 5);
 ---
 
-<Layout title="Useful Apps for Everyday Life.">
+<Layout title="SmartUp Tech | Software Development & Mobile App Solutions">
+	<SEO
+		slot="head"
+		isHomePage={true}
+		description="SmartUp Tech specializes in enterprise software, workflow automation, and high-impact Android applications for millions of users worldwide."
+	/>
 	<Navbar />
 
 	<main>
@@ -31,9 +37,11 @@ const mainApps = apps.slice(0, 5);
 		</section>
 
 		<!-- SECTION 2: APP SHOWCASE -->
-		<div id="apps">
+		<div id="apps" class="space-y-0 relative">
 			{mainApps.map((app, index) => (
-				<AppShowcase app={app} reverse={index % 2 !== 0} />
+				<div class="reveal">
+					<AppShowcase app={app} reverse={index % 2 !== 0} />
+				</div>
 			))}
 		</div>
 
@@ -74,19 +82,6 @@ const mainApps = apps.slice(0, 5);
 			</div>
 		</section>
 
-		<!-- SECTION 4: EXPLORE MORE -->
-		<section class="section-spacing">
-			<div class="max-w-[1400px] mx-auto px-6 md:px-12 text-center">
-				<h2 class="mb-16">Ready to improve <br />your workflow?</h2>
-				<div class="flex flex-wrap justify-center gap-x-12 gap-y-6">
-					{apps.map(app => (
-						<a href={`/apps/${app.id}`} class="text-xl font-medium text-gray-400 hover:text-black transition-colors underline-offset-8 hover:underline decoration-1">
-							{app.name}
-						</a>
-					))}
-				</div>
-			</div>
-		</section>
 	</main>
 
 	<Footer />
@@ -114,4 +109,32 @@ const mainApps = apps.slice(0, 5);
 	}
 
 	.slide-in-from-bottom-8 { animation-name: slide-up; }
+
+	.reveal {
+		opacity: 0;
+		transform: translateY(30px);
+		transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	.reveal.visible {
+		opacity: 1;
+		transform: translateY(0);
+	}
 </style>
+
+<script>
+	const observerOptions = {
+		threshold: 0.1,
+		rootMargin: '0px 0px -50px 0px'
+	};
+
+	const observer = new IntersectionObserver((entries) => {
+		entries.forEach(entry => {
+			if (entry.isIntersecting) {
+				entry.target.classList.add('visible');
+			}
+		});
+	}, observerOptions);
+
+	document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>

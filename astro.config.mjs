@@ -1,8 +1,11 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
+import sitemap from '@astrojs/sitemap';
 
-// Official Astro 6 + Tailwind 4 configuration
+// https://astro.build/config
 export default defineConfig({
+  site: 'https://smartuptech.github.io',
+  integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()],
   },

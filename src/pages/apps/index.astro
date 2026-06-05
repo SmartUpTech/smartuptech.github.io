@@ -3,13 +3,18 @@ import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
 import AppCard from '../../components/AppCard.astro';
+import SEO from '../../components/SEO.astro';
 import { apps } from '../../data/apps';
 ---
 
 <Layout
-	title="All Apps"
-	description="Browse the complete catalog of premium Android utility applications by SmartUp Tech."
+	title="Android Apps by SmartUp Tech"
 >
+	<SEO
+		slot="head"
+		title="Android Apps by SmartUp Tech"
+		description="Explore our collection of premium Android utility apps, including Vedic Panchang, Today, Unit Converter, and more."
+	/>
 	<Navbar />
 
 	<main class="pt-32">

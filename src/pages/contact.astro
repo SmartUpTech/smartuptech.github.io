@@ -1,0 +1,113 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import SEO from '../components/SEO.astro';
+import CTAButton from '../components/CTAButton.astro';
+
+const contactOptions = [
+	{
+		title: "General Inquiries",
+		email: "smartlogic08@gmail.com",
+		description: "For questions about our apps, features, or general business inquiries."
+	},
+	{
+		title: "Support",
+		email: "smartlogic08@gmail.com",
+		description: "Need help with one of our apps? Our team is ready to assist you."
+	},
+	{
+		title: "Partnerships",
+		email: "smartlogic08@gmail.com",
+		description: "Interested in collaborating on a project or business partnership?"
+	}
+];
+---
+
+<Layout title="Contact SmartUp Tech">
+	<SEO
+		slot="head"
+		title="Contact SmartUp Tech | Get in Touch"
+		description="Have questions about our Android apps or enterprise solutions? Contact SmartUp Tech for support, inquiries, or partnership opportunities."
+	/>
+	<Navbar />
+
+	<main class="pt-32">
+		<section class="py-24">
+			<div class="max-w-[1400px] mx-auto px-6 md:px-12">
+				<div class="grid lg:grid-cols-2 gap-24 items-start">
+					<div>
+						<h1 class="text-6xl md:text-8xl mb-8">Get in <br /><span class="text-gray-400">touch.</span></h1>
+						<p class="text-2xl text-gray-500 mb-12 max-w-xl">
+							Whether you have a suggestion for one of our apps or want to discuss a new software project, we'd love to hear from you.
+						</p>
+
+						<div class="space-y-12">
+							{contactOptions.map(option => (
+								<div class="space-y-2">
+									<h3 class="text-sm font-bold tracking-widest uppercase text-black">{option.title}</h3>
+									<a href={`mailto:${option.email}`} class="text-3xl md:text-4xl font-medium hover:opacity-60 transition-opacity">
+										{option.email}
+									</a>
+									<p class="text-gray-500 max-w-sm pt-2">{option.description}</p>
+								</div>
+							))}
+						</div>
+					</div>
+
+					<div class="bg-gray-50/50 p-12 md:p-16 rounded-[4rem] border border-gray-100">
+						<h2 class="text-3xl mb-8">Send a message.</h2>
+						<form class="space-y-8" action="#" method="POST">
+							<div class="grid md:grid-cols-2 gap-8">
+								<div class="space-y-2">
+									<label for="name" class="text-xs font-bold uppercase tracking-widest text-gray-400">Name</label>
+									<input type="text" id="name" name="name" class="w-full bg-transparent border-b border-gray-300 py-4 focus:border-black outline-none transition-colors" placeholder="Your name" required />
+								</div>
+								<div class="space-y-2">
+									<label for="email" class="text-xs font-bold uppercase tracking-widest text-gray-400">Email</label>
+									<input type="email" id="email" name="email" class="w-full bg-transparent border-b border-gray-300 py-4 focus:border-black outline-none transition-colors" placeholder="your@email.com" required />
+								</div>
+							</div>
+							<div class="space-y-2">
+								<label for="subject" class="text-xs font-bold uppercase tracking-widest text-gray-400">Subject</label>
+								<input type="text" id="subject" name="subject" class="w-full bg-transparent border-b border-gray-300 py-4 focus:border-black outline-none transition-colors" placeholder="What is this about?" required />
+							</div>
+							<div class="space-y-2">
+								<label for="message" class="text-xs font-bold uppercase tracking-widest text-gray-400">Message</label>
+								<textarea id="message" name="message" rows="4" class="w-full bg-transparent border-b border-gray-300 py-4 focus:border-black outline-none transition-colors resize-none" placeholder="How can we help?" required></textarea>
+							</div>
+							<div class="pt-8">
+								<button type="submit" class="bg-black text-white px-12 py-6 rounded-full font-bold text-lg hover:bg-gray-800 transition-all hover:-translate-y-1 shadow-xl">
+									Send Message
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Office Location/Brand Trust -->
+		<section class="section-spacing border-t border-gray-100">
+			<div class="max-w-[1400px] mx-auto px-6 md:px-12 text-center">
+				<h2 class="mb-12">Global presence, <br />personal touch.</h2>
+				<div class="grid md:grid-cols-3 gap-12">
+					<div class="p-12 rounded-[3rem] bg-gray-50/30">
+						<h3 class="text-xl font-bold mb-4">Fast Response</h3>
+						<p class="text-gray-500">We typically respond to all inquiries within 24-48 business hours.</p>
+					</div>
+					<div class="p-12 rounded-[3rem] bg-gray-50/30">
+						<h3 class="text-xl font-bold mb-4">Expert Support</h3>
+						<p class="text-gray-500">Speak directly with developers who build the products you use.</p>
+					</div>
+					<div class="p-12 rounded-[3rem] bg-gray-50/30">
+						<h3 class="text-xl font-bold mb-4">Privacy Guaranteed</h3>
+						<p class="text-gray-500">Your information is never shared. We only use it to respond to your request.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+</Layout>
