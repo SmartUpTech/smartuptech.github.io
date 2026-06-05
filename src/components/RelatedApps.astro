@@ -1,0 +1,28 @@
+---
+import { apps } from '../data/apps';
+
+interface Props {
+	currentId: string;
+}
+
+const { currentId } = Astro.props;
+const relatedApps = apps.filter(app => app.id !== currentId).slice(0, 3);
+---
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+	{relatedApps.map(app => (
+		<a
+			href={`/apps/${app.id}`}
+			class="group p-8 rounded-[2.5rem] bg-gray-50/50 hover:bg-white border border-transparent hover:border-gray-100 transition-all shadow-sm hover:shadow-xl"
+		>
+			<img
+				src={app.icon}
+				alt={`${app.name} icon`}
+				class="w-12 h-12 rounded-2xl mb-6 transition-transform group-hover:scale-110 object-cover shadow-sm"
+				style={`border: 1px solid ${app.themeColor}20`}
+			/>
+			<h4 class="text-xl font-bold mb-2">{app.name}</h4>
+			<p class="text-sm text-gray-500 line-clamp-2">{app.shortDescription}</p>
+		</a>
+	))}
+</div>

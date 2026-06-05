@@ -18,10 +18,10 @@ const { app, reverse = false } = Astro.props;
 						{app.category}
 					</span>
 					<h2 class="text-5xl md:text-7xl">{app.name}</h2>
-					<p class="text-xl md:text-2xl font-medium text-black/80">{app.tagline}</p>
+					<p class="text-xl md:text-2xl font-medium" style={`color: ${app.themeColor}`}>{app.tagline}</p>
 				</div>
 
-				<p class="max-w-xl">{app.description}</p>
+				<p class="max-w-xl">{app.shortDescription}</p>
 
 				<ul class="space-y-4 pt-4">
 					{app.features.map(feature => (
@@ -46,21 +46,17 @@ const { app, reverse = false } = Astro.props;
 
 			<div class="flex-1 w-full">
 				<div
-					class="aspect-[4/5] md:aspect-square rounded-[3rem] bg-gray-50 flex items-center justify-center p-12 relative overflow-hidden group"
+					class="aspect-[4/5] md:aspect-square rounded-[4rem] bg-gray-50/50 flex items-center justify-center p-12 relative overflow-hidden group border border-gray-100/50"
 				>
-					<!-- Abstract product representation since we don't have screenshots -->
-					<div
-						class="w-2/3 h-4/5 rounded-[2rem] shadow-2xl transition-transform duration-700 group-hover:scale-105"
-						style={`background: linear-gradient(135deg, ${app.themeColor}10 0%, ${app.themeColor}20 100%); border: 1px solid ${app.themeColor}30;`}
-					>
-						<div class="absolute inset-0 flex items-center justify-center text-8xl opacity-20 filter grayscale">
-							{app.name.charAt(0)}
-						</div>
-					</div>
+					<img
+						src={app.icon}
+						alt={app.name}
+						class="w-1/2 h-auto rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-transform duration-700 group-hover:scale-110 object-cover relative z-10"
+					/>
 
-					<!-- Decorative floaters -->
+					<!-- Subtle background glow -->
 					<div
-						class="absolute top-1/4 right-10 w-24 h-24 rounded-3xl blur-2xl opacity-40 animate-pulse"
+						class="absolute inset-0 opacity-0 blur-[100px] transition-opacity duration-1000 group-hover:opacity-20 pointer-events-none"
 						style={`background-color: ${app.themeColor}`}
 					></div>
 				</div>

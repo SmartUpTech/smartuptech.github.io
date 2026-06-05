@@ -1,0 +1,57 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import AppCard from '../../components/AppCard.astro';
+import { apps } from '../../data/apps';
+---
+
+<Layout
+	title="All Apps"
+	description="Browse the complete catalog of premium Android utility applications by SmartUp Tech."
+>
+	<Navbar />
+
+	<main class="pt-32">
+		<!-- Hero Section -->
+		<section class="py-24">
+			<div class="max-w-[1400px] mx-auto px-6 md:px-12 text-center">
+				<h1 class="mb-8">SmartUp <span class="text-gray-400">Apps.</span></h1>
+				<p class="max-w-2xl mx-auto text-xl md:text-2xl text-gray-500">
+					A collection of thoughtfully designed tools, ranging from traditional calendars to modern productivity utilities.
+				</p>
+			</div>
+		</section>
+
+		<!-- Apps Grid -->
+		<section class="pb-32">
+			<div class="max-w-[1400px] mx-auto px-6 md:px-12">
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+					{apps.map(app => (
+						<AppCard app={app} />
+					))}
+				</div>
+			</div>
+		</section>
+
+		<!-- Developer CTA -->
+		<section class="py-32 bg-gray-50/50">
+			<div class="max-w-[1000px] mx-auto px-6 text-center">
+				<h2 class="mb-8">More to explore.</h2>
+				<p class="text-xl text-gray-500 mb-12">
+					We are constantly building and refining new tools. Visit our developer profile on Google Play to see all our latest releases and early access apps.
+				</p>
+				<a
+					href="https://play.google.com/store/apps/dev?id=6614685995890456247"
+					target="_blank"
+					class="inline-flex items-center gap-2 bg-black text-white px-10 py-5 rounded-full font-bold text-lg hover:bg-gray-800 transition-all hover:-translate-y-1 shadow-xl"
+				>
+					View All on Play Store
+					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+				</a>
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+</Layout>
