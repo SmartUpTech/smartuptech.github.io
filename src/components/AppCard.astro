@@ -54,6 +54,8 @@ const { app } = Astro.props;
 			href={app.playStoreUrl}
 			target="_blank"
 			rel="noopener noreferrer"
+			data-track-playstore
+			data-app-name={app.name}
 			class="w-12 h-12 flex items-center justify-center rounded-full bg-black text-white hover:bg-gray-800 transition-all shadow-lg"
 			aria-label="Download on Google Play"
 		>

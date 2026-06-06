@@ -5,9 +5,10 @@ interface Props {
 	class?: string;
 	target?: string;
 	rel?: string;
+	[key: string]: any;
 }
 
-const { href, variant = 'primary', class: className, target, rel } = Astro.props;
+const { href, variant = 'primary', class: className, target, rel, ...rest } = Astro.props;
 
 const baseStyles = "inline-flex items-center justify-center transition-all duration-300 font-medium";
 const variants = {
@@ -22,6 +23,7 @@ const variants = {
 	class:list={[baseStyles, variants[variant], className]}
 	target={target}
 	rel={rel || (target === '_blank' ? 'noopener noreferrer' : undefined)}
+	{...rest}
 >
 	<slot />
 	{variant === 'link' && (
