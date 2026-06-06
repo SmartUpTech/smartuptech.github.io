@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://smartuptech.github.io',
+  site: 'https://smartuptech.in',
   integrations: [sitemap()],
   build: {
     format: 'file'

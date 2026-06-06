@@ -37,6 +37,8 @@ const { app, reverse = false } = Astro.props;
 						href={app.playStoreUrl}
 						target="_blank"
 						rel="noopener noreferrer"
+						data-track-playstore
+						data-app-name={app.name}
 						class="inline-flex items-center gap-2 font-semibold text-lg hover:gap-4 transition-all duration-300"
 						style={`color: ${app.themeColor}`}
 					>
