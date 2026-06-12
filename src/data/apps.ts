@@ -12,6 +12,7 @@ export interface Screenshot {
 export interface App {
   id: string;
   name: string;
+  topicName: string; // Generic category for articles (e.g., "Panchang", "International Days")
   tagline: string;
   shortDescription: string;
   longDescription: string;
@@ -31,6 +32,7 @@ export const apps: App[] = [
   {
     id: "panchang",
     name: "Vedic Panchang",
+    topicName: "Panchang",
     tagline: "Your Daily Spiritual Guide",
     shortDescription: "Comprehensive Hindu Panchang with Tithi, Nakshatra, Muhurat, and Festival information.",
     longDescription: "Deep dive into ancient wisdom with accurate Tithi, Nakshatra, and Muhurat calculations. Vedic Panchang provides a comprehensive spiritual experience similar to Drik Panchang and Kalnirnay, but with a focused, minimalist interface. Whether you are looking for a reliable Moon Calendar, insights into Vedang Panchang, or a modern alternative to apps like Moonly, our app is designed for clarity and spiritual precision.",
@@ -68,6 +70,7 @@ export const apps: App[] = [
   {
     id: "today",
     name: "Today",
+    topicName: "International Days",
     tagline: "International & National Days",
     shortDescription: "Discover international days, national observances, and awareness events happening around the world.",
     longDescription: "Never miss an important event. Discover what the world is celebrating today with a clean, distraction-free interface. Today brings you a curated list of international observances, historical events, and national celebrations.",
@@ -105,6 +108,7 @@ export const apps: App[] = [
   {
     id: "unit-converter",
     name: "Unit Converter",
+    topicName: "Unit Conversion",
     tagline: "Precision in your pocket",
     shortDescription: "Fast and accurate unit conversion tool supporting multiple measurement categories.",
     longDescription: "Elegant, fast, and comprehensive conversion for all your professional needs. No clutter, just the results you need. Whether you are a student, professional, or DIY enthusiast, this tool simplifies complex conversions.",
@@ -140,6 +144,7 @@ export const apps: App[] = [
   {
     id: "citizen-calculator",
     name: "Citizen Calculator",
+    topicName: "Calculator",
     tagline: "Simplified Taxation",
     shortDescription: "Business calculator with GST calculation, tax calculations, and daily utility functions.",
     longDescription: "Calculate GST instantly with precision. Designed for Indian businesses and professionals who value speed and accuracy. Citizen Calculator brings the familiar interface of traditional calculators to your smartphone with added digital power.",
@@ -165,16 +170,19 @@ export const apps: App[] = [
       { question: "Does it support large number calculations?", answer: "Yes, the calculator is optimized for high-precision business math." }
     ],
     screenshots: [
-      { file: "screenshot-citizen-1.webp", title: "GST Made Simple", description: "One-Tap Tax. Dedicated GST+ and GST- buttons for lightning-fast business calculations." },
-      { file: "screenshot-citizen-2.webp", title: "Business Logic", description: "Professional Grade. Accurate percentage and markup tools designed for Indian trade." },
-      { file: "screenshot-citizen-3.webp", title: "Calculation History", description: "Digital Tape. Review your previous steps to ensure complete accuracy in your accounting." },
-      { file: "screenshot-citizen-4.webp", title: "Custom Tax Rates", description: "Tailored to You. Set up multiple tax brackets to match your specific business needs." },
-      { file: "screenshot-citizen-5.webp", title: "Classic Layout", description: "Familiar Power. The reliability of a physical calculator, enhanced with digital precision." }
+      { file: "screenshot-calculator-1.webp", title: "GST Made Simple", description: "One-Tap Tax. Dedicated GST+ and GST- buttons for lightning-fast business calculations." },
+      { file: "screenshot-calculator-2.webp", title: "Business Logic", description: "Professional Grade. Accurate percentage and markup tools designed for Indian trade." },
+      { file: "screenshot-calculator-3.webp", title: "Calculation History", description: "Digital Tape. Review your previous steps to ensure complete accuracy in your accounting." },
+      { file: "screenshot-calculator-4.webp", title: "Custom Tax Rates", description: "Tailored to You. Set up multiple tax brackets to match your specific business needs." },
+      { file: "screenshot-calculator-5.webp", title: "Classic Layout", description: "Familiar Power. The reliability of a physical calculator, enhanced with digital precision." },
+      { file: "screenshot-calculator-6.webp", title: "Accurate Results", description: "High precision. Optimized for high-precision business math and financial accuracy." },
+      { file: "screenshot-calculator-7.webp", title: "Fast and Reliable", description: "Smooth Performance. Optimized for all devices, ensuring a seamless experience every time." }
     ]
   },
   {
     id: "sindhi-tipno",
     name: "Sindhi Tipno",
+    topicName: "Sindhi Calendar",
     tagline: "Preserving Heritage",
     shortDescription: "Traditional Sindhi calendar application with important dates, festivals, and cultural information.",
     longDescription: "The most authentic Sindhi calendar with all festivals and cultural dates, bringing tradition to your modern device. Sindhi Tipno helps you stay connected with your community's heritage and never miss an important cultural event.",
