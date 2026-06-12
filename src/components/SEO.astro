@@ -1,23 +1,35 @@
 ---
 import type { App } from '../data/apps';
+import type { Article } from '../data/articles';
 
 interface Props {
 	app?: App;
+	article?: Article;
 	title?: string;
 	description?: string;
 	ogImage?: string;
 	isHomePage?: boolean;
 }
 
-const { app, title, description, ogImage = "/og-image.png", isHomePage = false } = Astro.props;
+const { app, article, title, description, isHomePage = false } = Astro.props;
+let { ogImage = "/og-image.png" } = Astro.props;
 
-const seoTitle = app
-  ? (app.seoTitle || `${app.name} App | ${app.tagline}`)
-  : (title ? title : "SmartUp Tech | Quality Android Applications for Everyday Life");
+if (article?.coverImage && !Astro.props.ogImage) {
+  ogImage = article.coverImage;
+}
 
-const seoDescription = app
-  ? app.shortDescription
-  : (description || "SmartUp Tech develops high-impact Android applications focused on utility, cultural heritage, and daily productivity for millions of users worldwide.");
+
+const seoTitle = article
+  ? article.title
+  : (app
+    ? (app.seoTitle || `${app.name} App | ${app.tagline}`)
+    : (title ? title : "SmartUp Tech | Quality Android Applications for Everyday Life"));
+
+const seoDescription = article
+  ? article.excerpt
+  : (app
+    ? app.shortDescription
+    : (description || "SmartUp Tech develops high-impact Android applications focused on utility, cultural heritage, and daily productivity for millions of users worldwide."));
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site || "https://smartuptech.in");
 
@@ -63,6 +75,55 @@ const orgJsonLd = isHomePage ? {
     "https://play.google.com/store/apps/dev?id=6614685995890456247"
   ]
 } : null;
+
+// Article Schema
+const articleJsonLd = article ? {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": article.title,
+  "description": article.excerpt,
+  "image": new URL(article.coverImage, Astro.site || "https://smartuptech.in"),
+  "author": {
+    "@type": "Organization",
+    "name": "SmartUp Tech",
+    "url": "https://smartuptech.in"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "SmartUp Tech",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://smartuptech.in/smart-up-tech.webp"
+    }
+  },
+  "datePublished": article.publishDate
+} : null;
+
+// Breadcrumb Schema
+const breadcrumbs = [];
+const pathSegments = Astro.url.pathname.split('/').filter(Boolean);
+if (pathSegments.length > 0) {
+	breadcrumbs.push({
+		"@type": "ListItem",
+		"position": 1,
+		"name": "Home",
+		"item": "https://smartuptech.in/"
+	});
+	pathSegments.forEach((segment, index) => {
+		breadcrumbs.push({
+			"@type": "ListItem",
+			"position": index + 2,
+			"name": segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' '),
+			"item": `https://smartuptech.in/${pathSegments.slice(0, index + 1).join('/')}`
+		});
+	});
+}
+
+const breadcrumbJsonLd = breadcrumbs.length > 0 ? {
+	"@context": "https://schema.org",
+	"@type": "BreadcrumbList",
+	"itemListElement": breadcrumbs
+} : null;
 ---
 
 <!-- Primary Meta Tags -->
@@ -91,4 +152,12 @@ const orgJsonLd = isHomePage ? {
 
 {orgJsonLd && (
   <script type="application/ld+json" is:inline set:html={JSON.stringify(orgJsonLd)} />
+)}
+
+{articleJsonLd && (
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(articleJsonLd)} />
+)}
+
+{breadcrumbJsonLd && (
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbJsonLd)} />
 )}
