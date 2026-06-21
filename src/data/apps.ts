@@ -210,7 +210,7 @@ export const apps: App[] = [
     screenshots: [
       { file: "screenshot-tipno-1.webp", title: "Authentic Sindhi Calendar", description: "Cultural Roots. The most accurate Tipno tracking lunar phases and community dates." },
       { file: "screenshot-tipno-2.webp", title: "Major Sindhi Festivals", description: "Stay Connected. Never miss Cheti Chand, Chaliho, or any other community celebration." },
-      { file: "screenshot-tipno-3.png", title: "Cultural Heritage", description: "Ancient Wisdom. Preserve traditional Sindhi knowledge for future generations." },
+      { file: "screenshot-tipno-3.webp", title: "Cultural Heritage", description: "Ancient Wisdom. Preserve traditional Sindhi knowledge for future generations." },
       { file: "screenshot-tipno-4.webp", title: "Daily Lunar Dates", description: "Traditional Flow. Accurate Chand and Tithi information at your fingertips." },
       { file: "screenshot-tipno-5.webp", title: "Community Events", description: "Local Context. Stay informed about important religious and social dates." }
     ]
