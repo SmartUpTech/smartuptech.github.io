@@ -31,18 +31,18 @@ export interface App {
 export const apps: App[] = [
   {
     id: "panchang",
-    name: "Vedic Panchang",
+    name: "Hindu Panchang Calendar",
     topicName: "Panchang",
     tagline: "Your Daily Spiritual Guide",
     shortDescription: "Comprehensive Hindu Panchang with Tithi, Nakshatra, Muhurat, and Festival information.",
-    longDescription: "Deep dive into ancient wisdom with accurate Tithi, Nakshatra, and Muhurat calculations. Vedic Panchang provides a comprehensive spiritual experience similar to Drik Panchang and Kalnirnay, but with a focused, minimalist interface. Whether you are looking for a reliable Moon Calendar, insights into Vedang Panchang, or a modern alternative to apps like Moonly, our app is designed for clarity and spiritual precision.",
+    longDescription: "Deep dive into ancient wisdom with accurate Tithi, Nakshatra, and Muhurat calculations. Hindu Panchang provides a comprehensive spiritual experience similar to Drik Panchang and Kalnirnay, but with a focused, minimalist interface. Whether you are looking for a reliable Moon Calendar, insights into Hindu Panchang, or a modern alternative to apps like Moonly, our app is designed for clarity and spiritual precision.",
     themeColor: "#FF9933", // Saffron
     category: "Utility & Lifestyle",
     playStoreUrl: "https://play.google.com/store/apps/details?id=net.smartlogic.hinducalendar",
-    icon: "/vedic-panchang.webp",
-    seoTitle: "Vedic Panchang App | Hindu Calendar, Tithi & Muhurat | SmartUp Tech",
+    icon: "/panchang.webp",
+    seoTitle: "Hindu Panchang App | Hindu Calendar, Tithi & Muhurat | SmartUp Tech",
     features: ["Daily Panchang", "Tithi & Nakshatra", "Yoga & Muhurat", "Hindu Festivals", "Sunrise & Sunset", "Multiple Languages", "Offline Access"],
-    seoKeywords: ["Vedic Panchang", "Hindu Calendar", "Panchang App", "Festival Calendar", "Muhurat App", "Drik Panchang", "Kalnirnay", "Vedang Panchang", "Moon Calendar", "Moonly"],
+    seoKeywords: ["Hindu Panchang Calendar", "Hindu Panchang", "Panchang App", "Festival Calendar", "Muhurat App", "Drik Panchang", "Kalnirnay", "Hindu Calendar", "Moon Calendar", "Moonly"],
     benefits: [
       "Plan your auspicious events with accurate Muhurat timings.",
       "Stay connected to your cultural roots with festival notifications.",
@@ -51,11 +51,11 @@ export const apps: App[] = [
       "Easy-to-use interface designed for all age groups."
     ],
     faqs: [
-      { question: "Is Vedic Panchang available offline?", answer: "Yes, the core Panchang calculations and festival information are available offline." },
+      { question: "Is Hindu Panchang Calendar available offline?", answer: "Yes, the core Panchang calculations and festival information are available offline." },
       { question: "Does it support multiple languages?", answer: "Yes, the app supports several Indian languages for a more personalized experience." },
-      { question: "How accurate are the Muhurat timings?", answer: "Our calculations are based on standard Vedic astronomical algorithms ensuring high precision." },
+      { question: "How accurate are the Muhurat timings?", answer: "Our calculations are based on standard Hindu astronomical algorithms ensuring high precision." },
       { question: "Can I see sunrise and sunset times for my location?", answer: "Yes, the app uses your location to provide accurate local sunrise and sunset timings." },
-      { question: "Is the app free to use?", answer: "Yes, Vedic Panchang is free to download and use with all essential features." }
+      { question: "Is the app free to use?", answer: "Yes, Hindu Panchang Calendar is free to download and use with all essential features." }
     ],
     screenshots: [
       { file: "screenshot-panchang-1.webp", title: "Daily Panchang with Mahurats", description: "Muhurat Precision. Master the cosmic influences of Tithi and Nakshatra to find the exact moment for every auspicious beginning." },
@@ -64,7 +64,7 @@ export const apps: App[] = [
       { file: "screenshot-panchang-3.webp", title: "Day & Night Choghadiya", description: "Daily Flow. Master the cosmic influences of Choghadiya throughout the day and night." },
       { file: "screenshot-panchang-4.webp", title: "Live Hindu Clock (Ghadi)", description: "Live Ghadi. The heartbeat of tradition, pulsing in real-time on your device." },
       { file: "screenshot-panchang-6.webp", title: "Upcoming festivals", description: "Festival Guide. Your essential companion for every cultural celebration." },
-      { file: "screenshot-panchang-7.webp", title: "Support multiple languages", description: "Global Wisdom. Authentic Vedic math, accessible in every major language." }
+      { file: "screenshot-panchang-7.webp", title: "Support multiple languages", description: "Global Wisdom. Authentic Hindu math, accessible in every major language." }
     ]
   },
   {
