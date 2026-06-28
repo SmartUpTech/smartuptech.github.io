@@ -1,4 +1,9 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://smartuptech.in/sitemap-index.xml
+# Disallow build files and internal Astro paths
+Disallow: /_astro/
+Disallow: /chunks/
+Disallow: /assets/
+
+Sitemap: https://www.smartuptech.in/sitemap.xml
