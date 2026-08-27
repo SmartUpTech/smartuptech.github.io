@@ -2,157 +2,187 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.smartuptech.in/</loc>
-    <lastmod>2025-02-27</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.smartuptech.in/apps</loc>
-    <lastmod>2025-02-27</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.smartuptech.in/about</loc>
-    <lastmod>2025-02-27</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.smartuptech.in/contact</loc>
-    <lastmod>2025-02-27</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.smartuptech.in/privacy_policy</loc>
-    <lastmod>2025-02-27</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://www.smartuptech.in/articles</loc>
-    <lastmod>2025-02-27</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.smartuptech.in/apps/panchang</loc>
-    <lastmod>2025-02-27</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.smartuptech.in/apps/today</loc>
-    <lastmod>2025-02-27</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.smartuptech.in/apps/unit-converter</loc>
-    <lastmod>2025-02-27</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.smartuptech.in/apps/citizen-calculator</loc>
-    <lastmod>2025-02-27</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.smartuptech.in/apps/sindhi-tipno</loc>
-    <lastmod>2025-02-27</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.smartuptech.in/articles/panchang</loc>
-    <lastmod>2025-02-27</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.smartuptech.in/articles/today</loc>
-    <lastmod>2025-02-27</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.smartuptech.in/articles/unit-converter</loc>
-    <lastmod>2025-02-27</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.smartuptech.in/articles/citizen-calculator</loc>
-    <lastmod>2025-02-27</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.smartuptech.in/articles/sindhi-tipno</loc>
-    <lastmod>2025-02-27</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.smartuptech.in/articles/panchang/what-is-panchang</loc>
-    <lastmod>2025-02-15</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.smartuptech.in/articles/panchang/tithi-explained</loc>
-    <lastmod>2025-02-16</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.smartuptech.in/articles/panchang/nakshatra-guide</loc>
-    <lastmod>2025-02-17</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.smartuptech.in/articles/panchang/muhurat-guide</loc>
-    <lastmod>2025-02-18</lastmod>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.smartuptech.in/articles/panchang/rahu-kaal-explained</loc>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.smartuptech.in/articles/today/why-do-we-celebrate-international-days</loc>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.smartuptech.in/articles/today/most-important-international-days-of-the-year</loc>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.smartuptech.in/articles/unit-converter/common-unit-conversions</loc>
-    <lastmod>2025-02-22</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.smartuptech.in/articles/unit-converter/temperature-conversion-guide</loc>
-    <lastmod>2025-02-23</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.smartuptech.in/articles/citizen-calculator/how-to-calculate-gst</loc>
-    <lastmod>2025-02-24</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.smartuptech.in/articles/citizen-calculator/business-calculator-guide</loc>
-    <lastmod>2025-02-25</lastmod>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.smartuptech.in/articles/sindhi-tipno/sindhi-tipno-app-guide</loc>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.smartuptech.in/articles/sindhi-tipno/what-is-sindhi-tipno</loc>
-    <lastmod>2025-02-26</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.smartuptech.in/articles/sindhi-tipno/sindhi-festivals-guide</loc>
-    <lastmod>2025-02-27</lastmod>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.smartuptech.in/articles/sindhi-tipno/chaliho-sahib-guide</loc>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
