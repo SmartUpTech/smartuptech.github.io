@@ -181,4 +181,50 @@ const { type, article, app, appArticles } = Astro.props;
 	.prose th { @apply text-left py-4 px-4 bg-gray-50 border-b border-gray-100 font-bold text-sm uppercase tracking-wider; }
 	.prose td { @apply py-4 px-4 border-b border-gray-50 text-sm; }
 	.prose strong { @apply text-black font-bold; }
+
+	/* Graphy demo visualizations */
+	.graphy-demo { @apply rounded-3xl border border-gray-100 bg-gradient-to-br from-teal-50/50 to-indigo-50/30 p-6 md:p-8; }
+	.graphy-demo-title { @apply text-xs font-bold uppercase tracking-widest text-teal-700 mb-6; }
+
+	.graphy-flowchart { @apply flex flex-col items-center gap-2; }
+	.graphy-flowchart-horizontal { @apply flex-row flex-wrap justify-center items-center gap-3; }
+
+	.graphy-node { @apply rounded-2xl px-6 py-4 text-center min-w-[140px] shadow-sm border; }
+	.graphy-node-label { @apply block text-[10px] font-bold uppercase tracking-widest mb-1 opacity-70; }
+	.graphy-node-value { @apply block text-sm font-semibold; }
+	.graphy-node-input { @apply bg-teal-50 border-teal-200 text-teal-900; }
+	.graphy-node-formula { @apply bg-indigo-50 border-indigo-200 text-indigo-900; }
+	.graphy-node-compute { @apply bg-amber-50 border-amber-200 text-amber-900; }
+	.graphy-node-result { @apply bg-gray-900 border-gray-900 text-white; }
+
+	.graphy-connector { @apply text-gray-300 text-lg font-light; }
+	.graphy-connector-h { @apply text-gray-300 text-xl font-light; }
+
+	.graphy-blocks { @apply flex flex-col gap-2 max-w-md mx-auto; }
+	.graphy-block { @apply rounded-xl px-5 py-3 flex justify-between items-center shadow-sm; }
+	.graphy-block-label { @apply text-[10px] font-bold uppercase tracking-widest opacity-80; }
+	.graphy-block-value { @apply text-sm font-bold; }
+	.graphy-block-teal { @apply bg-teal-100 text-teal-900; }
+	.graphy-block-indigo { @apply bg-indigo-100 text-indigo-900; }
+	.graphy-block-amber { @apply bg-amber-100 text-amber-900; }
+	.graphy-block-result { @apply bg-gray-900 text-white; }
+
+	.graphy-gauge { @apply max-w-lg mx-auto; }
+	.graphy-gauge-track { @apply relative flex h-10 rounded-full overflow-hidden shadow-inner; }
+	.graphy-gauge-zone { @apply flex items-center justify-center text-[9px] font-bold text-white/90; }
+	.graphy-gauge-under { @apply bg-blue-400; }
+	.graphy-gauge-normal { @apply bg-teal-500; }
+	.graphy-gauge-over { @apply bg-amber-500; }
+	.graphy-gauge-obese { @apply bg-red-500; }
+	.graphy-gauge-needle { @apply absolute top-0 w-1 h-full bg-gray-900 shadow-lg; transform: translateX(-50%); }
+	.graphy-gauge-needle::after { content: ''; @apply absolute -top-1 left-1/2 -translate-x-1/2 w-3 h-3 bg-gray-900 rounded-full; }
+	.graphy-gauge-label { @apply text-center text-sm font-semibold text-gray-700 mt-4; }
+
+	.graphy-chart { @apply flex items-end justify-center gap-8 h-48; }
+	.graphy-chart-bar { @apply flex flex-col items-center gap-2 w-20; }
+	.graphy-chart-fill { @apply w-full rounded-t-xl min-h-[20px]; }
+	.graphy-chart-principal { @apply bg-teal-500; }
+	.graphy-chart-interest { @apply bg-indigo-500; }
+	.graphy-chart-total { @apply bg-gray-800; }
+	.graphy-chart-label { @apply text-[10px] font-bold text-center text-gray-600 leading-tight; }
 </style>

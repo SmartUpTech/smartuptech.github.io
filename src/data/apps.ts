@@ -106,39 +106,39 @@ export const apps: App[] = [
     ]
   },
   {
-    id: "unit-converter",
-    name: "Unit Converter",
-    topicName: "Unit Conversion",
-    tagline: "Precision in your pocket",
-    shortDescription: "Fast and accurate unit conversion tool supporting multiple measurement categories.",
-    longDescription: "Elegant, fast, and comprehensive conversion for all your professional needs. No clutter, just the results you need. Whether you are a student, professional, or DIY enthusiast, this tool simplifies complex conversions.",
+    id: "graphy-calculator",
+    name: "Graphy Calculator",
+    topicName: "Graphy Calculator",
+    tagline: "Calculate. Visualize. Understand.",
+    shortDescription: "Smart calculator with unit conversion, scientific math, and Graphy — visual explanations that show how every answer was built.",
+    longDescription: "Graphy Calculator combines fast everyday calculations, comprehensive unit conversion, and a breakthrough Graphy Engine that turns results into clear visual explanations. Use the calculator exactly as before — then open Graphy to see flowcharts, blocks, gauges, and charts that reveal how your answer was produced. From percentage and BMI to EMI and length conversion, every calculation becomes easier to understand, verify, and trust.",
     themeColor: "#14B8A6", // Teal
     category: "Productivity",
     playStoreUrl: "https://play.google.com/store/apps/details?id=net.smartlogic.unitconverter",
-    icon: "/unit-converter.webp",
-    seoTitle: "Unit Converter App | Precision Measurement Conversion | SmartUp Tech",
-    features: ["Length & Weight", "Temperature & Area", "Volume & Currency", "Scientific Units", "Instant Conversion", "Offline Mode"],
-    seoKeywords: ["Unit Converter", "Measurement Converter", "Currency Converter", "Conversion Calculator"],
+    icon: "/graphy-calculator.webp",
+    seoTitle: "Graphy Calculator App | Visual Math & Unit Conversion | SmartUp Tech",
+    features: ["Graphy Visual Engine", "Unit Conversion", "Scientific Calculator", "Percentage & BMI", "EMI & Finance", "History & Favorites", "Offline Mode"],
+    seoKeywords: ["Graphy Calculator", "Visual Calculator", "Unit Converter", "Percentage Calculator", "BMI Calculator", "EMI Calculator", "Graphy Engine"],
     benefits: [
-      "Save time with instant results as you type.",
-      "Perform conversions across 100+ categories with ease.",
-      "Reliable tool for professional and academic use.",
-      "Works perfectly offline for on-the-go calculations.",
-      "Minimalist design reduces cognitive load and improves speed."
+      "See how every answer was built with optional Graphy visual explanations.",
+      "Convert units across 100+ categories with instant, accurate results.",
+      "Switch between flowchart, blocks, gauge, and chart renderers for the same calculation.",
+      "One shared calculation engine — Graphy never computes independently of your result.",
+      "Fast calculator workflows preserved; Graphy is an optional insight panel, not a replacement."
     ],
     faqs: [
-      { question: "Does it support currency conversion?", answer: "Yes, currency conversion is supported with rates that can be updated when online." },
-      { question: "Are scientific units included?", answer: "Yes, the app covers a wide range of scientific and engineering units." },
-      { question: "Is the interface easy for quick use?", answer: "The app is designed for speed, allowing you to switch categories and units instantly." },
-      { question: "How many categories are supported?", answer: "We support over 100 categories of measurement, making it one of the most comprehensive tools available." },
-      { question: "Does it require special permissions?", answer: "No, the app is built with privacy in mind and requires minimal permissions." }
+      { question: "What is Graphy?", answer: "Graphy is a visual explanation layer that transforms your calculation result into flowcharts, blocks, gauges, or charts — showing exactly how the answer was produced." },
+      { question: "Does Graphy change my calculation result?", answer: "No. Graphy and the calculator share one calculation path. Graphy visualizes the same evaluated result; it never calculates independently." },
+      { question: "Which calculators support Graphy?", answer: "Graphy is rolling out across calculators including Percentage, BMI, EMI, Length Converter, and more. Flowchart is the universal fallback for every calculator." },
+      { question: "Can I still use it as a regular calculator?", answer: "Yes. Your existing fast calculator and unit conversion workflows are preserved. Graphy is optional — open it when you want to understand the math." },
+      { question: "Does it work offline?", answer: "Yes. Core calculations and unit conversions work offline. Currency rates update when you are online." }
     ],
     screenshots: [
-      { file: "screenshot-unit-1.webp", title: "Precise Conversions", description: "Instant Accuracy. Get real-time conversion results for length, weight, and more as you type." },
-      { file: "screenshot-unit-2.webp", title: "100+ Categories", description: "Comprehensive Tool. From basic measurements to specialized scientific units, we cover it all." },
-      { file: "screenshot-unit-3.webp", title: "Live Currency Rates", description: "Global Finance. Stay updated with real-time currency conversion for over 150 world currencies." },
-      { file: "screenshot-unit-4.webp", title: "Scientific Precision", description: "Engineered for Excellence. Specialized units for engineering, physics, and advanced mathematics." },
-      { file: "screenshot-unit-5.webp", title: "Minimalist Interface", description: "Focus on Results. A clean, distraction-free design optimized for speed and efficiency." }
+      { file: "screenshot-graphy-1.webp", title: "Graphy Flowchart", description: "Visual Clarity. See every step from input to result in a clean, connected flowchart." },
+      { file: "screenshot-graphy-2.webp", title: "Blocks Renderer", description: "Structured Insight. Color-coded blocks break complex formulas into digestible pieces." },
+      { file: "screenshot-graphy-3.webp", title: "Unit Conversion", description: "Instant Precision. Convert length, weight, temperature, currency, and 100+ categories as you type." },
+      { file: "screenshot-graphy-4.webp", title: "Percentage & BMI", description: "Decision Support. Gauges and range indicators for percentage, BMI, and bounded results." },
+      { file: "screenshot-graphy-5.webp", title: "EMI Breakdown", description: "Financial Clarity. Bar charts and tables reveal principal, interest, and amortization at a glance." }
     ]
   },
   {

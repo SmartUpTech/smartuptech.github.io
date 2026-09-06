@@ -1,6 +1,6 @@
 import { panchangArticles } from './articles-panchang';
 import { todayArticles } from './articles-today';
-import { unitConverterArticles } from './articles-unit-converter';
+import { graphyCalculatorArticles } from './articles-graphy-calculator';
 import { citizenCalculatorArticles } from './articles-citizen-calculator';
 import { sindhiTipnoArticles } from './articles-sindhi-tipno';
 
@@ -20,7 +20,7 @@ export interface Article {
 export const articles: Article[] = [
 	...panchangArticles,
 	...todayArticles,
-	...unitConverterArticles,
+	...graphyCalculatorArticles,
 	...citizenCalculatorArticles,
 	...sindhiTipnoArticles,
 ];
