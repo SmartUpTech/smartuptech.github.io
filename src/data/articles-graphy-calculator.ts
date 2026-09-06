@@ -61,7 +61,7 @@ export const graphyCalculatorArticles: Article[] = [
 				<a href="https://play.google.com/store/apps/details?id=net.smartlogic.unitconverter" target="_blank" rel="noopener noreferrer" class="inline-block bg-black text-white px-8 py-3 rounded-full font-bold hover:bg-gray-800 transition-colors">Get it on Google Play Store</a>
 			</div>
 
-			<p>Explore more on the <a href="/apps/graphy-calculator">Graphy Calculator website</a> or read our guides on <a href="/articles/graphy-calculator/what-is-graphy">What Is Graphy?</a> and <a href="/articles/graphy-calculator/graphy-calculation-examples">Graphy Calculation Examples</a>.</p>
+			<p>Explore more on the <a href="/apps/graphy-calculator">Graphy Calculator website</a> or read our guides: <a href="/articles/graphy-calculator/graphy-calculator-usage-guide">How to Use Graphy Calculator</a>, <a href="/articles/graphy-calculator/what-is-graphy">What Is Graphy?</a>, and <a href="/articles/graphy-calculator/graphy-calculation-examples">Graphy Calculation Examples</a>.</p>
 
 			<p><strong>Graphy Calculator — Calculate fast. Understand deeply.</strong></p>
 		`
@@ -383,6 +383,176 @@ export const graphyCalculatorArticles: Article[] = [
 					<tr><td>Is Graphy required to use the app?</td><td>No. Graphy is optional. Your calculator and converter work exactly as fast without opening Graphy.</td></tr>
 				</table>
 			</section>
+		`
+	},
+	{
+		slug: 'graphy-calculator-usage-guide',
+		appId: 'graphy-calculator',
+		title: 'How to Use Graphy Calculator: A Complete Usage Guide',
+		excerpt: 'Step-by-step guide to calculating, converting units, opening Graphy visual explanations, and using favorites and history — without slowing down your workflow.',
+		coverImage: '/blog/graphy-calculator/graphy-calculator-usage-guide-cover.webp',
+		publishDate: '2026-09-06',
+		category: 'Usage Guide',
+		seoTitle: 'How to Use Graphy Calculator | Step-by-Step Usage Guide',
+		seoDescription: 'Learn how to use Graphy Calculator: five-tab navigation, fast calculations, unit conversion, optional Graphy visual explanations, favorites, and history.',
+		content: `
+			<h2>Calculate Fast — Understand When You Want To</h2>
+			<p><strong>Graphy Calculator</strong> is built around one principle: your existing calculator and unit converter workflows stay exactly as fast as before. Graphy is an optional layer you open when you want to <em>see</em> how an answer was produced. This guide walks you through every part of the app — from your first calculation to switching visual renderers and revisiting past results.</p>
+
+			<h2>Getting Started</h2>
+			<p>Download Graphy Calculator from Google Play and open the app. You land on the main screen with five tabs along the bottom. No account is required for core functionality — calculate, convert, and explore offline.</p>
+
+			<ol>
+				<li>Install the app from <a href="https://play.google.com/store/apps/details?id=net.smartlogic.unitconverter" target="_blank" rel="noopener noreferrer">Google Play</a></li>
+				<li>Open any tab — <strong>Calculate</strong> or <strong>Convert</strong> depending on your task</li>
+				<li>Enter values and get your result instantly, just like a standard calculator</li>
+				<li>Optionally tap the <strong>Graphy</strong> panel to see a visual explanation</li>
+			</ol>
+
+			<h2>The Five Tabs</h2>
+			<p>Graphy Calculator organizes everything into five intuitive sections:</p>
+
+			<table>
+				<tr><th>Tab</th><th>What It Does</th><th>When to Use It</th></tr>
+				<tr><td><strong>Calculate</strong></td><td>Specialized calculators: Percentage, BMI, GST, Discount, EMI, Scientific, and more</td><td>When you need a purpose-built formula — not just basic arithmetic</td></tr>
+				<tr><td><strong>Convert</strong></td><td>100+ unit categories: length, weight, temperature, area, volume, currency, and more</td><td>When you need instant conversions as you type</td></tr>
+				<tr><td><strong>Explore</strong></td><td>Browse calculators by category and discover new tools</td><td>When you are not sure which calculator fits your task</td></tr>
+				<tr><td><strong>Favourites</strong></td><td>Quick access to calculators you pin</td><td>When you use the same tools daily — BMI, GST, currency, etc.</td></tr>
+				<tr><td><strong>History</strong></td><td>Past calculations with full context; re-open Graphy views</td><td>When you need to verify or repeat a previous result</td></tr>
+			</table>
+
+			<h2>Using the Calculator</h2>
+			<p>The basic calculator and scientific keypad work exactly as you expect. Expression display, memory controls, and keypad behavior are unchanged from the established app — Graphy Calculator does not rebuild or replace this foundation.</p>
+
+			<h3>Quick Calculation Workflow</h3>
+			<ol>
+				<li>Open <strong>Calculate</strong> and select a calculator (e.g., Percentage) or use the scientific keypad</li>
+				<li>Enter your values using the on-screen keypad</li>
+				<li>Tap calculate — the result appears immediately</li>
+				<li>Done. No Graphy step is required unless you want visual confirmation</li>
+			</ol>
+
+			<p><strong>Remember:</strong> Existing calculation → same result → optional Graphy explanation. Speed first, depth when you choose it.</p>
+
+			<h2>Using Unit Conversion</h2>
+			<p>The <strong>Convert</strong> tab preserves the full unit converter experience. Select a category (length, temperature, weight, etc.), pick source and target units, and type a value. Results update instantly as you type — no extra tap needed.</p>
+
+			<div class="graphy-demo my-10">
+				<div class="graphy-demo-title">Typical Conversion Flow</div>
+				<div class="graphy-blocks">
+					<div class="graphy-block graphy-block-teal">
+						<span class="graphy-block-label">Step 1</span>
+						<span class="graphy-block-value">Open Convert → choose category</span>
+					</div>
+					<div class="graphy-block graphy-block-indigo">
+						<span class="graphy-block-label">Step 2</span>
+						<span class="graphy-block-value">Select units (e.g., miles → km)</span>
+					</div>
+					<div class="graphy-block graphy-block-amber">
+						<span class="graphy-block-label">Step 3</span>
+						<span class="graphy-block-value">Type a value — result updates live</span>
+					</div>
+					<div class="graphy-block graphy-block-result">
+						<span class="graphy-block-label">Optional</span>
+						<span class="graphy-block-value">Open Graphy to see the conversion factor applied</span>
+					</div>
+				</div>
+			</div>
+
+			<h2>Opening Graphy Visual Explanations</h2>
+			<p>Graphy is the visual explanation engine inside Graphy Calculator. After any calculation or conversion, you can open the collapsible <strong>Graphy panel</strong> to see how the answer was built — without triggering a new calculation.</p>
+
+			<h3>How to Open Graphy</h3>
+			<ol>
+				<li>Complete a calculation or conversion as usual</li>
+				<li>Look for the <strong>Graphy</strong> panel below or beside your result</li>
+				<li>Tap to expand — a visual explanation renders instantly</li>
+				<li>Switch renderers (flowchart, blocks, gauge, chart) without recalculating</li>
+			</ol>
+
+			<p><strong>Critical rule:</strong> Graphy never calculates independently. What you see in the result field is exactly what Graphy explains. If the calculator says 100, Graphy shows how 100 was produced — not 99.9 or 100.1.</p>
+
+			<h3>Choosing a Renderer</h3>
+			<p>Graphy supports multiple visual formats. Every calculator has at least a <strong>flowchart</strong> (the universal fallback). Specialized calculators may also offer blocks, gauges, or charts:</p>
+
+			<ul>
+				<li><strong>Flowchart</strong> — Input → formula → compute → result. Best for sequential logic (percentage, discount, EMI)</li>
+				<li><strong>Blocks</strong> — Color-coded stacked segments. Best for multi-step formulas (unit conversion, BMI)</li>
+				<li><strong>Gauge</strong> — Arc indicator on a scale. Best for bounded ranges (BMI categories, percentage completion)</li>
+				<li><strong>Charts</strong> — Bar or pie breakdown. Best for comparative results (EMI principal vs interest)</li>
+			</ul>
+
+			<p>Switch renderers freely on the same result. Graphy re-renders the existing GraphyOutput — it does not re-run the math.</p>
+
+			<h2>Favourites: Pin What You Use Daily</h2>
+			<p>If you reach for the same calculators repeatedly — GST for your shop, BMI for health tracking, currency for travel — pin them in <strong>Favourites</strong>:</p>
+			<ol>
+				<li>Open any calculator from Calculate or Explore</li>
+				<li>Tap the favourite (heart/star) icon on the calculator screen</li>
+				<li>Access pinned tools instantly from the Favourites tab</li>
+			</ol>
+
+			<h2>History: Revisit and Verify</h2>
+			<p>Every calculation is saved in <strong>History</strong> with full context — inputs, result, calculator type, and timestamp. This is especially useful when you need to double-check a figure or re-open a Graphy visualization later.</p>
+
+			<ul>
+				<li>Scroll through past calculations chronologically</li>
+				<li>Tap any entry to see inputs and the result again</li>
+				<li>Re-open the Graphy view for that calculation without re-entering values</li>
+			</ul>
+
+			<h2>Specialized Calculators at a Glance</h2>
+			<p>The <strong>Calculate</strong> tab includes purpose-built tools beyond basic arithmetic. Here is when to reach for each:</p>
+
+			<table>
+				<tr><th>Calculator</th><th>Use Case</th><th>Graphy Renderer</th></tr>
+				<tr><td>Percentage</td><td>Find X% of Y, increase/decrease by percentage</td><td>Flowchart, Blocks</td></tr>
+				<tr><td>BMI</td><td>Body Mass Index from weight and height</td><td>Gauge, Blocks, Flowchart</td></tr>
+				<tr><td>EMI</td><td>Monthly loan payment for home, car, or personal loans</td><td>Bar chart, Flowchart</td></tr>
+				<tr><td>GST</td><td>Add or remove Goods and Services Tax</td><td>Flowchart</td></tr>
+				<tr><td>Discount</td><td>Calculate sale price after a percentage off</td><td>Flowchart</td></tr>
+				<tr><td>Scientific</td><td>Trigonometry, logarithms, expressions with memory</td><td>Flowchart</td></tr>
+			</table>
+
+			<h2>Practical Tips</h2>
+			<ul>
+				<li><strong>Speed first:</strong> You never need to open Graphy. Use it when understanding matters — homework, invoices, health checks, loan decisions.</li>
+				<li><strong>Verify before sharing:</strong> Open Graphy before sending a result to a client or classmate. The visual breakdown builds trust.</li>
+				<li><strong>Explore by category:</strong> Not sure which tool to use? Browse <strong>Explore</strong> by topic — finance, health, conversion, and more.</li>
+				<li><strong>Offline-ready:</strong> Core calculator and converter functions work without an internet connection.</li>
+				<li><strong>Dark mode:</strong> Graphy visualizations follow the same theme tokens in light and dark mode for consistent readability.</li>
+			</ul>
+
+			<h2>What Graphy Calculator Is Not (Yet)</h2>
+			<p>Graphy Calculator MVP focuses on adding visual explanations to existing functionality. The following are planned for future releases but not part of the current experience:</p>
+			<ul>
+				<li>Coins, timeline, and XY graph renderers (coming progressively)</li>
+				<li>AI-powered insights and what-if suggestions</li>
+				<li>Advanced PDF export</li>
+				<li>Full catalog of 100+ specialized calculators (expanding over time)</li>
+			</ul>
+
+			<div class="bg-gray-50 p-8 rounded-3xl my-8 border border-gray-100">
+				<h3 class="mt-0">Ready to Try It?</h3>
+				<p>Calculate as you always have. Open Graphy when you want to understand the math behind the number.</p>
+				<a href="https://play.google.com/store/apps/details?id=net.smartlogic.unitconverter" target="_blank" rel="noopener noreferrer" class="inline-block bg-black text-white px-8 py-3 rounded-full font-bold hover:bg-gray-800 transition-colors">Get Graphy Calculator on Google Play</a>
+			</div>
+
+			<p>Want to go deeper? Read <a href="/articles/graphy-calculator/what-is-graphy">What Is Graphy?</a> for the visual engine explained, or see <a href="/articles/graphy-calculator/graphy-calculation-examples">Graphy Calculation Examples</a> with percentage, BMI, and EMI walkthroughs.</p>
+
+			<section>
+				<h3>Usage Guide FAQs</h3>
+				<table>
+					<tr><th>Question</th><th>Answer</th></tr>
+					<tr><td>Do I have to open Graphy every time?</td><td>No. Graphy is completely optional. Your calculator works at full speed without it.</td></tr>
+					<tr><td>Will Graphy change my result?</td><td>Never. Graphy visualizes the same calculation the app already performed.</td></tr>
+					<tr><td>Can I use the app offline?</td><td>Yes. Core calculator, converter, and Graphy rendering work offline.</td></tr>
+					<tr><td>How do I find a specific calculator?</td><td>Use Explore to browse by category, or search from the Calculate tab.</td></tr>
+					<tr><td>Can I revisit a past Graphy view?</td><td>Yes. Open History, tap the entry, and re-open Graphy for that calculation.</td></tr>
+				</table>
+			</section>
+
+			<p><strong>Graphy Calculator — Calculate fast. Understand deeply.</strong></p>
 		`
 	}
 ];
