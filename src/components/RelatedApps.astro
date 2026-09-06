@@ -9,20 +9,26 @@ const { currentId } = Astro.props;
 const relatedApps = apps.filter(app => app.id !== currentId).slice(0, 3);
 ---
 
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
 	{relatedApps.map(app => (
 		<a
 			href={`/apps/${app.id}`}
-			class="group p-8 rounded-[2.5rem] bg-gray-50/50 hover:bg-white border border-transparent hover:border-gray-100 transition-all shadow-sm hover:shadow-xl"
+			class="group p-5 md:p-8 rounded-[2rem] md:rounded-[2.5rem] bg-gray-50/50 hover:bg-white border border-transparent hover:border-gray-100 transition-all shadow-sm hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2"
 		>
-			<img
-				src={app.icon}
-				alt={`${app.name} - ${app.tagline}`}
-				class="w-12 h-12 rounded-2xl mb-6 transition-transform group-hover:scale-110 object-cover shadow-sm"
-				style={`border: 1px solid ${app.themeColor}20`}
-			/>
-			<h4 class="text-xl font-bold mb-2">{app.name}</h4>
-			<p class="text-sm text-gray-500 line-clamp-2">{app.shortDescription}</p>
+			<div class="flex gap-4 items-start">
+				<img
+					src={app.icon}
+					alt={`${app.name} Android app icon`}
+					loading="lazy"
+					decoding="async"
+					class="w-14 h-14 md:w-12 md:h-12 shrink-0 rounded-2xl transition-transform group-hover:scale-110 object-cover shadow-sm"
+					style={`border: 1px solid ${app.themeColor}20`}
+				/>
+				<div class="min-w-0 flex-1">
+					<h4 class="text-lg md:text-xl font-bold mb-1 md:mb-2 leading-tight">{app.name}</h4>
+					<p class="text-sm text-gray-500 line-clamp-2 leading-relaxed">{app.shortDescription}</p>
+				</div>
+			</div>
 		</a>
 	))}
 </div>

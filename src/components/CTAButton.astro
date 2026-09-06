@@ -10,11 +10,11 @@ interface Props {
 
 const { href, variant = 'primary', class: className, target, rel, ...rest } = Astro.props;
 
-const baseStyles = "inline-flex items-center justify-center transition-all duration-300 font-medium";
+const baseStyles = "inline-flex items-center justify-center transition-all duration-300 font-medium min-h-[48px]";
 const variants = {
-	primary: "bg-black text-white hover:bg-gray-800 px-8 py-4 rounded-full text-lg",
-	secondary: "bg-gray-100 text-black hover:bg-gray-200 px-8 py-4 rounded-full text-lg",
-	link: "text-black hover:opacity-70 p-0 text-lg gap-2"
+	primary: "bg-black text-white hover:bg-gray-800 px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg",
+	secondary: "bg-gray-100 text-black hover:bg-gray-200 px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg",
+	link: "text-black hover:opacity-70 p-0 text-base sm:text-lg gap-2 min-h-[44px]"
 };
 ---
 
