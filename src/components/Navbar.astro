@@ -85,7 +85,9 @@ const playStoreUrl = 'https://play.google.com/store/apps/dev?id=6614685995890456
 	function initMobileMenu() {
 		const button = document.getElementById('mobile-menu-button');
 		const menu = document.getElementById('mobile-menu');
-		if (!button || !menu) return;
+		if (!button || !menu || button.dataset.menuInitialized === 'true') return;
+
+		button.dataset.menuInitialized = 'true';
 
 		const openIcon = button.querySelector('.menu-icon-open');
 		const closeIcon = button.querySelector('.menu-icon-close');
@@ -101,7 +103,8 @@ const playStoreUrl = 'https://play.google.com/store/apps/dev?id=6614685995890456
 			document.body.classList.toggle('overflow-hidden', isOpen);
 		};
 
-		button.addEventListener('click', () => {
+		button.addEventListener('click', (event) => {
+			event.stopPropagation();
 			const isOpen = button.getAttribute('aria-expanded') === 'true';
 			setMenuOpen(!isOpen);
 		});

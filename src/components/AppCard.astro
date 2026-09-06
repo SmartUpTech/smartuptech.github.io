@@ -110,16 +110,15 @@ const { app } = Astro.props;
 
 	@media (min-width: 768px) {
 		.app-card-header {
-			display: flex;
-			flex-wrap: wrap;
-			justify-content: space-between;
-			align-items: flex-start;
+			grid-template-columns: 1fr auto;
+			grid-template-rows: auto auto auto;
+			column-gap: 0;
 			row-gap: 0;
 		}
 
 		.app-card-icon {
-			grid-column: unset;
-			grid-row: unset;
+			grid-column: 1;
+			grid-row: 1;
 		}
 
 		.app-card-category-mobile {
@@ -128,17 +127,24 @@ const { app } = Astro.props;
 
 		.app-card-category-desktop {
 			display: inline-flex;
-		}
-
-		.app-card-title,
-		.app-card-tagline {
-			flex: 0 0 100%;
-			grid-column: unset;
-			grid-row: unset;
+			grid-column: 2;
+			grid-row: 1;
+			align-self: start;
+			justify-self: end;
 		}
 
 		.app-card-title {
+			grid-column: 1 / -1;
+			grid-row: 2;
+			align-self: auto;
+			margin-top: 0;
 			margin-bottom: 0.5rem;
+		}
+
+		.app-card-tagline {
+			grid-column: 1 / -1;
+			grid-row: 3;
+			margin-bottom: 1rem;
 		}
 	}
 </style>
