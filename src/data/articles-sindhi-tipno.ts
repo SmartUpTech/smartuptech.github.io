@@ -113,5 +113,127 @@ export const sindhiTipnoArticles: Article[] = [
 				</table>
 			</section>
 		`
+	},
+	{
+		slug: 'sindhi-festival-cuisine',
+		appId: 'sindhi-tipno',
+		title: 'Sindhi Cuisine: The Sacred Flavors of Our Festivals',
+		excerpt: 'From the golden sweetness of Tahiri at Cheti Chand to the cooling Thadri thali and the nourishing Sai Bhaji — discover how Sindhi festival foods carry faith, memory, and community.',
+		coverImage: '/blog/sindhi-tipno/sindhi-festival-cuisine-cover.webp',
+		publishDate: '2026-09-06',
+		category: 'Culture & Cuisine',
+		seoTitle: 'Sindhi Festival Cuisine: Tahiri, Sai Bhaji & Thadri Cold Food Traditions',
+		seoDescription: 'Explore Sindhi festival foods including Tahiri sweet rice, Sai Bhaji, and the sacred tradition of cold food during Thadri. A guide to the flavors that bind the Sindhi community.',
+		content: `
+			<h2>Food as Memory, Faith, and Celebration</h2>
+			<p>For Sindhis around the world, festival food is never just about taste. Each dish carries the weight of history — of the Indus Valley, of migration after Partition, and of families gathering in temples, homes, and community halls. Whether it is the sticky sweetness of <strong>Tahiri</strong> served during <strong>Cheti Chand</strong>, the emerald comfort of <strong>Sai Bhaji</strong> ladled beside it, or the deliberately cooled plates of <strong>Thadri</strong>, Sindhi cuisine at festival time is a language of devotion, resilience, and belonging.</p>
+
+			<h2>Tahiri: The Sweet Rice That Binds a Community</h2>
+			<p>Known variously as <strong>Tahiri</strong>, <strong>Tairi</strong>, or <strong>Tayri</strong>, this aromatic sweet rice is among the most beloved dishes in Sindhi culinary tradition. Made with basmati rice cooked in jaggery or sugar, enriched with ghee, cardamom, fennel seeds, and often saffron, pistachios, and raisins, Tahiri is complex in flavor — sweet, earthy, peppery, and fragrant all at once.</p>
+
+			<h3>A Dish Shaped by History</h3>
+			<p>Sindh's position on ancient trade routes means its cuisine absorbed influences from Persian, Arab, Central Asian, and Mughal cooking. The use of saffron and pistachios in Tahiri reflects that layered heritage. For a community that experienced displacement and diaspora, Tahiri became more than a dessert — it became a taste of home that could travel anywhere.</p>
+
+			<h3>Tahiri at Cheti Chand and Langar</h3>
+			<p>During <strong>Cheti Chand</strong>, the Sindhi New Year marking the birth of Jhulelal (Uderolal), Tahiri holds a place of honor. At the end of celebrations, devotees sit cross-legged for <strong>langar</strong>, the communal meal where volunteers scoop heaps of golden sweet rice onto plates. Tahiri is distributed as <strong>prasad</strong>, symbolizing abundance, unity, and gratitude.</p>
+			<p>It is also prepared for weddings, mundan ceremonies, Chaliho observances, and Sunday family meals. Some households add a pinch of salt to balance the sweetness; others prefer jaggery over refined sugar. Every family recipe is slightly different — and every Sindhi will tell you their mother's version is the best.</p>
+
+			<h3>What Goes Into Tahiri</h3>
+			<ul>
+				<li><strong>Base:</strong> Basmati rice cooked until each grain is separate yet tender</li>
+				<li><strong>Sweetener:</strong> Jaggery (gur) or sugar, sometimes melted into the cooking water</li>
+				<li><strong>Aromatics:</strong> Green cardamom, fennel seeds (saunf), and occasionally caraway</li>
+				<li><strong>Richness:</strong> Ghee, saffron strands, and nuts such as pistachios, almonds, or cashews</li>
+				<li><strong>Color:</strong> Natural golden hue from saffron, or occasionally food coloring for festive brightness</li>
+			</ul>
+
+			<h2>Sai Bhaji: The Green Heart of Sindhi Comfort</h2>
+			<p>If Tahiri is celebration in a bowl, <strong>Sai Bhaji</strong> (also spelled Saibhaji or Sai Bhaaji) is nourishment. The name comes from the Sindhi words <em>sai</em> (green) and <em>bhaji</em> (vegetables) — and the dish lives up to its name. A slow-cooked stew of chana dal (split Bengal gram), spinach, dill, fenugreek, and seasonal vegetables like potato, eggplant, carrot, and bottle gourd, Sai Bhaji is creamy, lightly spiced, and deeply satisfying.</p>
+
+			<h3>More Than a Side Dish</h3>
+			<p>Sai Bhaji is a staple across Sindhi households in India, Pakistan, and the global diaspora. It is eaten in summer and winter, for lunch and dinner, and is especially treasured during festivals. At Cheti Chand langar, Tahiri is often served alongside Sai Bhaji — the sweetness of the rice balanced by the earthy greens and lentils. Other classic pairings include <strong>Bhee Patata</strong> (lotus stem and potato curry) and simple papad.</p>
+
+			<h3>The Art of the Baghaar</h3>
+			<p>What sets each family's Sai Bhaji apart is the <strong>baghaar</strong> (tempering) — a sizzling finish of ghee, garlic, cumin, and dried red chilies poured over the finished stew. The <strong>vakhar</strong> (mix of vegetables) also varies from home to home. Some add sorrel leaves for tang; others rely on dill and fenugreek for depth. The result is never identical, yet always unmistakably Sindhi.</p>
+
+			<h3>Why Sai Bhaji Matters at Festival Time</h3>
+			<p>For a community shaped by migration, Sai Bhaji represents continuity. After Partition in 1947, Sindhi refugees carried this recipe into new cities and countries, adapting ingredients while preserving the soul of the dish. Preparing Sai Bhaji during Cheti Chand or Chaliho is an act of cultural remembrance — a way of saying, <em>we are still here, and this is who we are</em>.</p>
+
+			<h2>Thadri: The Sacred Tradition of Cold Food</h2>
+			<p>Seven days after Raksha Bandhan, Sindhi families observe <strong>Thadri</strong> (also called Thadree or Thadree Sahib) — a festival dedicated to Goddess <strong>Shitala Devi</strong> (Jog Maya). The word comes from the Sindhi <em>Thado</em>, meaning "cool." On this day, no fire is lit in the kitchen. No food is cooked or reheated. The entire household eats food prepared the previous day — cold, by design and by devotion.</p>
+
+			<h3>The Spiritual Significance</h3>
+			<p>Shitala Devi is the goddess associated with cooling, healing, and protection against heat-related diseases — historically smallpox, chickenpox, and seasonal fevers. By avoiding fire and consuming cold food, families honor her cooling nature and seek her blessings for health during the hot months of August and September, when the festival typically falls (often a day before Janmashtami).</p>
+			<p>The ritual is similar to <strong>Sheetla Ashtami</strong> and <strong>Basoda</strong> observed in other North Indian communities — a shared understanding across cultures that certain seasonal transitions call for rest, cooling foods, and mindful eating.</p>
+
+			<h3>Why Cold Food? The Science Behind the Ritual</h3>
+			<p>Beyond devotion, there is practical wisdom in the Thadri tradition. Preparing food a day ahead and eating it cold encourages:</p>
+			<ul>
+				<li><strong>Probiotics:</strong> Curd-based dishes like dahi vada and raita support gut health</li>
+				<li><strong>Rest for the cook:</strong> The woman of the house, who prepares an elaborate spread the day before, gets a day without kitchen heat</li>
+				<li><strong>Seasonal cooling:</strong> Cold, fermented, and lightly spiced foods help the body during peak summer heat</li>
+				<li><strong>Community sharing:</strong> Families traditionally share Thadri food with neighbors and friends</li>
+			</ul>
+
+			<h3>The Classic Thadri Thali</h3>
+			<p>The Thadri spread is a celebration of dishes designed to keep well overnight. A typical thali includes:</p>
+			<ul>
+				<li><strong>Lola:</strong> Thick wheat flour flatbread, cut into quarters and deep-fried — sweet, crisp, and shelf-stable</li>
+				<li><strong>Koki:</strong> A flaky, spiced flatbread made with wheat flour, besan, onions, and herbs</li>
+				<li><strong>Besani:</strong> Savory chickpea flour flatbread with excellent keeping quality</li>
+				<li><strong>Dahi Vada:</strong> Lentil fritters soaked in beaten curd — eaten cold on Thadri morning</li>
+				<li><strong>Bhindi Aloo:</strong> Fried okra and potato, spiced and prepared ahead</li>
+				<li><strong>Methi Aloo:</strong> Fenugreek and potato sabzi, cooked the day before</li>
+				<li><strong>Basar ji Khatairn:</strong> Onion pickle and green chutney for tang</li>
+				<li><strong>Singar (Sev):</strong> Crispy nylon sev for texture</li>
+			</ul>
+			<p>Parathas and lolas are typically eaten in the morning, while chaat, sandwiches, and lighter items may be enjoyed later in the day. Soaking vadas in water before adding them to curd keeps them soft and refreshing.</p>
+
+			<h3>Rituals of the Day</h3>
+			<p>The woman who cooks the Thadri food follows specific rituals: she bathes with cold water, wears the same clothes from cooking, and performs a small ceremony at the stove — applying kumkum, placing akhryun (small dough figures), and reciting traditional verses before the family may eat. These customs connect the meal to generations of Sindhi women who have kept the tradition alive.</p>
+
+			<h2>Three Dishes, One Living Tradition</h2>
+			<p>Tahiri, Sai Bhaji, and the Thadri thali represent three distinct rhythms of Sindhi festival life — celebration, daily nourishment, and sacred rest. Together, they tell the story of a community that has preserved its identity through flavor:</p>
+			<ul>
+				<li><strong>Tahiri</strong> gathers people together in joy and gratitude</li>
+				<li><strong>Sai Bhaji</strong> sustains families through seasons and migrations</li>
+				<li><strong>Thadri</strong> teaches humility, health, and the sacred pause</li>
+			</ul>
+
+			<h2>Stay Connected to Sindhi Festival Dates</h2>
+			<p>Knowing when Cheti Chand, Thadri, Chaliho Sahib, and other Sindhi occasions fall each year helps you plan these meals and observances in advance. The <strong>Sindhi Tipno app</strong> provides accurate festival dates, Tithi, Nakshatra, and Muhurat information based on traditional calculations — so you never miss the day when Tahiri should be on the stove or the Thadri thali should be prepared the evening before.</p>
+
+			<div class="bg-gray-50 p-8 rounded-3xl my-8 border border-gray-100">
+				<h3 class="mt-0">Celebrate Your Heritage</h3>
+				<p>Download Sindhi Tipno to track festival dates, set reminders, and keep Sindhi traditions close — wherever you are in the world.</p>
+				<a href="https://play.google.com/store/apps/details?id=net.smartlogic.sindhitipno" target="_blank" rel="noopener noreferrer" class="inline-block bg-black text-white px-8 py-3 rounded-full font-bold hover:bg-gray-800 transition-colors">Get it on Google Play Store</a>
+			</div>
+
+			<section>
+				<h3>Festival Cuisine FAQs</h3>
+				<table>
+					<tr>
+						<th>Question</th>
+						<th>Answer</th>
+					</tr>
+					<tr>
+						<td>Can Tahiri be made with sugar instead of jaggery?</td>
+						<td>Yes. Both are traditional. Jaggery gives a deeper, molasses-like flavor; sugar produces a cleaner sweetness.</td>
+					</tr>
+					<tr>
+						<td>Is Sai Bhaji the same as Saibhaji or Saiya?</td>
+						<td>Yes — these are regional and family variations of the same dish. "Saiya" is a colloquial shortening of Sai Bhaji.</td>
+					</tr>
+					<tr>
+						<td>Why is no fire lit on Thadri?</td>
+						<td>Fire represents heat, which is believed to displease Goddess Shitala. Cold food honors her cooling, protective nature.</td>
+					</tr>
+					<tr>
+						<td>When is Thadri celebrated?</td>
+						<td>Typically seven days after Raksha Bandhan, often falling in August or September, a day before Janmashtami.</td>
+					</tr>
+				</table>
+			</section>
+		`
 	}
 ];
