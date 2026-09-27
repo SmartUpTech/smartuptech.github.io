@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" width="1200" height="600">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="50%" stop-color="#1e1b4b" />
+      <stop offset="100%" stop-color="#312e81" />
+    </linearGradient>
+
+    <!-- Gold Gradient -->
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#fbbf24" />
+      <stop offset="50%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#d97706" />
+    </linearGradient>
+
+    <!-- Sun Glow -->
+    <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fef08a" stop-opacity="0.8"/>
+      <stop offset="60%" stop-color="#f59e0b" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#b45309" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Moon Glow -->
+    <radialGradient id="moonGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#e0f2fe" stop-opacity="0.9"/>
+      <stop offset="70%" stop-color="#38bdf8" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#0369a1" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="600" fill="url(#bgGrad)" />
+
+  <!-- Background Stars / Cosmic Pattern -->
+  <g fill="#ffffff" opacity="0.4">
+    <circle cx="150" cy="100" r="2" />
+    <circle cx="280" cy="450" r="1.5" />
+    <circle cx="950" cy="120" r="2" />
+    <circle cx="1050" cy="480" r="2.5" />
+    <circle cx="600" cy="80" r="1" />
+    <circle cx="400" cy="200" r="1.5" />
+    <circle cx="800" cy="500" r="2" />
+    <circle cx="1100" cy="250" r="1" />
+  </g>
+
+  <!-- Astrological Circles / Cosmic Junction Motif -->
+  <g transform="translate(950, 300)">
+    <!-- Outer Ring (27 Yogas) -->
+    <circle cx="0" cy="0" r="180" fill="none" stroke="url(#goldGrad)" stroke-width="2" stroke-dasharray="8 4" opacity="0.5" />
+    <!-- Middle Ring (60 Karanas) -->
+    <circle cx="0" cy="0" r="130" fill="none" stroke="#f59e0b" stroke-width="1.5" opacity="0.3" />
+    <!-- Inner Orbit -->
+    <circle cx="0" cy="0" r="80" fill="none" stroke="url(#goldGrad)" stroke-width="3" opacity="0.8" />
+
+    <!-- Sun & Moon Union Representation -->
+    <!-- Sun (Left of center) -->
+    <circle cx="-35" cy="0" r="45" fill="url(#sunGlow)" />
+    <circle cx="-35" cy="0" r="25" fill="#f59e0b" />
+    <path d="M-35,-45 L-35,-55 M-35,45 L-35,55 M-80,0 L-70,0 M10,0 L0,0 M-65,-30 L-72,-37 M-5,30 L2,37 M-65,30 L-72,37 M-5,-30 L2,-37" stroke="#fbbf24" stroke-width="3" stroke-linecap="round" />
+
+    <!-- Moon (Right of center overlapping) -->
+    <circle cx="35" cy="0" r="40" fill="url(#moonGlow)" />
+    <path d="M 25 -25 A 35 35 0 0 1 25 25 A 28 28 0 0 0 25 -25 Z" fill="#e0f2fe" />
+
+    <!-- Intersection Spark / Junction -->
+    <circle cx="0" cy="0" r="8" fill="#ffffff" filter="drop-shadow(0 0 8px #ffffff)" />
+  </g>
+
+  <!-- Left Content: Typography & Branding -->
+  <g transform="translate(100, 0)">
+    <!-- Category Badge -->
+    <rect x="0" y="140" width="180" height="36" rx="18" fill="#f59e0b" opacity="0.2" />
+    <text x="90" y="163" fill="#fbbf24" font-family="system-ui, sans-serif" font-size="12" font-weight="700" letter-spacing="2" text-anchor="middle">PANCHANG BASICS</text>
+
+    <!-- Main Title -->
+    <text x="0" y="250" fill="#ffffff" font-family="system-ui, sans-serif" font-size="52" font-weight="800" letter-spacing="-1">Yoga &amp; Karana</text>
+
+    <!-- Subtitle -->
+    <text x="0" y="310" fill="#cbd5e1" font-family="system-ui, sans-serif" font-size="28" font-weight="600">The Hidden Limbs of Panchang</text>
+
+    <!-- Description / Hook -->
+    <text x="0" y="370" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="18" font-weight="400">
+      <tspan x="0" dy="0">Mastering the subtle mathematical powerhouses</tspan>
+      <tspan x="0" dy="28">that dictate the daily energy of time.</tspan>
+    </text>
+
+    <!-- App Brand Tag -->
+    <g transform="translate(0, 450)">
+      <rect x="0" y="0" width="220" height="48" rx="24" fill="#ffffff" opacity="0.1" />
+      <circle cx="24" cy="24" r="16" fill="#f59e0b" />
+      <text x="24" y="29" fill="#ffffff" font-family="system-ui, sans-serif" font-size="16" font-weight="bold" text-anchor="middle">ॐ</text>
+      <text x="56" y="29" fill="#ffffff" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" letter-spacing="1">HINDU PANCHANG</text>
+    </g>
+  </g>
+</svg>
