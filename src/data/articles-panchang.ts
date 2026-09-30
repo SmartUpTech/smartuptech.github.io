@@ -63,7 +63,7 @@ export const panchangArticles: Article[] = [
 
 			<h2>How Mobile Apps Simplify the Complexity</h2>
 			<p>Historically, computing Yoga and Karana required advanced ephemeris tables, spherical trigonometry, and expert astrological knowledge. Today, technology bridges the gap instantly.</p>
-			<p>The <strong>Hindu Panchang Android app</strong> performs these complex astronomical calculations in real time based on your precise GPS coordinates. Whether you want to check the current Yoga, identify upcoming Bhadra (Vishti) windows to avoid, or find a harmonious Muhurat, the app puts thousands of years of Vedic astronomy right in your pocket.</p>
+			<p>The <strong>Anant Panchang Android app</strong> performs these complex astronomical calculations in real time based on your precise GPS coordinates. Whether you want to check the current Yoga, identify upcoming Bhadra (Vishti) windows to avoid, or find a harmonious Muhurat, the app puts thousands of years of Vedic astronomy right in your pocket.</p>
 
 			<section>
 				<h3>Quick Reference: The Five Limbs at a Glance</h3>
@@ -258,7 +258,7 @@ export const panchangArticles: Article[] = [
 			<p>Names, marriages, and even the start of a child's education are often timed according to favorable Nakshatras. 'Pushya', for example, is considered the most auspicious Nakshatra for all spiritual and worldly growth, except for weddings.</p>
 
 			<h3>Modern Discovery</h3>
-			<p>With the <strong>Hindu Panchang Android app</strong>, identifying the current Nakshatra is as easy as checking the time. The app provides not just the name, but the characteristics and suitability of the current Nakshatra for various activities, bringing ancient wisdom to your fingertips.</p>
+			<p>With the <strong>Anant Panchang Android app</strong>, identifying the current Nakshatra is as easy as checking the time. The app provides not just the name, but the characteristics and suitability of the current Nakshatra for various activities, bringing ancient wisdom to your fingertips.</p>
 
 			<section>
 				<h3>Common Nakshatras and Their Meanings</h3>
@@ -329,7 +329,7 @@ export const panchangArticles: Article[] = [
 			<p>Even if you aren't getting married or buying a house, you can use daily windows like <strong>Abhijit Muhurat</strong> (roughly midday) for small but important tasks. It is considered a naturally powerful window that can overcome many minor celestial flaws.</p>
 
 			<h2>Technology and Muhurat</h2>
-			<p>Finding these windows manually is nearly impossible for a layperson. The <strong>Hindu Panchang app</strong> simplifies this by highlighting 'Shubh' (auspicious) and 'Ashubh' (inauspicious) timings for your specific city, allowing you to plan your day with confidence.</p>
+			<p>Finding these windows manually is nearly impossible for a layperson. The <strong>Anant Panchang app</strong> simplifies this by highlighting 'Shubh' (auspicious) and 'Ashubh' (inauspicious) timings for your specific city, allowing you to plan your day with confidence.</p>
 		`
 	},
 	{
@@ -371,7 +371,7 @@ export const panchangArticles: Article[] = [
 			<p>Many successful people use Rahu Kaal as a time for 'internal' work—reviewing plans, cleaning their workspace, or introspection—while saving the 'external' launches for more favorable times. It’s a tool for rhythmic living.</p>
 
 			<h3>Finding Your Local Rahu Kaal</h3>
-			<p>To get the exact timing for your specific location today, you can use the <strong>Hindu Panchang app</strong>. It calculates the precise 90-minute window for your coordinates daily, helping you avoid the 'shadow' and stay in the light of clarity.</p>
+			<p>To get the exact timing for your specific location today, you can use the <strong>Anant Panchang app</strong>. It calculates the precise 90-minute window for your coordinates daily, helping you avoid the 'shadow' and stay in the light of clarity.</p>
 
 			<section>
 				<h3>Rahu Kaal FAQs</h3>
