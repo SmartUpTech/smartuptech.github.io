@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "net.smartlogic.hinducalendar",
+      "sha256_cert_fingerprints": [
+        "74:16:02:55:AA:7A:A0:00:D6:A5:95:CB:EA:53:F9:C4:77:58:2C:86:A6:F6:7E:9F:27:C5:56:9F:82:16:DB:26"
+      ]
+    }
+  }
+]
