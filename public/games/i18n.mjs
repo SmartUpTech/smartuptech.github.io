@@ -1,5 +1,12 @@
 export const messages = {
   en: {
+    shape_fit:'Shape Fit',pipe_connect:'Pipe Connect',code_breaker:'Code Breaker',
+    shape_help:'Fill the square with all four pieces, without overlaps. Drag a piece onto the board, or select it then tap a cell. The cell marks the top-left of its bounding box. Select a placed piece to move it; Clear resets the board.',
+    shape_piece:'Piece {number}',shape_selected:'Place piece {number}',shape_invalid:'That piece overlaps or extends outside the board.',
+    pipe_help:'Tap a pipe to rotate it clockwise. Connect S (start) to E (end). Connected pipes are highlighted; unused pipes do not need to connect.',pipe_route:'S → E',
+    pipe_cell:'Row {row}, column {col}. Openings: {ports}. Tap to rotate.',north:'top',east:'right',south:'bottom',west:'left',
+    code_help:'Find four different digits from 1–6 in the correct order. A digit cannot repeat. Each guess shows how many digits are in the right place and how many belong elsewhere. Unlimited guesses; the last three are shown.',
+    check_code:'Check code',code_legend:'Four different digits · 1–6',code_feedback:'{exact} exact · {misplaced} elsewhere',
     daily_progress:'Today’s progress',play_again_tomorrow:'Come back tomorrow to play again',
     how_to_play:'How to play',close_help:'Got it',
     daily_label:'YOUR DAILY PAUSE',
@@ -21,6 +28,13 @@ export const messages = {
     selected:'Selected', letter:'Letter {letter}', answer:'Your answer', hint:'Clue', host_error:'Your app could not configure Games. Reopen Games from the app.'
   },
   hi: {
+    shape_fit:'आकार मिलाएँ',pipe_connect:'पाइप जोड़ें',code_breaker:'कोड सुलझाएँ',
+    shape_help:'चारों टुकड़ों से चौकोर भरें। टुकड़े एक-दूसरे पर नहीं आने चाहिए। टुकड़ा खींचें या उसे चुनकर खाना दबाएँ। चुना खाना टुकड़े की बाहरी चौखट का ऊपरी-बायाँ कोना है। रखे टुकड़े को चुनकर हटा सकते हैं। मिटाएँ से फिर शुरू करें।',
+    shape_piece:'टुकड़ा {number}',shape_selected:'टुकड़ा {number} रखें',shape_invalid:'टुकड़ा दूसरे पर आ रहा है या बाहर जा रहा है।',
+    pipe_help:'पाइप को घड़ी की दिशा में घुमाने के लिए दबाएँ। S (शुरू) को E (अंत) से जोड़ें। जुड़े पाइप उभरकर दिखते हैं। बाकी पाइप जोड़ना ज़रूरी नहीं।',pipe_route:'S → E',
+    pipe_cell:'पंक्ति {row}, स्तंभ {col}। खुले सिरे: {ports}। घुमाने के लिए दबाएँ।',north:'ऊपर',east:'दाएँ',south:'नीचे',west:'बाएँ',
+    code_help:'1–6 में से चार अलग अंक सही क्रम में खोजें। अंक दोहराएँ नहीं। हर कोशिश सही जगह और दूसरी जगह वाले अंकों की संख्या दिखाती है। कोशिशों की सीमा नहीं। पिछली तीन दिखाई जाती हैं।',
+    check_code:'कोड जाँचें',code_legend:'चार अलग अंक · 1–6',code_feedback:'{exact} सही जगह · {misplaced} दूसरी जगह',
     daily_progress:'आज की प्रगति',play_again_tomorrow:'फिर खेलने के लिए कल वापस आएँ',
     how_to_play:'कैसे खेलें',close_help:'समझ गया',
     daily_label:'हर दिन कुछ पल अपने लिए',
@@ -39,6 +53,13 @@ export const messages = {
     day_changed:'नया दिन शुरू हो गया है। आज के खेलों के लिए रीफ़्रेश करें।', refresh:'खेल रीफ़्रेश करें', hint:'संकेत', answer:'आपका जवाब'
   },
   mr: {
+    shape_fit:'आकार जुळवा',pipe_connect:'पाइप जोडा',code_breaker:'कोड सोडवा',
+    shape_help:'चार तुकड्यांनी चौकोन भरा. तुकडे एकमेकांवर येऊ देऊ नका. तुकडा ओढा किंवा निवडून चौकट दाबा. ती चौकट तुकड्याच्या बाह्य चौकटीचा वरचा डावा कोपरा आहे. ठेवलेला तुकडा निवडून हलवा. पुसा दाबून पुन्हा सुरू करा.',
+    shape_piece:'तुकडा {number}',shape_selected:'तुकडा {number} ठेवा',shape_invalid:'तुकडा दुसऱ्यावर येतो किंवा बाहेर जातो.',
+    pipe_help:'पाइप घड्याळाच्या दिशेने फिरवण्यासाठी दाबा. S (सुरुवात) ते E (शेवट) जोडा. जोडलेले पाइप ठळक दिसतात. उरलेले जोडणे आवश्यक नाही.',pipe_route:'S → E',
+    pipe_cell:'ओळ {row}, स्तंभ {col}. उघडी टोके: {ports}. फिरवण्यासाठी दाबा.',north:'वर',east:'उजवीकडे',south:'खाली',west:'डावीकडे',
+    code_help:'1–6 मधील चार वेगळे अंक योग्य क्रमाने शोधा. अंक पुन्हा वापरू नका. प्रत्येक प्रयत्नात योग्य जागी आणि दुसऱ्या जागी असलेल्या अंकांची संख्या दिसते. प्रयत्नांना मर्यादा नाही. शेवटचे तीन दिसतात.',
+    check_code:'कोड तपासा',code_legend:'चार वेगळे अंक · 1–6',code_feedback:'{exact} योग्य जागी · {misplaced} दुसरीकडे',
     daily_progress:'आजची प्रगती',play_again_tomorrow:'पुन्हा खेळण्यासाठी उद्या या',
     how_to_play:'कसे खेळायचे',close_help:'समजले',
     daily_label:'दररोज थोडा विरंगुळा',

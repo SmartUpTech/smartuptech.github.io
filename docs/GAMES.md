@@ -164,6 +164,19 @@ enum into Android. No web code grants native ad rewards.
 
 ## Verification record
 
+The catalog now contains nine games. Shape Fit uses a daily connected-piece
+partition of a 4×4 square, with pointer dragging and keyboard/tap placement.
+The selected cell anchors the top-left of the piece bounding box; pieces keep
+their orientation. Clear resets placements. Any non-overlapping full tiling wins.
+Pipe Connect rotates a solvable daily 4×4 pipe layout clockwise. Any connected
+route from S to E wins; unused pipes need not connect. Code Breaker uses four
+distinct digits from 1–6, unlimited guesses, exact/misplaced clues and the last
+three guesses in a fixed-height history. No game needs a native keyboard.
+All three reuse daily completion, host events, semantic themes and localized
+English/Hindi/Marathi UI (other languages use the existing English fallback).
+Generator tests cover 800 dates; browser checks play all nine games to completion,
+including dragging, and check the new surfaces at 320×440 and larger WebViews.
+
 Local Node tests pass, including 800 consecutive dates for four language codes,
 catalog validation, leap dates, host validation, answer checking, translation
 fallback and corrupt/unavailable storage. Generator tests cover another 800
