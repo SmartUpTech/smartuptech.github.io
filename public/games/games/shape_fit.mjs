@@ -20,7 +20,7 @@ export function mount(root,{date,t,progress,complete,canPlay}) {
     b.addEventListener('pointerup',e=>{if(!drag)return;const moved=drag.moved;drag=null;suppressClick=moved;cells.forEach(c=>c.classList.remove('drop-target'));if(moved&&!disposed&&canPlay()){const target=document.elementFromPoint(e.clientX,e.clientY)?.closest('.shape-cell');if(target)place(Number(target.dataset.cell));}});
     b.addEventListener('pointercancel',()=>{drag=null;cells.forEach(c=>c.classList.remove('drop-target'));});return b;
   });
-  const reset=button(t('clear'),()=>{if(disposed||!canPlay())return;placements.fill(null);selected=0;render();progress({done:0,total:pieces.length});});root.append(board,tray,reset,feedback);
+  root.append(board,tray,feedback);
   function render(){cells.forEach(c=>{c.textContent='';c.classList.remove('filled');});placements.forEach((at,id)=>{if(at!==null)for(const cell of shapeCells(pieces[id],at)){cells[cell].textContent=String(id+1);cells[cell].classList.add('filled');}});buttons.forEach((b,id)=>b.setAttribute('aria-pressed',String(id===selected)));feedback.textContent=selected===null?'':t('shape_selected',{number:selected+1});}
   render();return()=>{disposed=true;drag=null;};
 }

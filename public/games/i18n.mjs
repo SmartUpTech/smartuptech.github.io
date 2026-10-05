@@ -1,5 +1,7 @@
 export const messages = {
   en: {
+    reset_game:'Reset',clear_answer:'Clear answer',clear_cell:'Clear cell',
+    daily_caveat:'One completion per game each day. Reset restarts this same daily puzzle and clears its unfinished progress. It does not unlock completed games or erase other games’ progress.',
     shape_fit:'Shape Fit',pipe_connect:'Pipe Connect',code_breaker:'Code Breaker',
     shape_help:'Fill the square with all four pieces, without overlaps. Drag a piece onto the board, or select it then tap a cell. The cell marks the top-left of its bounding box. Select a placed piece to move it; Clear resets the board.',
     shape_piece:'Piece {number}',shape_selected:'Place piece {number}',shape_invalid:'That piece overlaps or extends outside the board.',
@@ -28,6 +30,8 @@ export const messages = {
     selected:'Selected', letter:'Letter {letter}', answer:'Your answer', hint:'Clue', host_error:'Your app could not configure Games. Reopen Games from the app.'
   },
   hi: {
+    reset_game:'रीसेट',clear_answer:'जवाब मिटाएँ',clear_cell:'खाना मिटाएँ',
+    daily_caveat:'हर खेल रोज़ एक बार पूरा करें। रीसेट आज की यही पहेली फिर शुरू करके अधूरी प्रगति हटाता है। पूरे हुए खेल नहीं खुलते और दूसरे खेलों की प्रगति नहीं मिटती।',
     shape_fit:'आकार मिलाएँ',pipe_connect:'पाइप जोड़ें',code_breaker:'कोड सुलझाएँ',
     shape_help:'चारों टुकड़ों से चौकोर भरें। टुकड़े एक-दूसरे पर नहीं आने चाहिए। टुकड़ा खींचें या उसे चुनकर खाना दबाएँ। चुना खाना टुकड़े की बाहरी चौखट का ऊपरी-बायाँ कोना है। रखे टुकड़े को चुनकर हटा सकते हैं। मिटाएँ से फिर शुरू करें।',
     shape_piece:'टुकड़ा {number}',shape_selected:'टुकड़ा {number} रखें',shape_invalid:'टुकड़ा दूसरे पर आ रहा है या बाहर जा रहा है।',
@@ -53,6 +57,8 @@ export const messages = {
     day_changed:'नया दिन शुरू हो गया है। आज के खेलों के लिए रीफ़्रेश करें।', refresh:'खेल रीफ़्रेश करें', hint:'संकेत', answer:'आपका जवाब'
   },
   mr: {
+    reset_game:'रीसेट',clear_answer:'उत्तर पुसा',clear_cell:'चौकट पुसा',
+    daily_caveat:'प्रत्येक खेळ रोज एकदा पूर्ण करता येतो. रीसेट आजचे तेच कोडे पुन्हा सुरू करून अपूर्ण प्रगती काढते. पूर्ण खेळ पुन्हा उघडत नाहीत आणि इतर खेळांची प्रगती पुसली जात नाही.',
     shape_fit:'आकार जुळवा',pipe_connect:'पाइप जोडा',code_breaker:'कोड सोडवा',
     shape_help:'चार तुकड्यांनी चौकोन भरा. तुकडे एकमेकांवर येऊ देऊ नका. तुकडा ओढा किंवा निवडून चौकट दाबा. ती चौकट तुकड्याच्या बाह्य चौकटीचा वरचा डावा कोपरा आहे. ठेवलेला तुकडा निवडून हलवा. पुसा दाबून पुन्हा सुरू करा.',
     shape_piece:'तुकडा {number}',shape_selected:'तुकडा {number} ठेवा',shape_invalid:'तुकडा दुसऱ्यावर येतो किंवा बाहेर जातो.',

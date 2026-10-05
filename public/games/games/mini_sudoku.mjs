@@ -25,6 +25,6 @@ export function mount(root,{date,t,progress,complete,canPlay}) {
     if(board.every(Boolean))feedback.textContent=t('try_again');
   }
   for(const n of [1,2,3,4])pad.append(button(String(n),()=>enter(n),'digit-key'));
-  const clear=button(t('clear'),()=>enter(0),'erase-key');pad.append(clear);render();
+  const clear=button(t('clear_cell'),()=>enter(0),'erase-key');pad.append(clear);render();
   return ()=>{disposed=true;};
 }

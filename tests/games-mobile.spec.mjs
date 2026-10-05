@@ -166,9 +166,12 @@ try {
     assert.ok(bounds.width<=width,`${id} horizontal overflow`);assert.deepEqual(bounds.clipped,[],`${id} ${language}: controls must stay visible and at least 44px tall`);
     if(!id)assert.equal(await page.locator('.landing-header,.eyebrow').count(),0);
     else {
-      await page.locator('.help-button').click();await page.locator('dialog[open]').waitFor();
-      assert.ok((await page.locator('dialog p').textContent()).length>10);
-      await page.locator('dialog button').click();assert.equal(await page.locator('dialog[open]').count(),0);
+      assert.equal(await page.locator('.reset-game').count(),1);
+      await page.locator('.how-to-play summary').click();await page.locator('.how-to-play[open]').waitFor();
+      assert.equal(await page.locator('.how-to-body li').count(),3);
+      assert.ok((await page.locator('.game-caveat').textContent()).length>10);
+      assert.ok((await page.locator('.daily-caveat').textContent()).length>10);
+      await page.locator('.how-to-play summary').click();assert.equal(await page.locator('.how-to-play[open]').count(),0);
     }
     if(width===320&&language==='en')await page.screenshot({path:`test-results/games/compact-${id||'landing'}.png`,fullPage:true});
   }
@@ -192,5 +195,21 @@ try {
   await page.goto(base+'#word_scramble');await page.waitForSelector('.tiles');
   await page.locator('.tiles button').first().click();const partial=await page.locator('.answer').textContent();
   await page.setViewportSize({width:320,height:440});assert.equal(await page.locator('.answer').textContent(),partial);
-  assert.deepEqual(errors,[]);console.log('PASS: nine games, mobile gameplay, compact WebViews without page scrolling or clipped controls, help dialogs, resize state, themes, locales, focus, persistence and bridge configuration; no page errors.');
+  // Reset remounts the same puzzle without new session events or removing badges.
+  for(const [id,selector]of screens.filter(([id])=>id)){
+    await page.goto(base+`?embedded=1#${id}`);await page.waitForFunction(()=>Boolean(window.SmartUpGames));
+    await page.evaluate(c=>{window.events=[];window.addEventListener('games:event',e=>window.events.push(e.detail));window.SmartUpGames.configure(c);},{...config,date:'2026-10-05',completions:{}});
+    await page.waitForSelector(selector);
+    const initial=await page.locator('.game-content').innerHTML();
+    if(id==='maze')await page.locator('.move-up').click();
+    else await page.locator('.game-content button:not(:disabled)').first().click();
+    await page.locator('.reset-game').click();
+    assert.equal(await page.locator('.game-content').innerHTML(),initial,`${id} resets original daily board`);
+    assert.equal(await page.evaluate(()=>window.events.filter(e=>e.type==='onGameStarted').length),1);
+    assert.equal(await page.evaluate(()=>window.events.filter(e=>e.type==='onGameCompleted').length),0);
+  }
+  await page.goto(base+'?embedded=1#pipe_connect');await page.waitForFunction(()=>Boolean(window.SmartUpGames));
+  await page.evaluate(c=>window.SmartUpGames.configure(c),{...config,date:'2026-10-05',completions:{word_match:'2026-10-05'}});await page.waitForSelector('.pipe-board');
+  await page.locator('.reset-game').click();await page.locator('.back').click();await page.waitForSelector('.catalog');assert.equal(await page.locator('.badge').count(),1);
+  assert.deepEqual(errors,[]);console.log('PASS: nine games, mobile gameplay, compact WebViews without page scrolling or clipped controls, collapsible instructions, consistent reset, resize state, themes, locales, focus, persistence and bridge configuration; no page errors.');
 } finally {await browser.close();await new Promise(r=>server.close(r));}

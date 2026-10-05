@@ -1,6 +1,7 @@
 import {VERSION, localDate, safeId, validateHost, validateCatalog, completionStore} from './core.mjs';
 import {translator} from './i18n.mjs';
 import {applyTheme} from './theme.mjs';
+import {gameInstructions} from './instructions.mjs';
 
 const root = document.querySelector('#app');
 const params = new URLSearchParams(location.search);
@@ -141,26 +142,35 @@ async function route() {
   root.className='screen-game';root.dataset.game=game.id;root.replaceChildren();
   const toolbar=el('header',undefined,'game-toolbar');
   const back=button('←',home,'back');back.setAttribute('aria-label','← '+t('back'));
-  const help=button('?',()=>dialog.showModal(),'help-button');help.setAttribute('aria-label',t('how_to_play'));help.disabled=true;
-  toolbar.append(back,el('h1',t(game.nameKey)),help);
-  const content=el('section',undefined,'game-content'),dialog=el('dialog',undefined,'help-dialog');
-  dialog.setAttribute('aria-labelledby','help-title');
-  root.append(toolbar,content,dialog);
+  const reset=button(t('reset_game'),()=>{},'reset-game');reset.disabled=true;
+  toolbar.append(back,el('h1',t(game.nameKey)),reset);
+  const content=el('section',undefined,'game-content'),help=el('details',undefined,'how-to-play');
+  const summary=el('summary',t('how_to_play')),instructions=el('div',undefined,'how-to-body');
+  const guide=gameInstructions(game.id,host.language);
+  if(guide){const steps=el('ol');for(const step of guide[0])steps.append(el('li',step));instructions.append(steps,el('p',guide[1],'game-caveat'));}
+  instructions.append(el('p',t('daily_caveat'),'daily-caveat'));
+  help.append(summary,instructions);root.append(toolbar,help,content);
   try {
     // The validated catalog route is a local module within the games directory.
     const module=await import(`./games/${game.path}.mjs`);
     if(ticket!==generation)return;
     active=game;
     emit('onGameStarted',game.id);
-    cleanup=module.mount(content,{date:host.date,language:host.language,t,
-      progress:result=>{if(checkDay())window.dispatchEvent(new CustomEvent('games:progress',{detail:{gameId:game.id,date:host.date,...result}}));},
-      complete:result=>complete(game,result),canPlay:checkDay});
-    const instructions=content.firstElementChild;
-    if(instructions?.tagName==='P') {
-      const title=el('h2',t('how_to_play'));title.id='help-title';
-      dialog.append(title,instructions,button(t('close_help'),()=>dialog.close(),'primary'));
-      help.disabled=false;
+    function mountPuzzle(){
+      cleanup?.();cleanup=null;content.replaceChildren();
+      cleanup=module.mount(content,{date:host.date,language:host.language,t,
+        progress:result=>{if(checkDay())window.dispatchEvent(new CustomEvent('games:progress',{detail:{gameId:game.id,date:host.date,...result}}));},
+        complete:result=>complete(game,result),canPlay:checkDay});
+      // Modules keep a plain instruction fallback; the shared panel replaces it.
+      if(content.firstElementChild?.tagName==='P')content.firstElementChild.remove();
     }
+    mountPuzzle();reset.disabled=false;
+    reset.addEventListener('click',()=>{
+      if(ticket!==generation||!checkDay()||completed(game.id))return;
+      mountPuzzle();help.open=false;
+      window.dispatchEvent(new CustomEvent('games:progress',{detail:{gameId:game.id,date:host.date,reset:true,done:0}}));
+      reset.focus({preventScroll:true});
+    });
     focusHeading();
   } catch(error) {
     if(ticket!==generation)return;

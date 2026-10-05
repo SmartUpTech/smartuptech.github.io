@@ -17,7 +17,7 @@ export function mount(root,{date,language,t,progress,complete,canPlay}) {
       round++;progress({done:round,total:challenge.rounds.length});chosen=[];
       if(round===challenge.rounds.length)complete({solved:round,total:round});else {render();panel.querySelector('button')?.focus();}
     },'primary');
-    const clear=button(t('clear'),()=>{if(!canPlay())return;chosen=[];feedback.textContent='';update();tiles.querySelector('button')?.focus();});
+    const clear=button(t('clear_answer'),()=>{if(disposed||!canPlay())return;chosen=[];feedback.textContent='';update();tiles.querySelector('button')?.focus();});
     function update() {
       answer.textContent=chosen.map(i=>puzzle.tiles[i]).join('') || '—';
       [...tiles.children].forEach((b,i)=>{b.disabled=chosen.includes(i);});check.disabled=chosen.length!==puzzle.tiles.length;clear.disabled=!chosen.length;

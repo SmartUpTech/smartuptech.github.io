@@ -8,7 +8,7 @@ export function mount(root,{date,t,progress,complete,canPlay}) {
   const pad=el('div',undefined,'code-pad'),keys=[];
   for(let n=1;n<=6;n++){const key=button(String(n),()=>{if(disposed||!canPlay()||guess.length>=4||guess.includes(n))return;guess.push(n);render();});pad.append(key);keys.push(key);}
   const actions=el('div',undefined,'actions');
-  const erase=button(t('clear'),()=>{if(disposed||!canPlay())return;guess=[];render();});
+  const erase=button(t('clear_answer'),()=>{if(disposed||!canPlay())return;guess=[];render();});
   const check=button(t('check_code'),()=>{
     if(disposed||!canPlay())return;const clue=codeClue(secret,guess);if(!clue)return;
     attempts++;if(clue.exact===4){complete({attempts});return;}
