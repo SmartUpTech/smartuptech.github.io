@@ -1,0 +1,8 @@
+[
+  {"id":"word_match","nameKey":"word_match","icon":"icons/word_match.svg","path":"word_match","enabled":true,"sortOrder":10,"minBridgeVersion":1},
+  {"id":"word_scramble","nameKey":"word_scramble","icon":"icons/word_scramble.svg","path":"word_scramble","enabled":true,"sortOrder":20,"minBridgeVersion":1},
+  {"id":"mini_sudoku","nameKey":"mini_sudoku","icon":"icons/mini_sudoku.svg","path":"mini_sudoku","enabled":false,"sortOrder":30,"minBridgeVersion":1},
+  {"id":"sequence","nameKey":"sequence","icon":"icons/sequence.svg","path":"sequence","enabled":false,"sortOrder":40,"minBridgeVersion":1},
+  {"id":"maze","nameKey":"maze","icon":"icons/maze.svg","path":"maze","enabled":false,"sortOrder":50,"minBridgeVersion":1},
+  {"id":"number_grid","nameKey":"number_grid","icon":"icons/number_grid.svg","path":"number_grid","enabled":false,"sortOrder":60,"minBridgeVersion":1}
+]
