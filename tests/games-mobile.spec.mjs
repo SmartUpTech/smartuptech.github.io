@@ -114,5 +114,31 @@ try {
   // Failed catalog fetch has a working retry path.
   await page.route('**/games.json',route=>route.abort());await page.goto(base);await page.getByRole('button',{name:'Try again'}).waitFor();
   await page.unroute('**/games.json');await page.getByRole('button',{name:'Try again'}).click();await page.waitForSelector('.game-card');
-  assert.deepEqual(errors,[]);console.log('PASS: six games, 5 mobile widths, themes, localized game screens, heading/control focus, reduced motion, daily completion and reload, bridge configuration, retry; no page errors.');
+  // These are the remaining WebView sizes AFTER native bars take their space.
+  // Assert real content bounds, not just hidden page overflow.
+  const screens=[['','.catalog'],['word_match','.pairs'],['word_scramble','.tiles'],['mini_sudoku','.sudoku-board'],['sequence','.sequence-options'],['maze','.maze-board'],['number_grid','.number-grid']];
+  for(const [width,height]of [[320,440],[360,480],[390,560],[412,620]])for(const language of ['en','hi','mr','gu'])for(const [id,selector]of screens){
+    await page.setViewportSize({width,height});await page.goto(base+`?embedded=1${id?'#'+id:''}`);
+    await page.waitForFunction(()=>Boolean(window.SmartUpGames));
+    await page.evaluate(c=>window.SmartUpGames.configure(c),{...config,language,date:'2026-10-05',completions:{}});
+    await page.waitForSelector(selector);
+    const bounds=await page.evaluate(()=>({
+      width:document.documentElement.scrollWidth,height:document.documentElement.scrollHeight,
+      clipped:[...document.querySelectorAll('main button')].filter(b=>{const r=b.getBoundingClientRect();return r.width>0&&r.height>0&&(r.top<0||r.bottom>innerHeight+1||r.left<0||r.right>innerWidth+1||r.height<43);}).map(b=>b.textContent)
+    }));
+    assert.ok(bounds.height<=height+1,`${id||'landing'} ${language} ${width}×${height}: page height ${bounds.height}`);
+    assert.ok(bounds.width<=width,`${id} horizontal overflow`);assert.deepEqual(bounds.clipped,[],`${id} ${language}: controls must stay visible and at least 44px tall`);
+    if(!id)assert.equal(await page.locator('.landing-header,.eyebrow').count(),0);
+    else {
+      await page.locator('.help-button').click();await page.locator('dialog[open]').waitFor();
+      assert.ok((await page.locator('dialog p').textContent()).length>10);
+      await page.locator('dialog button').click();assert.equal(await page.locator('dialog[open]').count(),0);
+    }
+    if(width===320&&language==='en')await page.screenshot({path:`test-results/games/compact-${id||'landing'}.png`,fullPage:true});
+  }
+  // Resizing an active WebView does not regenerate the puzzle or discard input.
+  await page.goto(base+'#word_scramble');await page.waitForSelector('.tiles');
+  await page.locator('.tiles button').first().click();const partial=await page.locator('.answer').textContent();
+  await page.setViewportSize({width:320,height:440});assert.equal(await page.locator('.answer').textContent(),partial);
+  assert.deepEqual(errors,[]);console.log('PASS: six games, mobile gameplay, compact WebViews without page scrolling or clipped controls, help dialogs, resize state, themes, locales, focus, persistence and bridge configuration; no page errors.');
 } finally {await browser.close();await new Promise(r=>server.close(r));}

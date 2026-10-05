@@ -5,6 +5,7 @@ import {applyTheme} from './theme.mjs';
 const root = document.querySelector('#app');
 const params = new URLSearchParams(location.search);
 const embedded = params.get('embedded') === '1' || Boolean(window.AndroidGames);
+document.documentElement.dataset.embedded=String(embedded);
 let storage; try { storage = window.localStorage; } catch { storage = null; }
 const persistence = completionStore(storage);
 let host = embedded ? null : {bridgeVersion:1, appId:'standalone', language:params.get('lang') || 'en', date:localDate()};
@@ -36,6 +37,7 @@ function leave() {
   active = null;
 }
 function heading(title, subtitle) {
+  root.className='screen-message';delete root.dataset.game;
   root.replaceChildren(el('h1',title)); if (subtitle) root.append(el('p',subtitle));
 }
 function focusHeading() { const h = root.querySelector('h1'); h?.setAttribute('tabindex','-1'); h?.focus({preventScroll:true}); }
@@ -62,6 +64,7 @@ function complete(game, result) {
   }
   emit('onGameCompleted',game.id,result);
   cleanup?.(); cleanup=null;
+  root.className='screen-result';delete root.dataset.game;
   root.replaceChildren();
   const panel = el('section',undefined,'result');
   const mark = el('div','✓','result-mark'); mark.setAttribute('aria-hidden','true');
@@ -87,10 +90,8 @@ function settings() {
 function landing() {
   document.documentElement.lang = host.language;
   const doneCount=catalog.filter(g=>completed(g.id)).length;
-  root.replaceChildren(el('p',t('daily_label'),'eyebrow'));
-  const header=el('header',undefined,'landing-header'),intro=el('div');
-  intro.append(el('h1',t('games')),el('p',t('daily')));
-  const count=el('div',`${doneCount}/${catalog.length}`,'daily-count');count.setAttribute('aria-hidden','true');header.append(intro,count);root.append(header);
+  root.className='screen-landing';delete root.dataset.game;
+  root.replaceChildren(el('h1',t('games'),'sr-only'));
   root.append(el('p',t('summary',{done:doneCount,total:catalog.length}),'daily-summary'));
   const track=el('div',undefined,'daily-track');track.setAttribute('aria-hidden','true');
   for(const game of catalog)track.append(el('span','',completed(game.id)?'finished':''));root.append(track);
@@ -119,13 +120,20 @@ async function route() {
   const ticket=++generation; leave();
   if(!host) {heading(t('games'),t('waiting'));return;}
   if(!checkDay())return;
+  document.documentElement.lang=host.language.replace('_','-');
   catalog=validateCatalog(rawCatalog || [],host);
   const path=location.hash.slice(1);
   const game=catalog.find(g=>g.path===path);
   if(!game){landing();return;}
   if(completed(game.id)) {heading(t(game.nameKey),t('completed'));root.append(button(t('back'),home,'primary'));return;}
-  heading(t(game.nameKey)); root.prepend(button('← '+t('back'),home,'back'));
-  const content=el('section');root.append(content);
+  root.className='screen-game';root.dataset.game=game.id;root.replaceChildren();
+  const toolbar=el('header',undefined,'game-toolbar');
+  const back=button('←',home,'back');back.setAttribute('aria-label','← '+t('back'));
+  const help=button('?',()=>dialog.showModal(),'help-button');help.setAttribute('aria-label',t('how_to_play'));help.disabled=true;
+  toolbar.append(back,el('h1',t(game.nameKey)),help);
+  const content=el('section',undefined,'game-content'),dialog=el('dialog',undefined,'help-dialog');
+  dialog.setAttribute('aria-labelledby','help-title');
+  root.append(toolbar,content,dialog);
   try {
     // The validated catalog route is a local module within the games directory.
     const module=await import(`./games/${game.path}.mjs`);
@@ -135,6 +143,12 @@ async function route() {
     cleanup=module.mount(content,{date:host.date,language:host.language,t,
       progress:result=>{if(checkDay())window.dispatchEvent(new CustomEvent('games:progress',{detail:{gameId:game.id,date:host.date,...result}}));},
       complete:result=>complete(game,result),canPlay:checkDay});
+    const instructions=content.firstElementChild;
+    if(instructions?.tagName==='P') {
+      const title=el('h2',t('how_to_play'));title.id='help-title';
+      dialog.append(title,instructions,button(t('close_help'),()=>dialog.close(),'primary'));
+      help.disabled=false;
+    }
     focusHeading();
   } catch(error) {
     if(ticket!==generation)return;

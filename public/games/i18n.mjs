@@ -1,5 +1,6 @@
 export const messages = {
   en: {
+    how_to_play:'How to play',close_help:'Got it',
     daily_label:'YOUR DAILY PAUSE',
     word_match_detail:'Connect the meanings',word_scramble_detail:'Untangle the letters',mini_sudoku_detail:'A little logic',sequence_detail:'Find the pattern',maze_detail:'Find your way',number_grid_detail:'Focus, one at a time',
     sudoku_help:'Fill each row, column and 2 × 2 box with 1–4, without repeats. Select an empty cell, then a number.',
@@ -19,6 +20,7 @@ export const messages = {
     selected:'Selected', letter:'Letter {letter}', answer:'Your answer', hint:'Clue', host_error:'Your app could not configure Games. Reopen Games from the app.'
   },
   hi: {
+    how_to_play:'कैसे खेलें',close_help:'समझ गया',
     daily_label:'हर दिन कुछ पल अपने लिए',
     word_match_detail:'अर्थों को जोड़ें',word_scramble_detail:'अक्षरों को सुलझाएँ',mini_sudoku_detail:'तर्क का छोटा खेल',sequence_detail:'क्रम पहचानें',maze_detail:'रास्ता खोजें',number_grid_detail:'एक-एक अंक पर ध्यान दें',
     sudoku_help:'हर पंक्ति, स्तंभ और 2 × 2 खाने में 1–4 भरें। कोई अंक दोहराएँ नहीं। खाली खाना चुनकर अंक दबाएँ।',
@@ -35,6 +37,7 @@ export const messages = {
     day_changed:'नया दिन शुरू हो गया है। आज के खेलों के लिए रीफ़्रेश करें।', refresh:'खेल रीफ़्रेश करें', hint:'संकेत', answer:'आपका जवाब'
   },
   mr: {
+    how_to_play:'कसे खेळायचे',close_help:'समजले',
     daily_label:'दररोज थोडा विरंगुळा',
     word_match_detail:'अर्थ जुळवा',word_scramble_detail:'अक्षरे सोडवा',mini_sudoku_detail:'तर्काचा छोटा खेळ',sequence_detail:'क्रम ओळखा',maze_detail:'वाट शोधा',number_grid_detail:'एका वेळी एका अंकावर लक्ष',
     sudoku_help:'प्रत्येक ओळ, स्तंभ आणि 2 × 2 चौकटीत 1–4 भरा. अंक पुन्हा वापरू नका. रिकामी जागा निवडून अंक दाबा.',
