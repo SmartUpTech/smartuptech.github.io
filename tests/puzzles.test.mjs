@@ -1,5 +1,29 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {shapeChallenge,shapeCells,shapePlacement,pipeChallenge,pipeConnected,rotatePipe,codeChallenge,codeClue} from '../public/games/games/new-puzzles.mjs';
+
+test('new daily games are deterministic, solvable and reject invalid moves over 800 dates',()=>{
+  for(let i=0;i<800;i++){
+    const date=new Date(Date.UTC(2026,0,1+i)).toISOString().slice(0,10);
+    const pieces=shapeChallenge(date),placements=pieces.map(()=>null);
+    assert.deepEqual(pieces,shapeChallenge(date));
+    for(let id=0;id<pieces.length;id++){
+      assert.ok(shapePlacement(pieces,placements,id,pieces[id].anchor));placements[id]=pieces[id].anchor;
+      const cells=shapeCells(pieces[id],placements[id]),seen=new Set([cells[0]]),queue=[cells[0]];
+      for(const at of queue)for(let d=0;d<4;d++){const n=neighbor(at,d,4);if(cells.includes(n)&&!seen.has(n)){seen.add(n);queue.push(n);}}
+      assert.equal(seen.size,cells.length);
+    }
+    assert.equal(new Set(pieces.flatMap((p,id)=>shapeCells(p,placements[id]))).size,16);
+    assert.equal(shapePlacement(pieces,placements,0,16),false);
+    const pipe=pipeChallenge(date);assert.deepEqual(pipe,pipeChallenge(date));assert.ok(pipeConnected(pipe.solution).has(15));assert.ok(!pipeConnected(pipe.puzzle).has(15));
+    pipe.puzzle.forEach((mask,id)=>{const turns=[mask];for(let n=0;n<3;n++)turns.push(rotatePipe(turns.at(-1)));assert.ok(turns.includes(pipe.solution[id]));});
+    const code=codeChallenge(date);assert.deepEqual(code,codeChallenge(date));assert.equal(new Set(code).size,4);assert.deepEqual(codeClue(code,code),{exact:4,misplaced:0});
+    assert.deepEqual(codeClue(code,[...code.slice(1),code[0]]),{exact:0,misplaced:4});
+  }
+  assert.equal(codeClue([1,2,3,4],[1,1,2,3]),null);
+  assert.equal(codeClue([1,2,3,4],[0,2,3,4]),null);
+  assert.deepEqual(codeClue([1,2,3,4],[1,3,5,6]),{exact:1,misplaced:1});
+});
 import {sudokuChallenge,sudokuSolutions,sudokuComplete,sudokuCandidates,sequenceChallenge,sequenceCorrect,mazeChallenge,mazeMove,neighbor,numberGridChallenge,numberGridCorrect} from '../public/games/games/puzzles.mjs';
 
 export function mazePath(maze) {

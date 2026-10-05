@@ -4,5 +4,8 @@
   {"id":"mini_sudoku","nameKey":"mini_sudoku","icon":"icons/mini_sudoku.svg","path":"mini_sudoku","tone":"numbers","enabled":true,"sortOrder":30,"minBridgeVersion":1},
   {"id":"sequence","nameKey":"sequence","icon":"icons/sequence.svg","path":"sequence","tone":"patterns","enabled":true,"sortOrder":40,"minBridgeVersion":1},
   {"id":"maze","nameKey":"maze","icon":"icons/maze.svg","path":"maze","tone":"paths","enabled":true,"sortOrder":50,"minBridgeVersion":1},
-  {"id":"number_grid","nameKey":"number_grid","icon":"icons/number_grid.svg","path":"number_grid","tone":"focus","enabled":true,"sortOrder":60,"minBridgeVersion":1}
+  {"id":"number_grid","nameKey":"number_grid","icon":"icons/number_grid.svg","path":"number_grid","tone":"focus","enabled":true,"sortOrder":60,"minBridgeVersion":1},
+  {"id":"shape_fit","nameKey":"shape_fit","icon":"icons/shape_fit.svg","path":"shape_fit","tone":"patterns","enabled":true,"sortOrder":70,"minBridgeVersion":1},
+  {"id":"pipe_connect","nameKey":"pipe_connect","icon":"icons/pipe_connect.svg","path":"pipe_connect","tone":"paths","enabled":true,"sortOrder":80,"minBridgeVersion":1},
+  {"id":"code_breaker","nameKey":"code_breaker","icon":"icons/code_breaker.svg","path":"code_breaker","tone":"numbers","enabled":true,"sortOrder":90,"minBridgeVersion":1}
 ]

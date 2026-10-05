@@ -5,6 +5,7 @@ import {pathToFileURL} from 'node:url';
 import assert from 'node:assert/strict';
 import {scrambleChallenge,graphemes} from '../public/games/games/words.mjs';
 import {sudokuChallenge,sequenceChallenge,mazeChallenge,mazeMove} from '../public/games/games/puzzles.mjs';
+import {shapeChallenge,pipeChallenge,rotatePipe,codeChallenge} from '../public/games/games/new-puzzles.mjs';
 const {chromium}=await import(process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES ? pathToFileURL(resolve(process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES,'playwright/index.mjs')).href : 'playwright');
 const publicDir=resolve('public');
 const server=createServer(async(req,res)=>{
@@ -25,7 +26,10 @@ try {
   for(const width of [320,360,390,412,480])for(const theme of ['light','dark']) {
     await page.setViewportSize({width,height:844});await page.goto(base+`?test=1&theme=${theme}`);
     await page.waitForSelector('.game-card');
-    assert.equal(await page.locator('.game-card').count(),6);
+    assert.equal(await page.locator('.game-card').count(),9);
+    assert.equal(await page.locator('.footer').count(),0);
+    assert.equal(await page.getByRole('progressbar').getAttribute('aria-valuenow'),'0');
+    assert.equal(await page.locator('.catalog').evaluate(el=>getComputedStyle(el).gridTemplateColumns.split(' ').length),3);
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
     if(width===390)await page.screenshot({path:`test-results/games/landing-${theme}.png`,fullPage:true});
   }
@@ -44,6 +48,9 @@ try {
   assert.equal(await page.evaluate(()=>window.events.filter(e=>e.type==='onGameCompleted').length),1);
   await page.screenshot({path:'test-results/games/result.png'});
   await page.getByRole('button',{name:'Back to games'}).click();await page.waitForSelector('.badge');await page.reload();await page.waitForSelector('.badge');
+  assert.equal(await page.locator('.game-card .status').count(),0);
+  assert.equal(await page.locator('.footer').count(),0);
+  assert.equal(await page.getByRole('progressbar').getAttribute('aria-valuenow'),'1');
   await page.getByRole('button',{name:'Word Match: Completed today'}).click();assert.equal(await page.locator('[data-pair]').count(),0);
   await page.getByRole('button',{name:'Back to games'}).click();
   await page.getByRole('button',{name:'Word Scramble',exact:true}).click();await page.waitForSelector('.tiles');
@@ -82,9 +89,38 @@ try {
   for(let n=1;n<=16;n++)await page.locator(`[data-number="${n}"]`).click();
   await page.getByRole('heading',{name:'Well done!'}).waitFor();
   assert.equal(await page.locator('.result-mark').evaluate(el=>getComputedStyle(el).animationName),'none');
+  await page.getByRole('button',{name:'Back to games'}).click();await page.waitForSelector('.catalog');
+  await page.getByRole('button',{name:'Shape Fit',exact:true}).click();await page.waitForSelector('.shape-board');
+  const shapes=shapeChallenge(date);
+  for(let i=0;i<shapes.length;i++){
+    if(i===0){
+      const source=await page.locator(`[data-piece="${i}"]`).boundingBox(),target=await page.locator(`.shape-cell[data-cell="${shapes[i].anchor}"]`).boundingBox();
+      await page.mouse.move(source.x+source.width/2,source.y+source.height/2);await page.mouse.down();await page.mouse.move(target.x+target.width/2,target.y+target.height/2,{steps:8});await page.mouse.up();
+      assert.equal(await page.locator('.shape-cell.filled').count(),shapes[i].cells.length);
+    }else{await page.locator(`[data-piece="${i}"]`).click();await page.locator(`.shape-cell[data-cell="${shapes[i].anchor}"]`).click();}
+  }
+  await page.getByRole('heading',{name:'Well done!'}).waitFor();await page.getByRole('button',{name:'Back to games'}).click();await page.waitForSelector('.catalog');
+  await page.getByRole('button',{name:'Pipe Connect',exact:true}).click();await page.waitForSelector('.pipe-board');
+  const pipes=pipeChallenge(date);
+  // Solve endpoint last so incidental earlier connections cannot end the test mid-loop.
+  for(const i of [...Array.from({length:15},(_,i)=>i+1),0]){
+    let mask=pipes.puzzle[i];while(mask!==pipes.solution[i]){
+      if(await page.locator('.pipe-board').count()===0)break;
+      await page.locator(`.pipe-cell[data-cell="${i}"]`).click();mask=rotatePipe(mask);
+    }
+  }
+  await page.getByRole('heading',{name:'Well done!'}).waitFor();await page.getByRole('button',{name:'Back to games'}).click();await page.waitForSelector('.catalog');
+  await page.getByRole('button',{name:'Code Breaker',exact:true}).click();await page.waitForSelector('.code-pad');
+  const secret=codeChallenge(date),wrong=[...secret.slice(1),secret[0]];
+  for(let attempt=0;attempt<4;attempt++){for(const n of wrong)await page.locator('.code-pad button').filter({hasText:String(n)}).click();await page.getByRole('button',{name:'Check code',exact:true}).click();}
+  assert.equal(await page.locator('.code-history li').count(),3);assert.match(await page.locator('.feedback').textContent(),/0 exact · 4 elsewhere/);
+  for(const n of secret)await page.locator('.code-pad button').filter({hasText:String(n)}).click();
+  await page.getByRole('button',{name:'Check code',exact:true}).click();await page.getByRole('heading',{name:'Well done!'}).waitFor();
   const events=await page.evaluate(()=>window.events.filter(e=>e.type==='onGameCompleted').map(e=>e.gameId));
-  assert.deepEqual(events,['mini_sudoku','sequence','maze','number_grid']);
-  await page.getByRole('button',{name:'Back to games'}).click();await page.waitForSelector('.catalog');await page.reload();await page.waitForSelector('.catalog');assert.equal(await page.locator('.badge').count(),6);
+  assert.deepEqual(events,['mini_sudoku','sequence','maze','number_grid','shape_fit','pipe_connect','code_breaker']);
+  await page.getByRole('button',{name:'Back to games'}).click();await page.waitForSelector('.catalog');await page.reload();await page.waitForSelector('.catalog');assert.equal(await page.locator('.badge').count(),9);
+  assert.equal(await page.locator('.footer').textContent(),'Come back tomorrow to play again');
+  assert.equal(await page.getByRole('progressbar').getAttribute('aria-valuenow'),'9');
   await page.getByRole('button',{name:'Number Grid: Completed today',exact:true}).click();assert.equal(await page.locator('.number-grid').count(),0);
   // Localized content, narrow-screen gameplay and reduced motion.
   await context.clearCookies();await page.evaluate(()=>localStorage.clear());
@@ -94,7 +130,7 @@ try {
     await page.screenshot({path:`test-results/games/match-${lang}.png`,fullPage:true});
   }
   // Check every game surface, long translations and both themes on small phones.
-  for(const width of [320,412])for(const theme of ['light','dark'])for(const lang of ['en','hi','mr'])for(const [id,selector]of [['mini_sudoku','.sudoku-board'],['sequence','.sequence-options'],['maze','.maze-board'],['number_grid','.number-grid']]){
+  for(const width of [320,412])for(const theme of ['light','dark'])for(const lang of ['en','hi','mr'])for(const [id,selector]of [['mini_sudoku','.sudoku-board'],['sequence','.sequence-options'],['maze','.maze-board'],['number_grid','.number-grid'],['shape_fit','.shape-board'],['pipe_connect','.pipe-board'],['code_breaker','.code-pad']]){
     await page.setViewportSize({width,height:844});await page.goto(base+`?lang=${lang}&theme=${theme}#${id}`);await page.waitForSelector(selector);
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
     assert.equal(await page.locator('h1').evaluate(h=>getComputedStyle(h).outlineStyle),'none');
@@ -116,7 +152,7 @@ try {
   await page.unroute('**/games.json');await page.getByRole('button',{name:'Try again'}).click();await page.waitForSelector('.game-card');
   // These are the remaining WebView sizes AFTER native bars take their space.
   // Assert real content bounds, not just hidden page overflow.
-  const screens=[['','.catalog'],['word_match','.pairs'],['word_scramble','.tiles'],['mini_sudoku','.sudoku-board'],['sequence','.sequence-options'],['maze','.maze-board'],['number_grid','.number-grid']];
+  const screens=[['','.catalog'],['word_match','.pairs'],['word_scramble','.tiles'],['mini_sudoku','.sudoku-board'],['sequence','.sequence-options'],['maze','.maze-board'],['number_grid','.number-grid'],['shape_fit','.shape-board'],['pipe_connect','.pipe-board'],['code_breaker','.code-pad']];
   for(const [width,height]of [[320,440],[360,480],[390,560],[412,620]])for(const language of ['en','hi','mr','gu'])for(const [id,selector]of screens){
     await page.setViewportSize({width,height});await page.goto(base+`?embedded=1${id?'#'+id:''}`);
     await page.waitForFunction(()=>Boolean(window.SmartUpGames));
@@ -137,8 +173,24 @@ try {
     if(width===320&&language==='en')await page.screenshot({path:`test-results/games/compact-${id||'landing'}.png`,fullPage:true});
   }
   // Resizing an active WebView does not regenerate the puzzle or discard input.
+  // All nine real games fit with zero, partial and full completion.
+  const catalog=JSON.parse(await readFile(resolve(publicDir,'games/games.json'),'utf8'));
+  const nine=catalog;
+  await page.route('**/games.json',route=>route.fulfill({json:nine}));
+  await page.setViewportSize({width:320,height:440});
+  for(const language of ['en','hi','mr'])for(const count of [0,5,9]){
+    await page.goto(base+'?embedded=1');await page.waitForFunction(()=>Boolean(window.SmartUpGames));
+    await page.evaluate(c=>window.SmartUpGames.configure(c),{...config,language,date:'2026-10-05',completions:Object.fromEntries(nine.slice(0,count).map(g=>[g.id,'2026-10-05']))});
+    await page.waitForSelector('.catalog');assert.equal(await page.locator('.game-card').count(),9);
+    assert.equal(await page.getByRole('progressbar').getAttribute('aria-valuenow'),String(count));
+    assert.equal(await page.getByRole('progressbar').getAttribute('aria-valuemax'),'9');
+    assert.equal(await page.locator('.footer').count(),count===9?1:0);
+    assert.equal(await page.locator('.game-card .status').count(),0);
+    assert.ok(await page.evaluate(()=>document.documentElement.scrollHeight<=innerHeight+1),`nine games ${language} ${count} must fit`);
+  }
+  await page.unroute('**/games.json');
   await page.goto(base+'#word_scramble');await page.waitForSelector('.tiles');
   await page.locator('.tiles button').first().click();const partial=await page.locator('.answer').textContent();
   await page.setViewportSize({width:320,height:440});assert.equal(await page.locator('.answer').textContent(),partial);
-  assert.deepEqual(errors,[]);console.log('PASS: six games, mobile gameplay, compact WebViews without page scrolling or clipped controls, help dialogs, resize state, themes, locales, focus, persistence and bridge configuration; no page errors.');
+  assert.deepEqual(errors,[]);console.log('PASS: nine games, mobile gameplay, compact WebViews without page scrolling or clipped controls, help dialogs, resize state, themes, locales, focus, persistence and bridge configuration; no page errors.');
 } finally {await browser.close();await new Promise(r=>server.close(r));}
