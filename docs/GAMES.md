@@ -1,6 +1,6 @@
 # Web Games release 0.0.8
 
-Phases 1 and 2 add a small static application at `/games/` to the existing Astro
+Phases 1, 2, 4 and 5 add a small static application at `/games/` to the existing Astro
 site. Astro copies `public/games` into its output; no framework, third-party
 runtime, ad SDK or new npm dependency is added to the games. The home page gets
 one small Games link above its existing footer.
@@ -15,8 +15,16 @@ one small Games link above its existing footer.
   loading failures with retry, and standalone local-storage persistence.
 - English, Hindi and Marathi UI/content. All other requested language codes
   fall back to English; missing individual UI strings also fall back to English.
-- Mini Sudoku, Sequence, Maze and Number Grid remain disabled in the catalog.
-  The summary counts enabled/compatible games, so this release shows “of 2”.
+- Mini Sudoku: a 4 × 4 board with 2 × 2 boxes, fixed clues, uniqueness checking,
+  conflict feedback and editable/erasable answers using an on-screen keypad.
+- Sequence: three multiple-choice patterns with explicit rule-family hints.
+- Maze: a solvable 6 × 6 maze, directional controls, keyboard and adjacent-cell
+  tapping; move the dot to the vector flag.
+- Number Grid: tap shuffled numbers 1–16 in order, without a countdown.
+- All six games are enabled. The summary counts enabled/compatible games.
+- Landing cards use distinct theme tokens, short localized descriptions and a
+  daily completion strip. Programmatically focused titles have no outline;
+  interactive controls retain visible keyboard focus.
 
 ## Run and verify
 
@@ -39,6 +47,9 @@ Astro build on the release branch and on pull requests to main.
 Optional `apps` and `languages` arrays restrict visibility; omitting them allows
 all hosts/languages. Routes and icons must be local identifiers, never URLs.
 Each enabled route lazy-loads `games/<path>.mjs` with the shared mount contract.
+Optional `tone` selects a validated decorative category token. Standalone themes
+provide six subdued palettes. Embedded hosts can supply category Accent/Surface
+tokens; otherwise these derive from the host accent and surface.
 
 `words-1` datasets have six distinct daily sets per language per game. A
 date-indexed rotation selects a set without adjacent-day repeats; a seed derived
@@ -47,6 +58,14 @@ cycle after six days, while tile/order arrangements vary. Expand the datasets
 in a new content version when adding longer-term variety. Unicode grapheme
 segmentation keeps vowel signs and conjuncts together. Engines without
 `Intl.Segmenter` use English puzzles. Hints define the intended scramble answer.
+
+`puzzles-1` generates the four numeric/spatial games from game ID, date and
+generator version. Sudoku removes clues only while retaining one solution;
+its first clue cycles daily, preventing identical consecutive puzzles. Sequence
+uses addition, multiplication and consecutive squares, with one correct option
+per round. Maze uses a spanning-tree traversal with alternating start exits;
+all cells are reachable and consecutive layouts differ. Number Grid shuffles
+all 16 values and rotates the position of 1 each day. No puzzle requires a timer.
 
 Keep assets under stable `public/games/` paths. Release numbers belong in Git
 branch names, not directory names. Shared modules, styles and the catalog live
@@ -122,6 +141,8 @@ enum into Android. No web code grants native ad rewards.
 
 Local Node tests pass, including 800 consecutive dates for four language codes,
 catalog validation, leap dates, host validation, answer checking, translation
-fallback and corrupt/unavailable storage. Full Astro build and browser tests
+fallback and corrupt/unavailable storage. Generator tests cover another 800
+dates for Sudoku uniqueness, maze connectivity and symmetric walls, sequence
+answers, complete number permutations and non-consecutive repeats. Full Astro build and browser tests
 are also required CI gates; see the pull request checks for their final results.
-Native integration and device testing are outside Phases 1 and 2.
+Native integration and physical-device testing remain Phase 3 work.

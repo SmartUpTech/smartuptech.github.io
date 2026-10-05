@@ -1,4 +1,5 @@
 export const VERSION = '0.0.8';
+export const catalogTones = ['words','letters','numbers','patterns','paths','focus'];
 export const safeId = value => typeof value === 'string' && /^[a-z][a-z0-9_]{0,47}$/.test(value);
 export const languageOf = value => String(value || 'en').toLowerCase().split(/[-_]/)[0];
 export function validDate(value) {
@@ -40,6 +41,7 @@ export function validateCatalog(raw, host = {}) {
     if (typeof g.enabled !== 'boolean' || !g.enabled || !safeId(g.nameKey) ||
       !safeId(g.path) || !/^icons\/[a-z0-9_]+\.svg$/.test(g.icon) ||
       !Number.isSafeInteger(g.sortOrder) || !Number.isInteger(g.minBridgeVersion) || g.minBridgeVersion < 1) return false;
+    if (g.tone !== undefined && !catalogTones.includes(g.tone)) return false;
     if (g.apps !== undefined && (!Array.isArray(g.apps) || !g.apps.every(x => typeof x === 'string'))) return false;
     if (g.languages !== undefined && g.languages !== 'all' && (!Array.isArray(g.languages) || !g.languages.every(x => typeof x === 'string'))) return false;
     return g.minBridgeVersion <= (host.bridgeVersion ?? 1) &&

@@ -3,7 +3,7 @@ on:
   pull_request:
     branches: [main]
   push:
-    branches: [release/0.0.8]
+    branches: [release/0.0.8, release/v0.0.8]
 permissions:
   contents: read
 jobs:
@@ -20,3 +20,9 @@ jobs:
       - run: npm run build
       - run: npx playwright install --with-deps chromium
       - run: npm run test:games:mobile
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: games-mobile-screenshots
+          path: test-results/games/
+          retention-days: 7
