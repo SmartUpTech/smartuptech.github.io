@@ -10,7 +10,9 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "test:mobile": "node tests/mobile-comprehensive.spec.mjs"
+    "test:mobile": "node tests/mobile-comprehensive.spec.mjs",
+    "test:games": "node --test tests/games.test.mjs",
+    "test:games:mobile": "node tests/games-mobile.spec.mjs"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.0",

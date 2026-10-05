@@ -26,3 +26,6 @@ pnpm-debug.log*
 # Gemini artifacts
 .artifacts/
 *.artifact.md
+
+# Browser test output
+test-results/
