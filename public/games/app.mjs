@@ -92,9 +92,22 @@ function landing() {
   const doneCount=catalog.filter(g=>completed(g.id)).length;
   root.className='screen-landing';delete root.dataset.game;
   root.replaceChildren(el('h1',t('games'),'sr-only'));
-  root.append(el('p',t('summary',{done:doneCount,total:catalog.length}),'daily-summary'));
-  const track=el('div',undefined,'daily-track');track.setAttribute('aria-hidden','true');
-  for(const game of catalog)track.append(el('span','',completed(game.id)?'finished':''));root.append(track);
+  const summary=t('summary',{done:doneCount,total:catalog.length});
+  const status=el('section',undefined,'daily-status'),ring=el('div',undefined,'daily-ring');
+  ring.setAttribute('role','progressbar');ring.setAttribute('aria-label',t('daily_progress'));
+  ring.setAttribute('aria-valuemin','0');ring.setAttribute('aria-valuemax',String(catalog.length || 1));
+  ring.setAttribute('aria-valuenow',String(doneCount));ring.setAttribute('aria-valuetext',summary);
+  const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+  svg.setAttribute('viewBox','0 0 64 64');svg.setAttribute('aria-hidden','true');
+  for(const className of ['ring-track','ring-fill']) {
+    const circle=document.createElementNS(svg.namespaceURI,'circle');
+    for(const [key,value]of Object.entries({cx:32,cy:32,r:27,pathLength:100,class:className}))circle.setAttribute(key,String(value));
+    if(className==='ring-fill')circle.setAttribute('stroke-dasharray',`${catalog.length?doneCount/catalog.length*100:0} 100`);
+    svg.append(circle);
+  }
+  const count=el('span',`${doneCount}/${catalog.length}`,'ring-count');count.setAttribute('aria-hidden','true');ring.append(svg,count);
+  const text=el('div',undefined,'daily-status-text');text.append(el('p',t('daily_progress'),'daily-status-title'),el('p',summary,'daily-summary'));
+  status.append(ring,text);root.append(status);
   const grid = el('div',undefined,'catalog');
   for (const game of catalog) {
     const done = completed(game.id);
@@ -107,12 +120,11 @@ function landing() {
     const probe=new Image(); probe.onerror=()=>{icon.className='';icon.textContent='◇';};probe.src=new URL(game.icon,import.meta.url).href;
     wrap.append(icon);if(done){const badge=el('span','✓','badge');badge.setAttribute('aria-hidden','true');wrap.append(badge);}
     card.append(wrap,el('span',t(game.nameKey),'game-name'));
-    card.append(el('span',t(done?'completed':`${game.id}_detail`),'status'));
     grid.append(card);
   }
   root.append(grid);
   if(!catalog.length) root.append(el('p',t('empty')));
-  root.append(el('p',t('tomorrow'),'footer'));
+  if(catalog.length>0 && doneCount===catalog.length)root.append(el('p',t('play_again_tomorrow'),'footer'));
   if(storageFailed)root.append(el('p',t('storage_error'),'notice'));
   settings();
 }

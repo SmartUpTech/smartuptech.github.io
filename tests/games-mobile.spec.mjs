@@ -26,6 +26,9 @@ try {
     await page.setViewportSize({width,height:844});await page.goto(base+`?test=1&theme=${theme}`);
     await page.waitForSelector('.game-card');
     assert.equal(await page.locator('.game-card').count(),6);
+    assert.equal(await page.locator('.footer').count(),0);
+    assert.equal(await page.getByRole('progressbar').getAttribute('aria-valuenow'),'0');
+    assert.equal(await page.locator('.catalog').evaluate(el=>getComputedStyle(el).gridTemplateColumns.split(' ').length),3);
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
     if(width===390)await page.screenshot({path:`test-results/games/landing-${theme}.png`,fullPage:true});
   }
@@ -44,6 +47,9 @@ try {
   assert.equal(await page.evaluate(()=>window.events.filter(e=>e.type==='onGameCompleted').length),1);
   await page.screenshot({path:'test-results/games/result.png'});
   await page.getByRole('button',{name:'Back to games'}).click();await page.waitForSelector('.badge');await page.reload();await page.waitForSelector('.badge');
+  assert.equal(await page.locator('.game-card .status').count(),0);
+  assert.equal(await page.locator('.footer').count(),0);
+  assert.equal(await page.getByRole('progressbar').getAttribute('aria-valuenow'),'1');
   await page.getByRole('button',{name:'Word Match: Completed today'}).click();assert.equal(await page.locator('[data-pair]').count(),0);
   await page.getByRole('button',{name:'Back to games'}).click();
   await page.getByRole('button',{name:'Word Scramble',exact:true}).click();await page.waitForSelector('.tiles');
@@ -85,6 +91,8 @@ try {
   const events=await page.evaluate(()=>window.events.filter(e=>e.type==='onGameCompleted').map(e=>e.gameId));
   assert.deepEqual(events,['mini_sudoku','sequence','maze','number_grid']);
   await page.getByRole('button',{name:'Back to games'}).click();await page.waitForSelector('.catalog');await page.reload();await page.waitForSelector('.catalog');assert.equal(await page.locator('.badge').count(),6);
+  assert.equal(await page.locator('.footer').textContent(),'Come back tomorrow to play again');
+  assert.equal(await page.getByRole('progressbar').getAttribute('aria-valuenow'),'6');
   await page.getByRole('button',{name:'Number Grid: Completed today',exact:true}).click();assert.equal(await page.locator('.number-grid').count(),0);
   // Localized content, narrow-screen gameplay and reduced motion.
   await context.clearCookies();await page.evaluate(()=>localStorage.clear());
@@ -137,6 +145,22 @@ try {
     if(width===320&&language==='en')await page.screenshot({path:`test-results/games/compact-${id||'landing'}.png`,fullPage:true});
   }
   // Resizing an active WebView does not regenerate the puzzle or discard input.
+  // Future nine-game catalogs also fit; these extra entries exist only in tests.
+  const catalog=JSON.parse(await readFile(resolve(publicDir,'games/games.json'),'utf8'));
+  const nine=[...catalog,...catalog.slice(0,3).map((g,i)=>({...g,id:`future_${i}`,sortOrder:70+i}))];
+  await page.route('**/games.json',route=>route.fulfill({json:nine}));
+  await page.setViewportSize({width:320,height:440});
+  for(const language of ['en','hi','mr'])for(const count of [0,5,9]){
+    await page.goto(base+'?embedded=1');await page.waitForFunction(()=>Boolean(window.SmartUpGames));
+    await page.evaluate(c=>window.SmartUpGames.configure(c),{...config,language,date:'2026-10-05',completions:Object.fromEntries(nine.slice(0,count).map(g=>[g.id,'2026-10-05']))});
+    await page.waitForSelector('.catalog');assert.equal(await page.locator('.game-card').count(),9);
+    assert.equal(await page.getByRole('progressbar').getAttribute('aria-valuenow'),String(count));
+    assert.equal(await page.getByRole('progressbar').getAttribute('aria-valuemax'),'9');
+    assert.equal(await page.locator('.footer').count(),count===9?1:0);
+    assert.equal(await page.locator('.game-card .status').count(),0);
+    assert.ok(await page.evaluate(()=>document.documentElement.scrollHeight<=innerHeight+1),`nine games ${language} ${count} must fit`);
+  }
+  await page.unroute('**/games.json');
   await page.goto(base+'#word_scramble');await page.waitForSelector('.tiles');
   await page.locator('.tiles button').first().click();const partial=await page.locator('.answer').textContent();
   await page.setViewportSize({width:320,height:440});assert.equal(await page.locator('.answer').textContent(),partial);

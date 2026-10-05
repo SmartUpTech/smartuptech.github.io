@@ -7,7 +7,7 @@ one small Games link above its existing footer.
 
 ## What is delivered
 
-- Two-column icon grid, catalog validation/filtering/sorting, six SVG icons,
+- Three-column icon grid, catalog validation/filtering/sorting, six SVG icons,
   hash routes, semantic theme tokens, localization and daily-content utilities.
 - Word Match: match four words to their meanings, with retry after mistakes.
 - Word Scramble: solve three clued words by selecting shuffled letter tiles.
@@ -22,16 +22,19 @@ one small Games link above its existing footer.
   tapping; move the dot to the vector flag.
 - Number Grid: tap shuffled numbers 1–16 in order, without a countdown.
 - All six games are enabled. The summary counts enabled/compatible games.
-- Landing cards use distinct theme tokens, short localized descriptions and a
-  daily completion strip. Programmatically focused titles have no outline;
+- Compact landing cards use distinct theme tokens, names and tick-only completion
+  badges, with circular daily progress above. Programmatically focused titles have no outline;
   interactive controls retain visible keyboard focus.
 
 ## WebView layout
 
-The landing page starts with the completion summary and six compact game cards;
+The landing page has top spacing, circular progress and compact three-column cards;
 there is no visible Games heading, subtitle or promotional line. The Android
 app bar belongs to the host. A screen-reader-only heading preserves structure.
-Short viewports omit decorative card descriptions, while badges remain visible.
+Card descriptions and visible completion labels are omitted; tick badges and
+accessible completion labels remain. The return message appears only when every
+enabled game is complete: “Come back tomorrow to play again”. Empty catalogs
+never show that message. The layout is tested with six and nine catalog entries.
 
 Game pages use one compact row for back, game name and a How to play button.
 Instructions open in a themed modal dialog; progress, clues, boards and controls
