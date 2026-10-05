@@ -5,7 +5,7 @@ export function mount(root,{date,language,t,progress,complete,canPlay}) {
   const challenge=scrambleChallenge(date,language);let round=0,chosen=[],disposed=false;
   root.append(el('p',t('scramble_help')));
   if(challenge.language!==languageOf(language))root.append(el('p',t('english_content'),'notice'));
-  const panel=el('div');root.append(panel);
+  const panel=el('div',undefined,'game-panel');root.append(panel);
   function render() {
     const puzzle=challenge.rounds[round];panel.replaceChildren();
     panel.append(el('p',t('progress',{done:round,total:challenge.rounds.length}),'progress'),el('p',`${t('hint')}: ${puzzle.clue}`));

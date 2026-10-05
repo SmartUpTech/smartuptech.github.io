@@ -2,7 +2,7 @@ import {el,button} from '../ui.mjs';
 import {sequenceChallenge,sequenceCorrect} from './puzzles.mjs';
 export function mount(root,{date,t,progress,complete,canPlay}) {
   const rounds=sequenceChallenge(date);let index=0,disposed=false;
-  root.append(el('p',t('sequence_help')));const panel=el('div');root.append(panel);
+  root.append(el('p',t('sequence_help')));const panel=el('div',undefined,'game-panel');root.append(panel);
   function render(){
     const round=rounds[index];panel.replaceChildren(el('p',t('progress',{done:index,total:rounds.length}),'progress'),el('p',t(round.rule),'rule'));
     const sequence=el('div',undefined,'sequence-values');

@@ -26,6 +26,28 @@ one small Games link above its existing footer.
   daily completion strip. Programmatically focused titles have no outline;
   interactive controls retain visible keyboard focus.
 
+## WebView layout
+
+The landing page starts with the completion summary and six compact game cards;
+there is no visible Games heading, subtitle or promotional line. The Android
+app bar belongs to the host. A screen-reader-only heading preserves structure.
+Short viewports omit decorative card descriptions, while badges remain visible.
+
+Game pages use one compact row for back, game name and a How to play button.
+Instructions open in a themed modal dialog; progress, clues, boards and controls
+remain on the game surface. CSS sizes boards against the actual viewport height
+using dynamic viewport units, with a fallback for older engines. Resizing does
+not restart the game. Standard controls keep a minimum 44px touch height.
+
+Android must give the WebView only the space between its native app bar and
+bottom navigation, and apply system insets outside it. Embedded pages do not
+add those vertical insets again. Do not wrap the WebView in a native ScrollView.
+No host-bar height is guessed or subtracted in JavaScript. Browser tests verify
+landing and all six games at usable sizes 320×440, 360×480, 390×560 and 412×620
+in English, Hindi, Marathi and English-fallback Gujarati, with no page overflow
+or clipped controls. Extremely small windows or enlarged accessibility text may
+scroll so content stays reachable; scrolling is never disabled to hide overflow.
+
 ## Run and verify
 
 Use the repository's normal `npm ci` and `npm run dev`. Visit `/games/`.
