@@ -7,7 +7,7 @@ one small Games link above its existing footer.
 
 ## What is delivered
 
-- Three-column icon grid, catalog validation/filtering/sorting, six SVG icons,
+- Three-column icon grid, catalog validation/filtering/sorting, nine SVG icons,
   hash routes, semantic theme tokens, localization and daily-content utilities.
 - Word Match: match four words to their meanings, with retry after mistakes.
 - Word Scramble: solve three clued words by selecting shuffled letter tiles.
@@ -21,7 +21,8 @@ one small Games link above its existing footer.
 - Maze: a solvable 6 × 6 maze, directional controls, keyboard and adjacent-cell
   tapping; move the dot to the vector flag.
 - Number Grid: tap shuffled numbers 1–16 in order, without a countdown.
-- All six games are enabled. The summary counts enabled/compatible games.
+- Shape Fit, Pipe Connect and Code Breaker: daily touch-friendly puzzles (details below).
+- All nine games are enabled. The summary counts enabled/compatible games.
 - Compact landing cards use distinct theme tokens, names and tick-only completion
   badges, with circular daily progress above. Programmatically focused titles have no outline;
   interactive controls retain visible keyboard focus.
@@ -34,7 +35,7 @@ app bar belongs to the host. A screen-reader-only heading preserves structure.
 Card descriptions and visible completion labels are omitted; tick badges and
 accessible completion labels remain. The return message appears only when every
 enabled game is complete: “Come back tomorrow to play again”. Empty catalogs
-never show that message. The layout is tested with six and nine catalog entries.
+never show that message. The layout is tested with all nine catalog entries.
 
 Game pages use one compact row for back, game name and a How to play button.
 Instructions open in a themed modal dialog; progress, clues, boards and controls
@@ -46,7 +47,7 @@ Android must give the WebView only the space between its native app bar and
 bottom navigation, and apply system insets outside it. Embedded pages do not
 add those vertical insets again. Do not wrap the WebView in a native ScrollView.
 No host-bar height is guessed or subtracted in JavaScript. Browser tests verify
-landing and all six games at usable sizes 320×440, 360×480, 390×560 and 412×620
+landing and all nine games at usable sizes 320×440, 360×480, 390×560 and 412×620
 in English, Hindi, Marathi and English-fallback Gujarati, with no page overflow
 or clipped controls. Extremely small windows or enlarged accessibility text may
 scroll so content stays reachable; scrolling is never disabled to hide overflow.
