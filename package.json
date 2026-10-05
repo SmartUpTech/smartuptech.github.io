@@ -11,7 +11,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "test:mobile": "node tests/mobile-comprehensive.spec.mjs",
-    "test:games": "node --test tests/games.test.mjs",
+    "test:games": "node --test tests/games.test.mjs tests/puzzles.test.mjs",
     "test:games:mobile": "node tests/games-mobile.spec.mjs"
   },
   "dependencies": {

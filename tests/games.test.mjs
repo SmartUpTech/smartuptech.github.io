@@ -10,7 +10,7 @@ test('catalog validates, sorts, filters capabilities and rejects unsafe paths',(
   const raw=[catalog[1],first,{...first},null,{...first,id:'bad',icon:'https://bad/a.svg'},
     {...first,id:'badpath',path:'../evil'},{...first,id:'badorder',sortOrder:'10'},
     {...first,id:'newer',minBridgeVersion:2},{...first,id:'private',apps:['other']},
-    {...first,id:'restricted',languages:['hi']},...catalog.slice(2)];
+    {...first,id:'restricted',languages:['hi']},...catalog.slice(2).map(g=>({...g,enabled:false}))];
   assert.deepEqual(validateCatalog(raw).map(g=>g.id),['word_match','word_scramble']);
   assert.equal(validateCatalog(raw,{language:'hi-IN'}).some(g=>g.id==='restricted'),true);
   assert.throws(()=>validateCatalog({}));

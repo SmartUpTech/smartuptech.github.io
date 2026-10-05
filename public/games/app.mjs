@@ -86,19 +86,27 @@ function settings() {
 }
 function landing() {
   document.documentElement.lang = host.language;
-  heading(t('games'),t('daily'));
-  root.append(el('p',t('summary',{done:catalog.filter(g=>completed(g.id)).length,total:catalog.length}),'progress'));
+  const doneCount=catalog.filter(g=>completed(g.id)).length;
+  root.replaceChildren(el('p',t('daily_label'),'eyebrow'));
+  const header=el('header',undefined,'landing-header'),intro=el('div');
+  intro.append(el('h1',t('games')),el('p',t('daily')));
+  const count=el('div',`${doneCount}/${catalog.length}`,'daily-count');count.setAttribute('aria-hidden','true');header.append(intro,count);root.append(header);
+  root.append(el('p',t('summary',{done:doneCount,total:catalog.length}),'daily-summary'));
+  const track=el('div',undefined,'daily-track');track.setAttribute('aria-hidden','true');
+  for(const game of catalog)track.append(el('span','',completed(game.id)?'finished':''));root.append(track);
   const grid = el('div',undefined,'catalog');
   for (const game of catalog) {
     const done = completed(game.id);
     const card = button('',()=>{location.hash=game.path;},'game-card');
+    card.style.setProperty('--cardAccent',game.tone?`var(--${game.tone}Accent)`:'var(--accent)');
+    card.style.setProperty('--cardSurface',game.tone?`var(--${game.tone}Surface)`:'var(--surface)');
     card.setAttribute('aria-label',`${t(game.nameKey)}${done ? ': '+t('completed') : ''}`);
     const wrap = el('span',undefined,'icon-wrap'), icon=el('span',undefined,'game-icon');
     icon.style.setProperty('--icon',`url("${new URL(game.icon,import.meta.url).href}")`); icon.setAttribute('aria-hidden','true');
     const probe=new Image(); probe.onerror=()=>{icon.className='';icon.textContent='◇';};probe.src=new URL(game.icon,import.meta.url).href;
     wrap.append(icon);if(done){const badge=el('span','✓','badge');badge.setAttribute('aria-hidden','true');wrap.append(badge);}
     card.append(wrap,el('span',t(game.nameKey),'game-name'));
-    if(done)card.append(el('span',t('completed'),'status'));
+    card.append(el('span',t(done?'completed':`${game.id}_detail`),'status'));
     grid.append(card);
   }
   root.append(grid);
@@ -150,7 +158,7 @@ window.SmartUpGames=Object.freeze({
       generation++;leave();
       if(next.date!==host?.date || next.appId!==host?.appId)pending={};
       host=next;completions=next.completions;t=translator(next.language);staleDay=false;
-      applyTheme(next.theme);if(rawCatalog)route();return true;
+      applyTheme(next.theme,true);if(rawCatalog)route();return true;
     } catch {generation++;leave();host=null;heading(t('games'),t('host_error'));emit('onError',undefined,{code:'INVALID_HOST'});return false;}
   },
   back(){home();}
