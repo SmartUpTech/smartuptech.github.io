@@ -119,7 +119,7 @@ async function route() {
   heading(t(game.nameKey)); root.prepend(button('← '+t('back'),home,'back'));
   const content=el('section');root.append(content);
   try {
-    // The validated catalog route is a local module within this immutable release.
+    // The validated catalog route is a local module within the games directory.
     const module=await import(`./games/${game.path}.mjs`);
     if(ticket!==generation)return;
     active=game;

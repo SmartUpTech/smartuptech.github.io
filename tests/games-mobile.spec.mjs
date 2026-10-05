@@ -3,7 +3,7 @@ import {readFile,mkdir} from 'node:fs/promises';
 import {resolve,extname} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import assert from 'node:assert/strict';
-import {scrambleChallenge,graphemes} from '../public/games/v0.0.8/games/words.mjs';
+import {scrambleChallenge,graphemes} from '../public/games/games/words.mjs';
 const {chromium}=await import(process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES ? pathToFileURL(resolve(process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES,'playwright/index.mjs')).href : 'playwright');
 const publicDir=resolve('public');
 const server=createServer(async(req,res)=>{

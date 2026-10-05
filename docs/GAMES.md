@@ -48,11 +48,11 @@ in a new content version when adding longer-term variety. Unicode grapheme
 segmentation keeps vowel signs and conjuncts together. Engines without
 `Intl.Segmenter` use English puzzles. Hints define the intended scramble answer.
 
-Keep published assets in `v0.0.8` immutable after release. Future releases get a
-new asset directory and update the two references in `index.html`; preserve old
-directories for open/cached pages. Never change a published day's dataset in
-place. The catalog is fetched with revalidation and remains scoped to its
-matching release assets.
+Keep assets under stable `public/games/` paths. Release numbers belong in Git
+branch names, not directory names. Shared modules, styles and the catalog live
+directly in this directory; game implementations and icons have their own
+subdirectories. The catalog is fetched with revalidation. Dataset/generator
+versions remain independent of release branches to control daily puzzle content.
 
 ## Future native bridge contract
 

@@ -1,10 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {validateCatalog,validDate,localDate,dailyIndex,validateHost,completionStore} from '../public/games/v0.0.8/core.mjs';
-import {translator} from '../public/games/v0.0.8/i18n.mjs';
-import {matchChallenge,scrambleChallenge,isMatch,isAnswer,graphemes} from '../public/games/v0.0.8/games/words.mjs';
-const catalog=JSON.parse(await readFile(new URL('../public/games/v0.0.8/games.json',import.meta.url)));
+import {validateCatalog,validDate,localDate,dailyIndex,validateHost,completionStore} from '../public/games/core.mjs';
+import {translator} from '../public/games/i18n.mjs';
+import {matchChallenge,scrambleChallenge,isMatch,isAnswer,graphemes} from '../public/games/games/words.mjs';
+const catalog=JSON.parse(await readFile(new URL('../public/games/games.json',import.meta.url)));
 test('catalog validates, sorts, filters capabilities and rejects unsafe paths',()=>{
   const first=catalog[0];
   const raw=[catalog[1],first,{...first},null,{...first,id:'bad',icon:'https://bad/a.svg'},
@@ -59,5 +59,5 @@ test('completion storage survives reload, rejects corrupt records and handles bl
   assert.deepEqual(completionStore(null).read(),{});assert.equal(completionStore(null).write({}),false);
 });
 test('all catalog icons and enabled game modules exist',async()=>{
-  for(const game of catalog){await readFile(new URL(`../public/games/v0.0.8/${game.icon}`,import.meta.url));if(game.enabled)await readFile(new URL(`../public/games/v0.0.8/games/${game.path}.mjs`,import.meta.url));}
+  for(const game of catalog){await readFile(new URL(`../public/games/${game.icon}`,import.meta.url));if(game.enabled)await readFile(new URL(`../public/games/games/${game.path}.mjs`,import.meta.url));}
 });
