@@ -172,6 +172,13 @@ try {
     else {
       assert.equal(await page.locator('.reset-game').count(),1);
       assert.ok(await page.locator('.how-to-play').evaluate(el=>el.getBoundingClientRect().top>=document.querySelector('.game-content').getBoundingClientRect().bottom-1));
+      assert.ok(await page.locator('.how-to-play').evaluate(el=>el.getBoundingClientRect().top-document.querySelector('.game-content').getBoundingClientRect().bottom<=9),`${id}: help follows gameplay`);
+      if(id==='maze')assert.ok(await page.locator('.maze-controls').evaluate(el=>Math.abs(el.getBoundingClientRect().width-document.querySelector('.maze-board').getBoundingClientRect().width)<1));
+      if(id==='shape_fit')assert.ok(await page.locator('.shape-tray').evaluate(el=>Math.abs(el.getBoundingClientRect().width-document.querySelector('.shape-board').getBoundingClientRect().width)<1));
+      if(id==='mini_sudoku')assert.ok(await page.locator('.number-pad').evaluate(el=>{
+        const pad=el.getBoundingClientRect(),board=document.querySelector('.sudoku-board').getBoundingClientRect();
+        return Math.abs((pad.left+pad.right)/2-(board.left+board.right)/2)<1 && pad.width-board.width<=18;
+      }));
       assert.ok(await page.locator('.reset-game').evaluate(el=>el.getBoundingClientRect().height>=44));
       await page.locator('.how-to-play summary').click();await page.locator('.how-to-play[open]').waitFor();
       assert.equal(await page.locator('.how-to-body li').count(),3);
@@ -228,7 +235,8 @@ try {
     const duplicate=sudoku.puzzle.find((v,i)=>v&&Math.floor(i/4)===Math.floor(at/4));
     await page.locator(`[data-cell="${at}"]`).click();await page.locator('.digit-key').filter({hasText:String(duplicate)}).click();
     assert.equal(await page.locator('.feedback.is-error').count(),1);
-    assert.ok(await page.evaluate(()=>document.documentElement.scrollHeight<=innerHeight+1),`${language} error should fit compact WebView`);
+    const height=await page.evaluate(()=>document.documentElement.scrollHeight);
+    assert.ok(height<=441,`${language} error height ${height} should fit compact WebView`);
     assert.ok(await page.locator('.feedback').evaluate(el=>el.getBoundingClientRect().bottom<document.querySelector('.sudoku-board').getBoundingClientRect().top));
   }
   assert.deepEqual(errors,[]);console.log('PASS: nine games, mobile gameplay, compact WebViews without page scrolling or clipped controls, collapsible instructions, consistent reset, resize state, themes, locales, focus, persistence and bridge configuration; no page errors.');
