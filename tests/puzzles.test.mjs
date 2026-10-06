@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {shapeChallenge,shapeCells,shapePlacement,pipeChallenge,pipeConnected,rotatePipe,codeChallenge,codeClue} from '../public/games/games/new-puzzles.mjs';
+import {shapeChallenge,shapeCells,shapePlacement,shapeAnchor,shapeReference,pipeChallenge,pipeConnected,rotatePipe,codeChallenge,codeClue} from '../public/games/games/new-puzzles.mjs';
 
 test('new daily games are deterministic, solvable and reject invalid moves over 800 dates',()=>{
   for(let i=0;i<800;i++){
@@ -8,6 +8,8 @@ test('new daily games are deterministic, solvable and reject invalid moves over 
     const pieces=shapeChallenge(date),placements=pieces.map(()=>null);
     assert.deepEqual(pieces,shapeChallenge(date));
     for(let id=0;id<pieces.length;id++){
+      const [r,c]=shapeReference(pieces[id]);
+      assert.equal(shapeAnchor(pieces[id],pieces[id].anchor+r*4+c),pieces[id].anchor);
       assert.ok(shapePlacement(pieces,placements,id,pieces[id].anchor));placements[id]=pieces[id].anchor;
       const cells=shapeCells(pieces[id],placements[id]),seen=new Set([cells[0]]),queue=[cells[0]];
       for(const at of queue)for(let d=0;d<4;d++){const n=neighbor(at,d,4);if(cells.includes(n)&&!seen.has(n)){seen.add(n);queue.push(n);}}
@@ -23,6 +25,16 @@ test('new daily games are deterministic, solvable and reject invalid moves over 
   assert.equal(codeClue([1,2,3,4],[1,1,2,3]),null);
   assert.equal(codeClue([1,2,3,4],[0,2,3,4]),null);
   assert.deepEqual(codeClue([1,2,3,4],[1,3,5,6]),{exact:1,misplaced:1});
+});
+test('Shape Fit places the screenshot’s hollow-corner piece using its visible square',()=>{
+  const pieces=[{cells:[[0,0],[0,1],[1,0],[2,0]]},{cells:[[0,1],[1,1],[2,0],[2,1]]},{cells:[[0,0],[0,1],[1,0],[1,1]]},{cells:[[0,0],[0,1],[1,0],[1,1]]}];
+  const placements=[0,null,2,10];
+  const anchor=shapeAnchor(pieces[1],5);
+  assert.equal(anchor,4);
+  assert.equal(shapePlacement(pieces,placements,1,anchor),true);
+  assert.deepEqual(shapeCells(pieces[1],anchor),[5,9,12,13]);
+  assert.equal(shapeAnchor(pieces[1],4),null);
+  assert.equal(shapePlacement(pieces,placements,1,shapeAnchor(pieces[1],6)),false);
 });
 import {sudokuChallenge,sudokuSolutions,sudokuComplete,sudokuCandidates,sequenceChallenge,sequenceCorrect,mazeChallenge,mazeMove,neighbor,numberGridChallenge,numberGridCorrect} from '../public/games/games/puzzles.mjs';
 

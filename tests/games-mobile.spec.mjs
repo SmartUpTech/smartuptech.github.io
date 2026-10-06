@@ -5,7 +5,7 @@ import {pathToFileURL} from 'node:url';
 import assert from 'node:assert/strict';
 import {scrambleChallenge,graphemes} from '../public/games/games/words.mjs';
 import {sudokuChallenge,sequenceChallenge,mazeChallenge,mazeMove} from '../public/games/games/puzzles.mjs';
-import {shapeChallenge,pipeChallenge,rotatePipe,codeChallenge} from '../public/games/games/new-puzzles.mjs';
+import {shapeChallenge,shapeReference,pipeChallenge,rotatePipe,codeChallenge} from '../public/games/games/new-puzzles.mjs';
 const {chromium}=await import(process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES ? pathToFileURL(resolve(process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES,'playwright/index.mjs')).href : 'playwright');
 const publicDir=resolve('public');
 const server=createServer(async(req,res)=>{
@@ -94,11 +94,12 @@ try {
   await page.getByRole('button',{name:'Shape Fit',exact:true}).click();await page.waitForSelector('.shape-board');
   const shapes=shapeChallenge(date);
   for(let i=0;i<shapes.length;i++){
+    const [r,c]=shapeReference(shapes[i]),targetCell=shapes[i].anchor+r*4+c;
     if(i===0){
-      const source=await page.locator(`[data-piece="${i}"]`).boundingBox(),target=await page.locator(`.shape-cell[data-cell="${shapes[i].anchor}"]`).boundingBox();
+      const source=await page.locator(`[data-piece="${i}"]`).boundingBox(),target=await page.locator(`.shape-cell[data-cell="${targetCell}"]`).boundingBox();
       await page.mouse.move(source.x+source.width/2,source.y+source.height/2);await page.mouse.down();await page.mouse.move(target.x+target.width/2,target.y+target.height/2,{steps:8});await page.mouse.up();
       assert.equal(await page.locator('.shape-cell.filled').count(),shapes[i].cells.length);
-    }else{await page.locator(`[data-piece="${i}"]`).click();await page.locator(`.shape-cell[data-cell="${shapes[i].anchor}"]`).click();}
+    }else{await page.locator(`[data-piece="${i}"]`).click();await page.locator(`.shape-cell[data-cell="${targetCell}"]`).click();}
   }
   await page.getByRole('heading',{name:'Well done!'}).waitFor();await page.getByRole('button',{name:'Back to games'}).click();await page.waitForSelector('.catalog');
   await page.getByRole('button',{name:'Pipe Connect',exact:true}).click();await page.waitForSelector('.pipe-board');
