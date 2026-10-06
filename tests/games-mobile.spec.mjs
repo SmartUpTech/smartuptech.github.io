@@ -202,7 +202,7 @@ try {
     await page.waitForSelector(selector);
     const initial=await page.locator('.game-content').innerHTML();
     const startsBefore=await page.evaluate(()=>window.events.filter(e=>e.type==='onGameStarted').length);
-    if(id==='maze')await page.locator('.move-up').click();
+    if(id==='maze')await page.locator('.maze-controls button[aria-disabled="false"]').first().click();
     else await page.locator('.game-content button:not(:disabled)').first().click();
     await page.locator('.reset-game').click();
     assert.equal(await page.locator('.game-content').innerHTML(),initial,`${id} resets original daily board`);
