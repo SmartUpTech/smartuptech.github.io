@@ -62,7 +62,11 @@ button[aria-pressed="true"],.primary { border:2px solid var(--accent); color:var
 .pair-column { display:grid; gap:8px; }
 .pair-column button { min-height:clamp(56px,12vh,76px); min-height:clamp(56px,12dvh,76px); padding:8px; overflow-wrap:anywhere; font-size:.85rem; }
 .pair-column button.matched { border-style:dashed; color:var(--accent); }
-.feedback { min-height:36px; margin:0; color:var(--accent); font-size:.8rem; line-height:1.4; }
+.feedback { order:-2; min-height:36px; margin:0; padding:6px 10px; color:var(--accent); background:color-mix(in srgb,var(--accent) 9%,var(--surface)); border:1px solid color-mix(in srgb,var(--accent) 25%,var(--divider)); border-radius:10px; font-size:.9rem; font-weight:600; line-height:1.35; }
+.feedback:empty { padding:0; border-color:transparent; background:transparent; }
+.feedback.is-error { color:var(--error); background:color-mix(in srgb,var(--error) 11%,var(--surface)); border-color:color-mix(in srgb,var(--error) 32%,var(--divider)); }
+.feedback.is-error::before { content:'!'; display:inline-grid; place-items:center; width:20px; height:20px; margin-right:7px; border-radius:50%; color:var(--surface); background:var(--error); font-size:.75rem; vertical-align:middle; }
+.game-hint { order:-1; padding:7px 10px; border-left:3px solid var(--accent); border-radius:4px 10px 10px 4px; background:color-mix(in srgb,var(--accent) 8%,var(--surface)); color:var(--primaryText); font-size:.9rem; font-weight:550; line-height:1.35; }
 .tiles { display:flex; flex-wrap:wrap; justify-content:center; gap:4px; margin:4px 0; }
 .tiles button { width:44px; min-width:44px; min-height:44px; padding:6px; font-size:1.1rem; font-weight:650; }
 .tiles button:disabled { opacity:.4; }

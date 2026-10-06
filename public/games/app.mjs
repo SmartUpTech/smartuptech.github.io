@@ -46,6 +46,13 @@ function home() { if (location.hash) location.hash = ''; else route(); }
 function showError(key = 'load_error', retry = boot) {
   heading(t('games'),t(key)); root.append(button(t('retry'),retry,'primary'));
 }
+function resultScreen(title,message) {
+  root.className='screen-result';delete root.dataset.game;root.replaceChildren();
+  const panel=el('section',undefined,'result');
+  const mark=el('div','✓','result-mark');mark.setAttribute('aria-hidden','true');
+  panel.append(mark,el('h1',title),el('p',message),button(t('back'),home,'primary'));
+  root.append(panel);focusHeading();return panel;
+}
 function checkDay() {
   if (!embedded && host && host.date !== localDate()) {
     staleDay = true; generation++; leave();
@@ -65,13 +72,8 @@ function complete(game, result) {
   }
   emit('onGameCompleted',game.id,result);
   cleanup?.(); cleanup=null;
-  root.className='screen-result';delete root.dataset.game;
-  root.replaceChildren();
-  const panel = el('section',undefined,'result');
-  const mark = el('div','✓','result-mark'); mark.setAttribute('aria-hidden','true');
-  panel.append(mark,el('h1',t('well_done')),el('p',t('result')),button(t('back'),home,'primary'));
+  const panel=resultScreen(t('well_done'),t('result'));
   if (storageFailed) panel.append(el('p',t('storage_error'),'notice'));
-  root.append(panel); focusHeading();
 }
 function settings() {
   if (embedded || params.get('test') !== '1') return;
@@ -138,7 +140,7 @@ async function route() {
   const path=location.hash.slice(1);
   const game=catalog.find(g=>g.path===path);
   if(!game){landing();return;}
-  if(completed(game.id)) {heading(t(game.nameKey),t('completed'));root.append(button(t('back'),home,'primary'));return;}
+  if(completed(game.id)) {resultScreen(t(game.nameKey),t('completed'));return;}
   root.className='screen-game';root.dataset.game=game.id;root.replaceChildren();
   const toolbar=el('header',undefined,'game-toolbar');
   const back=button('←',home,'back');back.setAttribute('aria-label','← '+t('back'));

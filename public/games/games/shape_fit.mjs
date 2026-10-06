@@ -1,4 +1,4 @@
-import {el,button} from '../ui.mjs';
+import {el,button,setFeedback} from '../ui.mjs';
 import {shapeChallenge,shapeCells,shapePlacement} from './new-puzzles.mjs';
 export function mount(root,{date,t,progress,complete,canPlay}) {
   const pieces=shapeChallenge(date),placements=pieces.map(()=>null);let selected=0,disposed=false,drag=null,suppressClick=false;
@@ -6,7 +6,7 @@ export function mount(root,{date,t,progress,complete,canPlay}) {
   const board=el('div',undefined,'shape-board'),tray=el('div',undefined,'shape-tray'),feedback=el('p',t('shape_selected',{number:1}),'feedback');feedback.setAttribute('role','status');
   const cells=Array.from({length:16},(_,i)=>{const b=button('',()=>{if(disposed||!canPlay())return;place(i);},'shape-cell');b.dataset.cell=i;b.setAttribute('aria-label',t('maze_position',{row:Math.floor(i/4)+1,col:i%4+1}));board.append(b);return b;});
   function place(at){if(selected===null)return;
-    if(!shapePlacement(pieces,placements,selected,at)){feedback.textContent=t('shape_invalid');return;}
+    if(!shapePlacement(pieces,placements,selected,at)){setFeedback(feedback,t('shape_invalid'),'error');return;}
     placements[selected]=at;const done=placements.filter(at=>at!==null).length;progress({done,total:pieces.length});
     selected=placements.findIndex(at=>at===null);if(selected<0)selected=null;render();if(done===pieces.length)complete({pieces:done});
   }
@@ -21,6 +21,6 @@ export function mount(root,{date,t,progress,complete,canPlay}) {
     b.addEventListener('pointercancel',()=>{drag=null;cells.forEach(c=>c.classList.remove('drop-target'));});return b;
   });
   root.append(board,tray,feedback);
-  function render(){cells.forEach(c=>{c.textContent='';c.classList.remove('filled');});placements.forEach((at,id)=>{if(at!==null)for(const cell of shapeCells(pieces[id],at)){cells[cell].textContent=String(id+1);cells[cell].classList.add('filled');}});buttons.forEach((b,id)=>b.setAttribute('aria-pressed',String(id===selected)));feedback.textContent=selected===null?'':t('shape_selected',{number:selected+1});}
+  function render(){cells.forEach(c=>{c.textContent='';c.classList.remove('filled');});placements.forEach((at,id)=>{if(at!==null)for(const cell of shapeCells(pieces[id],at)){cells[cell].textContent=String(id+1);cells[cell].classList.add('filled');}});buttons.forEach((b,id)=>b.setAttribute('aria-pressed',String(id===selected)));setFeedback(feedback,selected===null?'':t('shape_selected',{number:selected+1}));}
   render();return()=>{disposed=true;drag=null;};
 }

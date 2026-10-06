@@ -3,7 +3,7 @@ import {pipeChallenge,rotatePipe,pipeConnected} from './new-puzzles.mjs';
 export function mount(root,{date,t,progress,complete,canPlay}) {
   const {puzzle}=pipeChallenge(date);let disposed=false,moves=0;
   root.append(el('p',t('pipe_help')));
-  const status=el('p',t('pipe_route'),'progress'),board=el('div',undefined,'pipe-board');root.append(status,board);
+  const status=el('p',t('pipe_route'),'progress game-hint'),board=el('div',undefined,'pipe-board');root.append(status,board);
   const buttons=puzzle.map((_,i)=>{
     const b=button('',()=>{if(disposed||!canPlay())return;puzzle[i]=rotatePipe(puzzle[i]);moves++;render();progress({moves});if(pipeConnected(puzzle).has(15))complete({moves});},'pipe-cell');
     b.dataset.cell=i;board.append(b);return b;

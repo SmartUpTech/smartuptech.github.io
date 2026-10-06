@@ -1,12 +1,12 @@
-import {el,button} from '../ui.mjs';
+import {el,button,setFeedback} from '../ui.mjs';
 import {mazeChallenge,mazeMove,directions} from './puzzles.mjs';
 const NS='http://www.w3.org/2000/svg';
 function svgNode(tag,attributes){const node=document.createElementNS(NS,tag);for(const [key,value]of Object.entries(attributes))node.setAttribute(key,String(value));return node;}
 export function mount(root,{date,t,progress,complete,canPlay}) {
   const maze=mazeChallenge(date);let at=maze.start,moves=0,disposed=false;
   const events=new AbortController();root.append(el('p',t('maze_help')));
-  const status=el('p','','progress'),board=el('div',undefined,'maze-board'),controls=el('div',undefined,'maze-controls');
-  board.tabIndex=0;board.setAttribute('role','group');board.setAttribute('aria-label',t('maze_help'));status.setAttribute('role','status');
+  const status=el('p','','progress'),feedback=el('p','','feedback'),board=el('div',undefined,'maze-board'),controls=el('div',undefined,'maze-controls');
+  board.tabIndex=0;board.setAttribute('role','group');board.setAttribute('aria-label',t('maze_help'));feedback.setAttribute('role','status');
   const svg=svgNode('svg',{viewBox:'-3 -3 294 294','aria-hidden':'true'}),step=288/maze.size;
   for(let i=0;i<maze.walls.length;i++){
     const x=i%maze.size*step,y=Math.floor(i/maze.size)*step;
@@ -15,7 +15,7 @@ export function mount(root,{date,t,progress,complete,canPlay}) {
   }
   const gx=(maze.goal%maze.size+.5)*step,gy=(Math.floor(maze.goal/maze.size)+.5)*step;
   svg.append(svgNode('path',{d:`M ${gx-6} ${gy+12} v -24 h 17 l -5 7 5 7 h -15 v 10 Z`,class:'maze-goal'}));
-  const player=svgNode('circle',{r:10,class:'maze-player'});svg.append(player);board.append(svg);root.append(status,board,controls);
+  const player=svgNode('circle',{r:10,class:'maze-player'});svg.append(player);board.append(svg);root.append(status,board,controls,feedback);
   const buttons=directions.map((direction,d)=>{const b=button(direction.symbol,()=>move(d));b.setAttribute('aria-label',t(direction.key));b.className=`move-${direction.key}`;controls.append(b);return b;});
   function render(){
     player.setAttribute('cx',(at%maze.size+.5)*step);player.setAttribute('cy',(Math.floor(at/maze.size)+.5)*step);
@@ -24,8 +24,8 @@ export function mount(root,{date,t,progress,complete,canPlay}) {
   }
   function move(direction){
     if(disposed||!canPlay())return;
-    const next=mazeMove(maze,at,direction);if(next===at){status.textContent=t('maze_wall');return;}
-    at=next;moves++;render();progress({moves,position:at});if(at===maze.goal)complete({moves});
+    const next=mazeMove(maze,at,direction);if(next===at){setFeedback(feedback,t('maze_wall'),'error');return;}
+    at=next;moves++;setFeedback(feedback,'');render();progress({moves,position:at});if(at===maze.goal)complete({moves});
   }
   root.addEventListener('keydown',event=>{const d={ArrowUp:0,ArrowRight:1,ArrowDown:2,ArrowLeft:3}[event.key];if(d!==undefined){event.preventDefault();move(d);}},{signal:events.signal});
   svg.addEventListener('click',event=>{

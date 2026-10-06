@@ -43,6 +43,7 @@ try {
   // Wrong pairs cannot complete the game.
   await page.locator('[data-side="left"][data-pair="0"]').click();await page.locator('[data-side="right"][data-pair="1"]').click();
   assert.equal(await page.locator('.matched').count(),0);
+  assert.equal(await page.locator('.feedback.is-error').count(),1);
   for(let i=0;i<4;i++){await page.locator(`[data-side="left"][data-pair="${i}"]`).click();await page.locator(`[data-side="right"][data-pair="${i}"]`).click();}
   await page.getByRole('heading',{name:'Well done!'}).waitFor();
   assert.equal(await page.evaluate(()=>window.events.filter(e=>e.type==='onGameCompleted').length),1);
@@ -64,7 +65,7 @@ try {
   const editable=sudoku.puzzle.findIndex(v=>!v);
   await page.locator(`[data-cell="${editable}"]`).click();
   const conflict=sudoku.puzzle.find((v,i)=>v&&Math.floor(i/4)===Math.floor(editable/4));
-  if(conflict){await page.locator('.digit-key').filter({hasText:String(conflict)}).click();assert.equal(await page.locator(`[data-cell="${editable}"]`).textContent(),'·');}
+  if(conflict){await page.locator('.digit-key').filter({hasText:String(conflict)}).click();assert.equal(await page.locator(`[data-cell="${editable}"]`).textContent(),'·');assert.equal(await page.locator('.feedback.is-error').count(),1);}
   for(let i=0;i<16;i++)if(!sudoku.puzzle[i]){await page.locator(`[data-cell="${i}"]`).click();await page.locator('.digit-key').filter({hasText:String(sudoku.solution[i])}).click();}
   await page.getByRole('heading',{name:'Well done!'}).waitFor();await page.getByRole('button',{name:'Back to games'}).click();await page.waitForSelector('.catalog');
   await page.getByRole('button',{name:'Sequence',exact:true}).click();await page.waitForSelector('.sequence-options');
@@ -80,7 +81,7 @@ try {
   for(const at of queue)for(let d=0;d<4;d++){const n=mazeMove(maze,at,d);if(!previous.has(n)){previous.set(n,{at,d});queue.push(n);}}
   let at=maze.goal;const path=[];while(at!==0){const step=previous.get(at);path.unshift(step.d);at=step.at;}
   await page.locator('.maze-board').focus();await page.keyboard.press('ArrowUp');
-  assert.match(await page.locator('.progress').textContent(),/wall/);
+  assert.match(await page.locator('.feedback.is-error').textContent(),/wall/);
   for(const d of path)await page.getByRole('button',{name:['Move up','Move right','Move down','Move left'][d],exact:true}).click();
   await page.getByRole('heading',{name:'Well done!'}).waitFor();await page.getByRole('button',{name:'Back to games'}).click();await page.waitForSelector('.catalog');
   await page.getByRole('button',{name:'Number Grid',exact:true}).click();await page.waitForSelector('.number-grid');
@@ -122,6 +123,9 @@ try {
   assert.equal(await page.locator('.footer').textContent(),'Come back tomorrow to play again');
   assert.equal(await page.getByRole('progressbar').getAttribute('aria-valuenow'),'9');
   await page.getByRole('button',{name:'Number Grid: Completed today',exact:true}).click();assert.equal(await page.locator('.number-grid').count(),0);
+  assert.equal(await page.locator('.screen-result .result-mark').textContent(),'✓');
+  assert.equal(await page.locator('.screen-result h1').textContent(),'Number Grid');
+  assert.equal(await page.locator('.screen-result .result p').textContent(),'Completed today');
   // Localized content, narrow-screen gameplay and reduced motion.
   await context.clearCookies();await page.evaluate(()=>localStorage.clear());
   for(const lang of ['hi','mr','gu']) {

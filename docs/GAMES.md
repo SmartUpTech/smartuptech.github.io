@@ -37,6 +37,13 @@ accessible completion labels remain. The return message appears only when every
 enabled game is complete: “Come back tomorrow to play again”. Empty catalogs
 never show that message. The layout is tested with all nine catalog entries.
 
+Opening a completed game shows the same centered checkmark/result layout as
+finishing it, with the game name and “Completed today.” Gameplay feedback now
+appears above the board in a shared, readable status card. Errors use a distinct
+alert color and icon; puzzle clues use a consistent hint card. The semantic
+error token follows the active light/dark theme and can be overridden by the
+host palette.
+
 Game pages use one compact row for back, game name and Reset, in the same place
 for every game. Reset restarts the same daily puzzle, clears unfinished moves and
 rounds, and preserves other completion badges. It does not emit another start
