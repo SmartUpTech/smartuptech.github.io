@@ -171,6 +171,8 @@ try {
     if(!id)assert.equal(await page.locator('.landing-header,.eyebrow').count(),0);
     else {
       assert.equal(await page.locator('.reset-game').count(),1);
+      assert.ok(await page.locator('.how-to-play').evaluate(el=>el.getBoundingClientRect().top>=document.querySelector('.game-content').getBoundingClientRect().bottom-1));
+      assert.ok(await page.locator('.reset-game').evaluate(el=>el.getBoundingClientRect().height>=44));
       await page.locator('.how-to-play summary').click();await page.locator('.how-to-play[open]').waitFor();
       assert.equal(await page.locator('.how-to-body li').count(),3);
       assert.ok((await page.locator('.game-caveat').textContent()).length>10);
