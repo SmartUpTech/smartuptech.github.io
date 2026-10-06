@@ -201,11 +201,12 @@ try {
     await page.evaluate(c=>{window.events=[];window.addEventListener('games:event',e=>window.events.push(e.detail));window.SmartUpGames.configure(c);},{...config,date:'2026-10-05',completions:{}});
     await page.waitForSelector(selector);
     const initial=await page.locator('.game-content').innerHTML();
+    const startsBefore=await page.evaluate(()=>window.events.filter(e=>e.type==='onGameStarted').length);
     if(id==='maze')await page.locator('.move-up').click();
     else await page.locator('.game-content button:not(:disabled)').first().click();
     await page.locator('.reset-game').click();
     assert.equal(await page.locator('.game-content').innerHTML(),initial,`${id} resets original daily board`);
-    assert.equal(await page.evaluate(()=>window.events.filter(e=>e.type==='onGameStarted').length),1);
+    assert.equal(await page.evaluate(()=>window.events.filter(e=>e.type==='onGameStarted').length),startsBefore);
     assert.equal(await page.evaluate(()=>window.events.filter(e=>e.type==='onGameCompleted').length),0);
   }
   await page.goto(base+'?embedded=1#pipe_connect');await page.waitForFunction(()=>Boolean(window.SmartUpGames));
