@@ -21,6 +21,15 @@ export function shapeCells(piece,anchor) {
   if(piece.cells.some(([r,c])=>row+r>=4||col+c>=4))return null;
   return piece.cells.map(([r,c])=>(row+r)*4+col+c);
 }
+export function shapeReference(piece) {
+  return piece.cells.reduce((first,cell)=>cell[0]*4+cell[1]<first[0]*4+first[1]?cell:first);
+}
+// The user's target is a visible square, not an empty bounding-box corner.
+export function shapeAnchor(piece,target) {
+  if(!Number.isInteger(target)||target<0||target>=16)return null;
+  const [r,c]=shapeReference(piece),row=Math.floor(target/4)-r,col=target%4-c;
+  return row<0||col<0?null:row*4+col;
+}
 export function shapePlacement(pieces,placements,id,anchor) {
   const cells=shapeCells(pieces[id],anchor);if(!cells)return false;
   const occupied=new Set(placements.flatMap((at,i)=>at===null||i===id?[]:shapeCells(pieces[i],at)||[]));
