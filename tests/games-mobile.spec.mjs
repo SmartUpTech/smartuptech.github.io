@@ -232,7 +232,8 @@ try {
     const duplicate=sudoku.puzzle.find((v,i)=>v&&Math.floor(i/4)===Math.floor(at/4));
     await page.locator(`[data-cell="${at}"]`).click();await page.locator('.digit-key').filter({hasText:String(duplicate)}).click();
     assert.equal(await page.locator('.feedback.is-error').count(),1);
-    assert.ok(await page.evaluate(()=>document.documentElement.scrollHeight<=innerHeight+1),`${language} error should fit compact WebView`);
+    const height=await page.evaluate(()=>document.documentElement.scrollHeight);
+    assert.ok(height<=441,`${language} error height ${height} should fit compact WebView`);
     assert.ok(await page.locator('.feedback').evaluate(el=>el.getBoundingClientRect().bottom<document.querySelector('.sudoku-board').getBoundingClientRect().top));
   }
   assert.deepEqual(errors,[]);console.log('PASS: nine games, mobile gameplay, compact WebViews without page scrolling or clipped controls, collapsible instructions, consistent reset, resize state, themes, locales, focus, persistence and bridge configuration; no page errors.');

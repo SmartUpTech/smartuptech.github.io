@@ -154,6 +154,8 @@ button[aria-pressed="true"],.primary { border:2px solid var(--accent); color:var
 @media (max-height:580px) {
   main { padding-top:max(8px,var(--insetTop)); padding-bottom:max(8px,var(--insetBottom)); }
   .screen-landing { padding-top:max(8px,var(--insetTop)); }
+  .screen-game[data-game="mini_sudoku"] { gap:4px; }
+  .screen-game[data-game="mini_sudoku"] .game-content { gap:3px; }
   .daily-status { margin-bottom:8px; }
   .catalog { row-gap:8px; }
   .icon-wrap { width:min(100%,clamp(62px,21vw,74px)); }
