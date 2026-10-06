@@ -56,6 +56,9 @@ panel and short viewports may scroll while expanded. Collapse it to restore
 the full no-scroll playing surface. CSS sizes boards against the actual viewport height
 using dynamic viewport units, with a fallback for older engines. Resizing does
 not restart the game. Standard controls keep a minimum 44px touch height.
+The help panel follows the last game control directly instead of filling leftover
+viewport space. Sudoku's keypad, Maze's arrows and Shape Fit's piece tray share
+their board widths; board prompts are aligned with the playable surface.
 
 Android must give the WebView only the space between its native app bar and
 bottom navigation, and apply system insets outside it. Embedded pages do not
