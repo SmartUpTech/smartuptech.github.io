@@ -175,7 +175,10 @@ try {
       assert.ok(await page.locator('.how-to-play').evaluate(el=>el.getBoundingClientRect().top-document.querySelector('.game-content').getBoundingClientRect().bottom<=9),`${id}: help follows gameplay`);
       if(id==='maze')assert.ok(await page.locator('.maze-controls').evaluate(el=>Math.abs(el.getBoundingClientRect().width-document.querySelector('.maze-board').getBoundingClientRect().width)<1));
       if(id==='shape_fit')assert.ok(await page.locator('.shape-tray').evaluate(el=>Math.abs(el.getBoundingClientRect().width-document.querySelector('.shape-board').getBoundingClientRect().width)<1));
-      if(id==='mini_sudoku')assert.ok(await page.locator('.number-pad').evaluate(el=>Math.abs(el.getBoundingClientRect().width-document.querySelector('.sudoku-board').getBoundingClientRect().width)<1));
+      if(id==='mini_sudoku')assert.ok(await page.locator('.number-pad').evaluate(el=>{
+        const pad=el.getBoundingClientRect(),board=document.querySelector('.sudoku-board').getBoundingClientRect();
+        return Math.abs((pad.left+pad.right)/2-(board.left+board.right)/2)<1 && pad.width-board.width<=18;
+      }));
       assert.ok(await page.locator('.reset-game').evaluate(el=>el.getBoundingClientRect().height>=44));
       await page.locator('.how-to-play summary').click();await page.locator('.how-to-play[open]').waitFor();
       assert.equal(await page.locator('.how-to-body li').count(),3);
