@@ -154,6 +154,9 @@ button[aria-pressed="true"],.primary { border:2px solid var(--accent); color:var
   .number-pad { grid-template-columns:repeat(4,minmax(0,1fr)) 72px; }
   .number-pad .erase-key { grid-column:auto; padding:4px; font-size:.7rem; }
   .pair-column { gap:6px; }
+  .sequence-values { margin:4px 0; }
+  .sequence-options { gap:6px; }
+  .sequence-options button { min-height:52px; }
   .game-content p:not(.feedback) { font-size:.8rem; line-height:1.4; }
   .game-content .notice { margin:0; }
 }
