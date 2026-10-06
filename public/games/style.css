@@ -127,7 +127,7 @@ button[aria-pressed="true"],.primary { border:2px solid var(--accent); color:var
 .shape-piece { padding:4px; height:64px; touch-action:none; display:grid; place-items:center; }
 .shape-mini { display:grid; grid-template-columns:repeat(4,10px); grid-template-rows:repeat(4,10px); gap:1px; pointer-events:none; }
 .shape-mini span { background:var(--accent); color:var(--background); font-size:8px; line-height:10px; }
-.pipe-board { width:min(100%,clamp(188px,calc(100dvh - 150px),340px)); gap:4px; }
+.pipe-board { width:min(100%,clamp(188px,calc(100dvh - 162px),340px)); gap:4px; }
 .pipe-cell { position:relative; overflow:hidden; color:var(--secondaryText); }
 .pipe-cell.connected { color:var(--accent); border-color:var(--accent); }
 .pipe-arm { position:absolute; background:currentColor; pointer-events:none; }
