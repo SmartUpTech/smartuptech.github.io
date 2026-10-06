@@ -1,4 +1,4 @@
-import {el,button} from '../ui.mjs';
+import {el,button,setFeedback} from '../ui.mjs';
 import {matchChallenge,isMatch} from './words.mjs';
 import {languageOf} from '../core.mjs';
 export function mount(root,{date,language,t,progress,complete,canPlay}) {
@@ -25,8 +25,8 @@ export function mount(root,{date,language,t,progress,complete,canPlay}) {
     if(disposed || !canPlay())return;
     if(side==='left')left=id;else right=id;
     if(left!==null && right!==null) {
-      if(isMatch(left,right)){matched.add(left);feedback.textContent=t('matched');progress({done:matched.size,total:4});}
-      else feedback.textContent=t('try_again');
+      if(isMatch(left,right)){matched.add(left);setFeedback(feedback,t('matched'),'success');progress({done:matched.size,total:4});}
+      else setFeedback(feedback,t('try_again'),'error');
       left=null;right=null;
     }
     render();

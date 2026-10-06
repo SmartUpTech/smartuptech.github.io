@@ -37,9 +37,23 @@ accessible completion labels remain. The return message appears only when every
 enabled game is complete: “Come back tomorrow to play again”. Empty catalogs
 never show that message. The layout is tested with all nine catalog entries.
 
-Game pages use one compact row for back, game name and a How to play button.
-Instructions open in a themed modal dialog; progress, clues, boards and controls
-remain on the game surface. CSS sizes boards against the actual viewport height
+Opening a completed game shows the same centered checkmark/result layout as
+finishing it, with the game name and “Completed today.” Gameplay feedback now
+appears above the board in a shared, readable status card. Errors use a distinct
+alert color and icon; puzzle clues use a consistent hint card. The semantic
+error token follows the active light/dark theme and can be overridden by the
+host palette.
+
+Game pages use one compact row for back, game name and Reset, in the same place
+for every game. Reset restarts the same daily puzzle, clears unfinished moves and
+rounds, and preserves other completion badges. It does not emit another start
+or completion event or unlock a completed game. Answer/cell clearing stays local
+to its keypad with an explicit label, distinct from resetting the entire game.
+A collapsed How to play box below the toolbar contains three numbered steps,
+game-specific caveats and the daily/reset rules in English, Hindi and Marathi.
+Expanding it reveals instructions inline; long instructions scroll within the
+panel and short viewports may scroll while expanded. Collapse it to restore
+the full no-scroll playing surface. CSS sizes boards against the actual viewport height
 using dynamic viewport units, with a fallback for older engines. Resizing does
 not restart the game. Standard controls keep a minimum 44px touch height.
 
@@ -168,7 +182,7 @@ enum into Android. No web code grants native ad rewards.
 The catalog now contains nine games. Shape Fit uses a daily connected-piece
 partition of a 4×4 square, with pointer dragging and keyboard/tap placement.
 The selected cell anchors the top-left of the piece bounding box; pieces keep
-their orientation. Clear resets placements. Any non-overlapping full tiling wins.
+their orientation. Reset restarts placements. Any non-overlapping full tiling wins.
 Pipe Connect rotates a solvable daily 4×4 pipe layout clockwise. Any connected
 route from S to E wins; unused pipes need not connect. Code Breaker uses four
 distinct digits from 1–6, unlimited guesses, exact/misplaced clues and the last

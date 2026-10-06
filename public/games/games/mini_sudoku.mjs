@@ -1,4 +1,4 @@
-import {el,button} from '../ui.mjs';
+import {el,button,setFeedback} from '../ui.mjs';
 import {sudokuChallenge,sudokuCandidates,sudokuComplete} from './puzzles.mjs';
 export function mount(root,{date,t,progress,complete,canPlay}) {
   const {puzzle}=sudokuChallenge(date),board=[...puzzle];let selected=board.indexOf(0),disposed=false;
@@ -18,13 +18,13 @@ export function mount(root,{date,t,progress,complete,canPlay}) {
   }
   function enter(value) {
     if(disposed||!canPlay()||selected<0||puzzle[selected])return;
-    if(value&&!sudokuCandidates(board,selected).includes(value)){feedback.textContent=t('sudoku_conflict');return;}
-    board[selected]=value;feedback.textContent='';render();
+    if(value&&!sudokuCandidates(board,selected).includes(value)){setFeedback(feedback,t('sudoku_conflict'),'error');return;}
+    board[selected]=value;setFeedback(feedback,'');render();
     progress({done:board.filter(Boolean).length,total:16});
     if(sudokuComplete(board,puzzle)){complete({filled:16,total:16});return;}
-    if(board.every(Boolean))feedback.textContent=t('try_again');
+    if(board.every(Boolean))setFeedback(feedback,t('try_again'),'error');
   }
   for(const n of [1,2,3,4])pad.append(button(String(n),()=>enter(n),'digit-key'));
-  const clear=button(t('clear'),()=>enter(0),'erase-key');pad.append(clear);render();
+  const clear=button(t('clear_cell'),()=>enter(0),'erase-key');pad.append(clear);render();
   return ()=>{disposed=true;};
 }
