@@ -216,5 +216,18 @@ try {
   await page.goto(base+'?embedded=1#pipe_connect');await page.waitForFunction(()=>Boolean(window.SmartUpGames));
   await page.evaluate(c=>window.SmartUpGames.configure(c),{...config,date:'2026-10-05',completions:{word_match:'2026-10-05'}});await page.waitForSelector('.pipe-board');
   await page.locator('.reset-game').click();await page.locator('.back').click();await page.waitForSelector('.catalog');assert.equal(await page.locator('.badge').count(),1);
+  // A visible localized error must remain above the board without covering controls.
+  await page.setViewportSize({width:320,height:440});
+  for(const language of ['en','hi','mr']){
+    await page.goto(base+'?embedded=1#mini_sudoku');await page.waitForFunction(()=>Boolean(window.SmartUpGames));
+    await page.evaluate(c=>window.SmartUpGames.configure(c),{...config,language,date:'2026-10-05',completions:{}});
+    await page.waitForSelector('.sudoku-board');
+    const sudoku=sudokuChallenge('2026-10-05'),at=sudoku.puzzle.findIndex(v=>!v);
+    const duplicate=sudoku.puzzle.find((v,i)=>v&&Math.floor(i/4)===Math.floor(at/4));
+    await page.locator(`[data-cell="${at}"]`).click();await page.locator('.digit-key').filter({hasText:String(duplicate)}).click();
+    assert.equal(await page.locator('.feedback.is-error').count(),1);
+    assert.ok(await page.evaluate(()=>document.documentElement.scrollHeight<=innerHeight+1),`${language} error should fit compact WebView`);
+    assert.ok(await page.locator('.feedback').evaluate(el=>el.getBoundingClientRect().bottom<document.querySelector('.sudoku-board').getBoundingClientRect().top));
+  }
   assert.deepEqual(errors,[]);console.log('PASS: nine games, mobile gameplay, compact WebViews without page scrolling or clipped controls, collapsible instructions, consistent reset, resize state, themes, locales, focus, persistence and bridge configuration; no page errors.');
 } finally {await browser.close();await new Promise(r=>server.close(r));}
