@@ -163,6 +163,8 @@ async function route() {
         complete:result=>complete(game,result),canPlay:checkDay});
       // Modules keep a plain instruction fallback; the shared panel replaces it.
       if(content.firstElementChild?.tagName==='P')content.firstElementChild.remove();
+      const fallbackNotice=content.querySelector(':scope > .notice');
+      if(fallbackNotice){if(!instructions.querySelector('.notice'))instructions.append(fallbackNotice);else fallbackNotice.remove();}
     }
     mountPuzzle();reset.disabled=false;
     reset.addEventListener('click',()=>{
