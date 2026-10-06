@@ -14,7 +14,10 @@ main { width:100%; max-width:520px; margin:auto; min-height:100vh; min-height:10
 .game-content,.game-panel { display:flex; flex-direction:column; gap:8px; min-width:0; }
 .game-content { flex:1; }
 .game-content p { margin:0; }
-.game-toolbar .reset-game { width:auto; padding:0 10px; font-size:.8rem; border:1px solid var(--divider); border-radius:10px; }
+.game-toolbar .reset-game { display:inline-flex; align-items:center; justify-content:center; gap:5px; width:auto; min-width:78px; padding:0 12px; font-size:.82rem; font-weight:650; color:var(--accent); background:color-mix(in srgb,var(--accent) 9%,var(--surface)); border:1px solid color-mix(in srgb,var(--accent) 30%,var(--divider)); border-radius:999px; box-shadow:0 2px 5px -4px var(--primaryText); }
+.game-toolbar .reset-game:active { background:color-mix(in srgb,var(--accent) 16%,var(--surface)); }
+.game-toolbar .reset-game:disabled { opacity:.5; }
+.reset-icon { display:inline-block; font-size:1.2rem; font-weight:500; line-height:1; }
 .how-to-play { border:1px solid var(--divider); border-radius:12px; background:var(--surface); }
 .how-to-play summary { display:flex; align-items:center; justify-content:space-between; min-height:44px; padding:10px 12px; cursor:pointer; font-size:.85rem; font-weight:650; list-style:none; }
 .how-to-play summary::-webkit-details-marker { display:none; }

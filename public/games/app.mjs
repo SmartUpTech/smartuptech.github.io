@@ -144,14 +144,16 @@ async function route() {
   root.className='screen-game';root.dataset.game=game.id;root.replaceChildren();
   const toolbar=el('header',undefined,'game-toolbar');
   const back=button('←',home,'back');back.setAttribute('aria-label','← '+t('back'));
-  const reset=button(t('reset_game'),()=>{},'reset-game');reset.disabled=true;
+  const reset=button('',()=>{},'reset-game');reset.disabled=true;
+  const resetIcon=el('span','↻','reset-icon');resetIcon.setAttribute('aria-hidden','true');
+  reset.append(resetIcon,el('span',t('reset_game')));
   toolbar.append(back,el('h1',t(game.nameKey)),reset);
   const content=el('section',undefined,'game-content'),help=el('details',undefined,'how-to-play');
   const summary=el('summary',t('how_to_play')),instructions=el('div',undefined,'how-to-body');
   const guide=gameInstructions(game.id,host.language);
   if(guide){const steps=el('ol');for(const step of guide[0])steps.append(el('li',step));instructions.append(steps,el('p',guide[1],'game-caveat'));}
   instructions.append(el('p',t('daily_caveat'),'daily-caveat'));
-  help.append(summary,instructions);root.append(toolbar,help,content);
+  help.append(summary,instructions);root.append(toolbar,content,help);
   try {
     // The validated catalog route is a local module within the games directory.
     const module=await import(`./games/${game.path}.mjs`);

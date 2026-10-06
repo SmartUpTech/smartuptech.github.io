@@ -49,7 +49,7 @@ for every game. Reset restarts the same daily puzzle, clears unfinished moves an
 rounds, and preserves other completion badges. It does not emit another start
 or completion event or unlock a completed game. Answer/cell clearing stays local
 to its keypad with an explicit label, distinct from resetting the entire game.
-A collapsed How to play box below the toolbar contains three numbered steps,
+A collapsed How to play box below the puzzle contains three numbered steps,
 game-specific caveats and the daily/reset rules in English, Hindi and Marathi.
 Expanding it reveals instructions inline; long instructions scroll within the
 panel and short viewports may scroll while expanded. Collapse it to restore
