@@ -36,10 +36,16 @@ export function sudokuChallenge(date) {
 }
 export const sudokuComplete=(board,puzzle)=>Array.isArray(board)&&board.length===16&&board.every((v,i)=>v>=1&&v<=4&&(!puzzle[i]||puzzle[i]===v))&&sudokuSolutions(board)===1;
 export function sequenceChallenge(date) {
-  const s=seed('sequence',date),start=2+mod(dayNumber(date),17),step=2+s%6;
-  const specs=[{rule:'rule_add',values:Array.from({length:5},(_,i)=>start+i*step)},
-    {rule:'rule_multiply',values:Array.from({length:5},(_,i)=>(2+s%3)*(2+s%2)**i)},
-    {rule:'rule_square',values:Array.from({length:5},(_,i)=>(2+s%5+i)**2)}];
+  // Encode the day into each pattern's parameters. Seed remainders alone made
+  // multiplication and square rounds repeat frequently, including adjacent days.
+  // The 9,973-day cycle keeps every round distinct for more than 27 years.
+  const day=mod(dayNumber(date),9973),s=seed('sequence:v2',date);
+  const addStart=2+day%97,step=2+Math.floor(day/97);
+  const multiplyStart=2+day%31,multiplier=2+Math.floor(day/31)%2,shift=Math.floor(day/62);
+  const squareStart=2+day%31,squareShift=Math.floor(day/31);
+  const specs=[{rule:'rule_add',values:Array.from({length:5},(_,i)=>addStart+i*step)},
+    {rule:'rule_multiply',values:Array.from({length:5},(_,i)=>shift+multiplyStart*multiplier**i)},
+    {rule:'rule_square',values:Array.from({length:5},(_,i)=>squareShift+(squareStart+i)**2)}];
   return specs.map(({rule,values},i)=>{
     const answer=values[4],delta=values[4]-values[3];
     const options=shuffle([answer,answer+delta,answer+1,answer-1],s^(i+357));

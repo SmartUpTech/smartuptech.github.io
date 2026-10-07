@@ -70,6 +70,25 @@ test('800 daily generated puzzles are valid, deterministic and differ on adjacen
     }
   }
 });
+test('each Sequence round changes every day across its 9,973-day cycle',()=>{
+  const seen=[new Set(),new Set(),new Set()];
+  let previous=null;
+  for(let i=0;i<9973;i++){
+    const date=new Date(Date.UTC(2026,0,1+i)).toISOString().slice(0,10);
+    const rounds=sequenceChallenge(date);
+    for(let n=0;n<3;n++){
+      const signature=rounds[n].values.join(',');
+      assert.ok(!seen[n].has(signature),`${date}: repeated round ${n+1}`);
+      seen[n].add(signature);
+      if(previous)assert.notDeepEqual(rounds[n].values,previous[n].values);
+      const [a,b,c,d]=rounds[n].values;
+      if(n===0)assert.equal(b-a,c-b);
+      if(n===1)assert.equal((c-b)/(b-a),(d-c)/(c-b));
+      if(n===2)assert.equal((c-b)-(b-a),2);
+    }
+    previous=rounds;
+  }
+});
 test('validators reject wrong values, changed clues, invalid boards and wall crossings',()=>{
   const date='2026-10-05',{puzzle,solution}=sudokuChallenge(date);
   const wrong=[...solution];wrong[0]=wrong[1];assert.equal(sudokuComplete(wrong,puzzle),false);
