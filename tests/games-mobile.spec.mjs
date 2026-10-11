@@ -1,6 +1,6 @@
 import {createServer} from 'node:http';
 import {readFile,mkdir} from 'node:fs/promises';
-import {resolve,extname} from 'node:path';
+import {resolve,extname,relative,isAbsolute} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import assert from 'node:assert/strict';
 import {scrambleChallenge,graphemes} from '../public/games/games/words.mjs';
@@ -11,7 +11,7 @@ const publicDir=resolve('public');
 const server=createServer(async(req,res)=>{
   try {
     let path=decodeURIComponent(new URL(req.url,'http://local').pathname);if(path.endsWith('/'))path+='index.html';
-    const file=resolve(publicDir,'.'+path);if(!file.startsWith(publicDir+'/')){res.writeHead(403);res.end();return;}
+    const file=resolve(publicDir,'.'+path),within=relative(publicDir,file);if(within.startsWith('..')||isAbsolute(within)){res.writeHead(403);res.end();return;}
     const data=await readFile(file);res.setHeader('Content-Type',({'.mjs':'text/javascript','.json':'application/json','.css':'text/css','.svg':'image/svg+xml','.html':'text/html'})[extname(file)] || 'text/plain');res.end(data);
   }catch{res.writeHead(404);res.end('Not found');}
 });
@@ -133,6 +133,7 @@ try {
     await page.goto(base+`?lang=${lang}`);await page.waitForSelector('.game-card');await page.locator('.game-card').first().click();await page.waitForSelector('.pairs');
     await page.setViewportSize({width:320,height:740});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
     await page.screenshot({path:`test-results/games/match-${lang}.png`,fullPage:true});
+    await page.evaluate(()=>window.SmartUpGames.back());await page.waitForSelector('.catalog');
   }
   // Check every game surface, long translations and both themes on small phones.
   for(const width of [320,412])for(const theme of ['light','dark'])for(const lang of ['en','hi','mr'])for(const [id,selector]of [['mini_sudoku','.sudoku-board'],['sequence','.sequence-options'],['maze','.maze-board'],['number_grid','.number-grid'],['shape_fit','.shape-board'],['pipe_connect','.pipe-board'],['code_breaker','.code-pad']]){
@@ -140,6 +141,7 @@ try {
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
     assert.equal(await page.locator('h1').evaluate(h=>getComputedStyle(h).outlineStyle),'none');
     if(width===320&&lang==='en')await page.screenshot({path:`test-results/games/${id}-${theme}.png`,fullPage:true});
+    await page.evaluate(()=>window.SmartUpGames.back());await page.waitForSelector('.catalog');
   }
   await page.emulateMedia({reducedMotion:'reduce'});
   // Embedded mode waits for native state, hides test controls and uses host date.
@@ -188,6 +190,7 @@ try {
       await page.locator('.how-to-play summary').click();assert.equal(await page.locator('.how-to-play[open]').count(),0);
     }
     if(width===320&&language==='en')await page.screenshot({path:`test-results/games/compact-${id||'landing'}.png`,fullPage:true});
+    await page.evaluate(()=>window.SmartUpGames.back());await page.waitForSelector('.catalog');
   }
   // Resizing an active WebView does not regenerate the puzzle or discard input.
   // All nine real games fit with zero, partial and full completion.

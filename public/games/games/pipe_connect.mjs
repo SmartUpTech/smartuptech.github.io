@@ -1,7 +1,10 @@
 import {el,button} from '../ui.mjs';
-import {pipeChallenge,rotatePipe,pipeConnected} from './new-puzzles.mjs';
-export function mount(root,{date,t,progress,complete,canPlay}) {
-  const {puzzle}=pipeChallenge(date);let disposed=false,moves=0;
+import {rotatePipe,pipeConnected} from './new-puzzles.mjs';
+import {session} from './session.mjs';
+export function mount(root,options) {
+  let puzzle=options.snapshot?.state.puzzle||[...options.puzzle.puzzle],moves=options.snapshot?.state.moves||0;
+  return session(root,options,()=>({puzzle,moves}),()=>{
+    const {t,progress,complete,canPlay}=options;let disposed=false;
   root.append(el('p',t('pipe_help')));
   const status=el('p',t('pipe_route'),'progress game-hint'),board=el('div',undefined,'pipe-board');root.append(status,board);
   const buttons=puzzle.map((_,i)=>{
@@ -14,4 +17,6 @@ export function mount(root,{date,t,progress,complete,canPlay}) {
     b.append(el('span',i===0?'S':i===15?'E':'','pipe-center'));
     b.setAttribute('aria-label',t('pipe_cell',{row:Math.floor(i/4)+1,col:i%4+1,ports:[0,1,2,3].filter(d=>puzzle[i]&(1<<d)).map(d=>t(['north','east','south','west'][d])).join(', ')}));
   });}render();return()=>{disposed=true;};
+
+  },()=>{puzzle=[...options.puzzle.puzzle];moves=0;});
 }

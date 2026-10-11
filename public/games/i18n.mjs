@@ -1,92 +1,17 @@
-export const messages = {
-  en: {
-    reset_game:'Reset',clear_answer:'Clear answer',clear_cell:'Clear cell',
-    daily_caveat:'One completion per game each day. Reset restarts this same daily puzzle and clears its unfinished progress. It does not unlock completed games or erase other games’ progress.',
-    shape_fit:'Shape Fit',pipe_connect:'Pipe Connect',code_breaker:'Code Breaker',
-    shape_help:'Fill the square with all four pieces, without overlaps. Drag a piece onto the board, or select it then tap a cell. The dotted square goes on the cell you choose. Select a placed piece to move it; Clear resets the board.',
-    shape_piece:'Piece {number}',shape_selected:'Place piece {number}',shape_invalid:'That piece overlaps or extends outside the board.',
-    pipe_help:'Tap a pipe to rotate it clockwise. Connect S (start) to E (end). Connected pipes are highlighted; unused pipes do not need to connect.',pipe_route:'S → E',
-    pipe_cell:'Row {row}, column {col}. Openings: {ports}. Tap to rotate.',north:'top',east:'right',south:'bottom',west:'left',
-    code_help:'Find four different digits from 1–6 in the correct order. A digit cannot repeat. Each guess shows how many digits are in the right place and how many belong elsewhere. Unlimited guesses; the last three are shown.',
-    check_code:'Check code',code_legend:'Four different digits · 1–6',code_feedback:'{exact} exact · {misplaced} elsewhere',
-    daily_progress:'Today’s progress',play_again_tomorrow:'Come back tomorrow to play again',
-    how_to_play:'How to play',close_help:'Got it',
-    daily_label:'YOUR DAILY PAUSE',
-    word_match_detail:'Connect the meanings',word_scramble_detail:'Untangle the letters',mini_sudoku_detail:'A little logic',sequence_detail:'Find the pattern',maze_detail:'Find your way',number_grid_detail:'Focus, one at a time',
-    sudoku_help:'Fill each row, column and 2 × 2 box with 1–4, without repeats. Select an empty cell, then a number.',
-    sudoku_conflict:'Number already used here.',cell_value:'Row {row}, column {col}: {value}',empty_cell:'empty',
-    sequence_help:'Choose the next number. Solve three patterns to finish.',rule_add:'The same amount is added each time.',rule_multiply:'The gap between numbers is multiplied by the same amount each time.',rule_square:'The gap grows by 2 each time.',
-    grid_help:'Find and tap 1 to 16 in order. Take your time—there is no timer.',find_number:'Find {number}',found:'Found',
-    maze_help:'Guide the dot to the flag. Use the arrows or tap an adjacent open space.',maze_position:'Row {row}, column {col}',maze_wall:'There is a wall in that direction.',up:'Move up',right:'Move right',down:'Move down',left:'Move left',
-    games:'Games', summary:'{done} of {total} completed today', tomorrow:'Come back tomorrow for new games',
-    word_match:'Word Match', word_scramble:'Word Scramble', mini_sudoku:'Mini Sudoku', sequence:'Sequence', maze:'Maze', number_grid:'Number Grid',
-    daily:'A little play, every day.', play:'Play', completed:'Completed today', back:'Back to games', well_done:'Well done!', result:'Today’s challenge is complete.',
-    match_help:'Match each word with its meaning. Choose one from each column.', scramble_help:'Tap the letters in order to find the word.',
-    progress:'{done} of {total}', check:'Check word', clear:'Clear', next:'Next word', try_again:'Not quite. Try again.', matched:'Match found!', correct:'That’s right!',
-    retry:'Try again', load_error:'Games could not load. Check your connection and try again.', empty:'New games are on the way.',
-    theme:'Theme', light:'Light', dark:'Dark', language:'Language', english_content:'This puzzle uses English words.',
-    day_changed:'A new day has begun. Refresh to play today’s games.', refresh:'Refresh games', waiting:'Waiting for your app to provide today’s games…',
-    storage_error:'Progress is saved for this visit only. Your browser storage is unavailable.', preview:'Test settings', mock:'Preview completion badges', reset:'Clear test progress',
-    selected:'Selected', letter:'Letter {letter}', answer:'Your answer', hint:'Clue', host_error:'Your app could not configure Games. Reopen Games from the app.'
-  },
-  hi: {
-    reset_game:'रीसेट',clear_answer:'जवाब मिटाएँ',clear_cell:'खाना मिटाएँ',
-    daily_caveat:'हर खेल रोज़ एक बार पूरा करें। रीसेट आज की यही पहेली फिर शुरू करके अधूरी प्रगति हटाता है। पूरे हुए खेल नहीं खुलते और दूसरे खेलों की प्रगति नहीं मिटती।',
-    shape_fit:'आकार मिलाएँ',pipe_connect:'पाइप जोड़ें',code_breaker:'कोड सुलझाएँ',
-    shape_help:'चारों टुकड़ों से चौकोर भरें। टुकड़े एक-दूसरे पर नहीं आने चाहिए। टुकड़ा खींचें या उसे चुनकर खाना दबाएँ। टुकड़े का बिंदु वाला खाना चुनी जगह पर आएगा। रखे टुकड़े को चुनकर हटा सकते हैं। मिटाएँ से फिर शुरू करें।',
-    shape_piece:'टुकड़ा {number}',shape_selected:'टुकड़ा {number} रखें',shape_invalid:'टुकड़ा दूसरे पर आ रहा है या बाहर जा रहा है।',
-    pipe_help:'पाइप को घड़ी की दिशा में घुमाने के लिए दबाएँ। S (शुरू) को E (अंत) से जोड़ें। जुड़े पाइप उभरकर दिखते हैं। बाकी पाइप जोड़ना ज़रूरी नहीं।',pipe_route:'S → E',
-    pipe_cell:'पंक्ति {row}, स्तंभ {col}। खुले सिरे: {ports}। घुमाने के लिए दबाएँ।',north:'ऊपर',east:'दाएँ',south:'नीचे',west:'बाएँ',
-    code_help:'1–6 में से चार अलग अंक सही क्रम में खोजें। अंक दोहराएँ नहीं। हर कोशिश सही जगह और दूसरी जगह वाले अंकों की संख्या दिखाती है। कोशिशों की सीमा नहीं। पिछली तीन दिखाई जाती हैं।',
-    check_code:'कोड जाँचें',code_legend:'चार अलग अंक · 1–6',code_feedback:'{exact} सही जगह · {misplaced} दूसरी जगह',
-    daily_progress:'आज की प्रगति',play_again_tomorrow:'फिर खेलने के लिए कल वापस आएँ',
-    how_to_play:'कैसे खेलें',close_help:'समझ गया',
-    daily_label:'हर दिन कुछ पल अपने लिए',
-    word_match_detail:'अर्थों को जोड़ें',word_scramble_detail:'अक्षरों को सुलझाएँ',mini_sudoku_detail:'तर्क का छोटा खेल',sequence_detail:'क्रम पहचानें',maze_detail:'रास्ता खोजें',number_grid_detail:'एक-एक अंक पर ध्यान दें',
-    sudoku_help:'हर पंक्ति, स्तंभ और 2 × 2 खाने में 1–4 भरें। कोई अंक दोहराएँ नहीं। खाली खाना चुनकर अंक दबाएँ।',
-    sudoku_conflict:'यह अंक यहाँ पहले से है।',cell_value:'पंक्ति {row}, स्तंभ {col}: {value}',empty_cell:'खाली',
-    sequence_help:'अगला अंक चुनें। पूरा करने के लिए तीन क्रम हल करें।',rule_add:'हर बार समान संख्या जोड़ी जाती है।',rule_multiply:'अंकों के बीच का अंतर हर बार समान संख्या से गुणा होता है।',rule_square:'अंकों के बीच का अंतर हर बार 2 बढ़ता है।',
-    grid_help:'1 से 16 तक अंक क्रम से चुनें। आराम से खेलें—समय सीमा नहीं है।',find_number:'{number} खोजें',found:'मिल गया',
-    maze_help:'बिंदु को झंडे तक पहुँचाएँ। तीर दबाएँ या पास के खुले खाने पर टैप करें।',maze_position:'पंक्ति {row}, स्तंभ {col}',maze_wall:'इस दिशा में दीवार है।',up:'ऊपर जाएँ',right:'दाएँ जाएँ',down:'नीचे जाएँ',left:'बाएँ जाएँ',
-    games:'खेल', summary:'आज {total} में से {done} पूरे', tomorrow:'नए खेलों के लिए कल फिर आएँ', daily:'हर दिन थोड़ा खेलें।',
-    word_match:'शब्द मिलान', word_scramble:'शब्द पहेली', mini_sudoku:'मिनी सुडोकू', sequence:'क्रम', maze:'भूलभुलैया', number_grid:'अंक ग्रिड',
-    back:'खेलों पर लौटें', well_done:'बहुत बढ़िया!', result:'आज की चुनौती पूरी हुई।', completed:'आज पूरा किया',
-    match_help:'हर शब्द को उसके अर्थ से मिलाएँ। दोनों स्तंभों से एक-एक चुनें।', scramble_help:'शब्द बनाने के लिए अक्षरों को सही क्रम में चुनें।',
-    progress:'{total} में से {done}', check:'शब्द जाँचें', clear:'मिटाएँ', next:'अगला शब्द', try_again:'फिर से कोशिश करें।', matched:'सही जोड़ी!', correct:'सही जवाब!',
-    retry:'फिर कोशिश करें', theme:'थीम', light:'हल्का', dark:'गहरा', language:'भाषा', english_content:'इस पहेली में अंग्रेज़ी शब्द हैं।',
-    day_changed:'नया दिन शुरू हो गया है। आज के खेलों के लिए रीफ़्रेश करें।', refresh:'खेल रीफ़्रेश करें', hint:'संकेत', answer:'आपका जवाब'
-  },
-  mr: {
-    reset_game:'रीसेट',clear_answer:'उत्तर पुसा',clear_cell:'चौकट पुसा',
-    daily_caveat:'प्रत्येक खेळ रोज एकदा पूर्ण करता येतो. रीसेट आजचे तेच कोडे पुन्हा सुरू करून अपूर्ण प्रगती काढते. पूर्ण खेळ पुन्हा उघडत नाहीत आणि इतर खेळांची प्रगती पुसली जात नाही.',
-    shape_fit:'आकार जुळवा',pipe_connect:'पाइप जोडा',code_breaker:'कोड सोडवा',
-    shape_help:'चार तुकड्यांनी चौकोन भरा. तुकडे एकमेकांवर येऊ देऊ नका. तुकडा ओढा किंवा निवडून चौकट दाबा. तुकड्यातील ठिपका असलेली चौकट निवडलेल्या जागी येते. ठेवलेला तुकडा निवडून हलवा. पुसा दाबून पुन्हा सुरू करा.',
-    shape_piece:'तुकडा {number}',shape_selected:'तुकडा {number} ठेवा',shape_invalid:'तुकडा दुसऱ्यावर येतो किंवा बाहेर जातो.',
-    pipe_help:'पाइप घड्याळाच्या दिशेने फिरवण्यासाठी दाबा. S (सुरुवात) ते E (शेवट) जोडा. जोडलेले पाइप ठळक दिसतात. उरलेले जोडणे आवश्यक नाही.',pipe_route:'S → E',
-    pipe_cell:'ओळ {row}, स्तंभ {col}. उघडी टोके: {ports}. फिरवण्यासाठी दाबा.',north:'वर',east:'उजवीकडे',south:'खाली',west:'डावीकडे',
-    code_help:'1–6 मधील चार वेगळे अंक योग्य क्रमाने शोधा. अंक पुन्हा वापरू नका. प्रत्येक प्रयत्नात योग्य जागी आणि दुसऱ्या जागी असलेल्या अंकांची संख्या दिसते. प्रयत्नांना मर्यादा नाही. शेवटचे तीन दिसतात.',
-    check_code:'कोड तपासा',code_legend:'चार वेगळे अंक · 1–6',code_feedback:'{exact} योग्य जागी · {misplaced} दुसरीकडे',
-    daily_progress:'आजची प्रगती',play_again_tomorrow:'पुन्हा खेळण्यासाठी उद्या या',
-    how_to_play:'कसे खेळायचे',close_help:'समजले',
-    daily_label:'दररोज थोडा विरंगुळा',
-    word_match_detail:'अर्थ जुळवा',word_scramble_detail:'अक्षरे सोडवा',mini_sudoku_detail:'तर्काचा छोटा खेळ',sequence_detail:'क्रम ओळखा',maze_detail:'वाट शोधा',number_grid_detail:'एका वेळी एका अंकावर लक्ष',
-    sudoku_help:'प्रत्येक ओळ, स्तंभ आणि 2 × 2 चौकटीत 1–4 भरा. अंक पुन्हा वापरू नका. रिकामी जागा निवडून अंक दाबा.',
-    sudoku_conflict:'हा अंक येथे आधीच आहे.',cell_value:'ओळ {row}, स्तंभ {col}: {value}',empty_cell:'रिकामी',
-    sequence_help:'पुढचा अंक निवडा. तीन क्रम सोडवून खेळ पूर्ण करा.',rule_add:'प्रत्येक वेळी समान संख्या मिळवली जाते.',rule_multiply:'संख्यांमधील अंतर प्रत्येक वेळी समान संख्येने गुणले जाते.',rule_square:'संख्यांमधील अंतर प्रत्येक वेळी 2 ने वाढते.',
-    grid_help:'1 ते 16 अंक क्रमाने निवडा. सावकाश खेळा—वेळेची मर्यादा नाही.',find_number:'{number} शोधा',found:'सापडले',
-    maze_help:'बिंदूला झेंड्यापर्यंत न्या. बाण दाबा किंवा शेजारच्या मोकळ्या जागेवर टॅप करा.',maze_position:'ओळ {row}, स्तंभ {col}',maze_wall:'या दिशेला भिंत आहे.',up:'वर जा',right:'उजवीकडे जा',down:'खाली जा',left:'डावीकडे जा',
-    games:'खेळ', summary:'आज {total} पैकी {done} पूर्ण', tomorrow:'नवीन खेळांसाठी उद्या पुन्हा या', daily:'दररोज थोडे खेळा.',
-    word_match:'शब्द जुळवा', word_scramble:'शब्द कोडे', mini_sudoku:'मिनी सुडोकू', sequence:'क्रम', maze:'भूलभुलैया', number_grid:'अंक जाळी',
-    back:'खेळांकडे परत', well_done:'छान केले!', result:'आजचे आव्हान पूर्ण झाले.', completed:'आज पूर्ण',
-    match_help:'प्रत्येक शब्द त्याच्या अर्थाशी जुळवा. दोन्ही स्तंभांतून एक निवडा.', scramble_help:'शब्द तयार करण्यासाठी अक्षरे क्रमाने निवडा.',
-    progress:'{total} पैकी {done}', check:'शब्द तपासा', clear:'पुसा', next:'पुढचा शब्द', try_again:'पुन्हा प्रयत्न करा.', matched:'योग्य जोडी!', correct:'बरोबर!',
-    theme:'थीम', light:'फिकट', dark:'गडद', language:'भाषा', english_content:'या कोड्यात इंग्रजी शब्द आहेत.', hint:'संकेत', answer:'तुमचे उत्तर'
-  }
-};
-export function translator(language = 'en') {
-  const lang = language.toLowerCase().split(/[-_]/)[0];
-  return (key, params = {}) => {
-    const template = messages[lang]?.[key] || messages.en[key] || 'Game';
-    return template.replace(/\{(\w+)\}/g, (_, k) => String(params[k] ?? ''));
-  };
+import {baseMessages,baseGuides} from './base-resources.mjs';
+import {translations} from './translations.mjs';
+import {localeOf,languages} from './locale.mjs';
+export const messages={...baseMessages,...translations};
+const helpKeys={word_match:'match_help',word_scramble:'scramble_help',mini_sudoku:'sudoku_help',sequence:'sequence_help',maze:'maze_help',number_grid:'grid_help',shape_fit:'shape_help',pipe_connect:'pipe_help',code_breaker:'code_help'};
+export const instructions=Object.fromEntries(languages.map(language=>[language,baseGuides[language]||Object.fromEntries(Object.entries(helpKeys).map(([id,key])=>[id,[[messages[language][key]],'']]))]));
+const descriptions=new Map();
+export function describeMessage(text){return descriptions.get(text)||null;}
+export function translator(language='en') {
+ const {language:lang,locale}=localeOf(language),number=new Intl.NumberFormat(locale);
+ return (key,params={})=>{
+  const template=messages[lang]?.[key]||messages.en[key]||'Game';
+  const text=template.replace(/\{(\w+)\}/g,(_,k)=>typeof params[k]==='number'?number.format(params[k]):String(params[k]??''));
+  descriptions.set(text,{key,params});if(descriptions.size>512)descriptions.delete(descriptions.keys().next().value);
+  return text;
+ };
 }

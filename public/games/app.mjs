@@ -2,6 +2,9 @@ import {VERSION, localDate, safeId, validateHost, validateCatalog, completionSto
 import {translator} from './i18n.mjs';
 import {applyTheme} from './theme.mjs';
 import {gameInstructions} from './instructions.mjs';
+import {languages,localeOf} from './locale.mjs';
+import {snapshotStore} from './snapshots.mjs';
+import {newPuzzle,validSnapshot} from './games/state.mjs';
 
 const root = document.querySelector('#app');
 const params = new URLSearchParams(location.search);
@@ -12,6 +15,12 @@ const persistence = completionStore(storage);
 let host = embedded ? null : {bridgeVersion:1, appId:'standalone', language:params.get('lang') || 'en', date:localDate()};
 let t = translator(host?.language), catalog = [], rawCatalog, active, cleanup, generation = 0;
 let completions = embedded ? {} : persistence.read(), pending = {}, storageFailed = false, staleDay = false;
+let snapshots,record,controller,refreshLabels,bootGeneration=0;
+function storageFailure(){storageFailed=true;showStorageNotice();}
+function showStorageNotice(){if(storageFailed&&!root.querySelector('.storage-notice'))root.append(el('p',t('storage_error'),'notice storage-notice'));}
+function openStore(){snapshots=snapshotStore(storage,embedded?'embedded':'standalone',host.appId,host.date,storageFailure);snapshots.prune();}
+function save(){if(record&&controller){Object.assign(record,controller.snapshot());snapshots.write(record.gameId,record);showStorageNotice();}}
+function applyLocale(){document.documentElement.lang=localeOf(host?.language).locale;document.title=t('games')+' · SmartUp Tech';}
 let standaloneTheme = params.get('theme') === 'dark' ? 'dark' : 'light';
 applyTheme({mode:standaloneTheme});
 
@@ -33,7 +42,7 @@ function emit(type, gameId, result) {
 }
 function completed(id) { return completions[id] === host?.date || pending[id] === host?.date; }
 function leave() {
-  cleanup?.(); cleanup = null;
+  save();controller?.dispose();controller=null;refreshLabels=null;record=null;cleanup?.(); cleanup = null;
   if (active) emit('onGameExited',active.id);
   active = null;
 }
@@ -57,30 +66,33 @@ function checkDay() {
   if (!embedded && host && host.date !== localDate()) {
     staleDay = true; generation++; leave();
     heading(t('games'),t('day_changed'));
-    root.append(button(t('refresh'),()=>{host.date=localDate(); staleDay=false; pending={}; home();},'primary'));
+    root.append(button(t('refresh'),()=>{host.date=localDate(); snapshots=null;staleDay=false; pending={}; home();},'primary'));
     return false;
   }
   return !staleDay;
 }
+function showFinished(game,justCompleted=false) {
+  const confirmed=completions[game.id]===host.date;
+  const panel=resultScreen(confirmed&&!justCompleted?t(game.nameKey):t('well_done'),confirmed&&!justCompleted?t('completed'):t('result'));
+  if(embedded&&!confirmed)panel.append(el('p',t('unconfirmed'),'notice'));
+  showStorageNotice();
+}
 function complete(game, result) {
   if (!checkDay() || !active || active.id !== game.id || completed(game.id)) return;
-  pending[game.id] = host.date;
-  if (!embedded) {
-    // Merge latest records to preserve completions made by another open tab.
-    completions = {...persistence.read(),...completions,[game.id]:host.date};
-    storageFailed = !persistence.write(completions);
-  }
+  save();record.status='finished';record.result=result;record.completionDispatched=true;
+  snapshots.write(game.id,record);pending[game.id]=host.date;
+  if(!embedded){completions={...persistence.read(),...completions,[game.id]:host.date};if(!persistence.write(completions))storageFailure();}
+  const finishingRecord=record;
   emit('onGameCompleted',game.id,result);
-  cleanup?.(); cleanup=null;
-  const panel=resultScreen(t('well_done'),t('result'));
-  if (storageFailed) panel.append(el('p',t('storage_error'),'notice'));
+  if(record!==finishingRecord||active?.id!==game.id)return;
+  controller?.dispose();controller=null;showFinished(game,true);
 }
 function settings() {
   if (embedded || params.get('test') !== '1') return;
   const details = el('details',undefined,'test-settings'); details.append(el('summary',t('preview')));
   for (const [key,values,current,onChange] of [
     ['theme',[['light',t('light')],['dark',t('dark')]],standaloneTheme,value=>{standaloneTheme=value;applyTheme({mode:value});}],
-    ['language',[['en','English'],['hi','हिन्दी'],['mr','मराठी']],host.language,value=>{host.language=value;t=translator(value);route();}]
+    ['language',languages.map(code=>[code,new Intl.DisplayNames([code],{type:'language'}).of(code)]),host.language,value=>{host.language=value;t=translator(value);applyLocale();if(controller){controller.updateLocale(t);refreshLabels?.();}else if(active)showFinished(active);else landing();}]
   ]) {
     const label = el('label',t(key)); const select = el('select');
     for (const [value,title] of values) {const option=el('option',title);option.value=value;select.append(option);}
@@ -131,64 +143,69 @@ function landing() {
   if(storageFailed)root.append(el('p',t('storage_error'),'notice'));
   settings();
 }
-async function route() {
-  const ticket=++generation; leave();
-  if(!host) {heading(t('games'),t('waiting'));return;}
+async function route({restore=false}={}) {
+  const ticket=++generation;leave();
+  if(!host){heading(t('games'),t('waiting'));return;}
   if(!checkDay())return;
-  document.documentElement.lang=host.language.replace('_','-');
-  catalog=validateCatalog(rawCatalog || [],host);
-  const path=location.hash.slice(1);
+  applyLocale();catalog=validateCatalog(rawCatalog||[],host);
+  if(!snapshots)openStore();
+  let path=location.hash.slice(1);
+  if(restore&&!path){path=snapshots.route()||'';if(path&&catalog.some(g=>g.path===path))history.replaceState(null,'','#'+path);}
   const game=catalog.find(g=>g.path===path);
-  if(!game){landing();return;}
-  if(completed(game.id)) {resultScreen(t(game.nameKey),t('completed'));return;}
+  snapshots.saveRoute(game?.path||'');
+  if(!game){landing();showStorageNotice();return;}
+  const saved=snapshots.read(game.id);
+  record=validSnapshot(saved,game.id,host.date)?saved:null;
+  if(saved&&!record)storageFailure();
+  if(completions[game.id]===host.date){active=game;record=null;showFinished(game);return;}
+  if(record?.status==='finished'){active=game;pending[game.id]=host.date;showFinished(game);return;}
   root.className='screen-game';root.dataset.game=game.id;root.replaceChildren();
-  const toolbar=el('header',undefined,'game-toolbar');
-  const back=button('←',home,'back');back.setAttribute('aria-label','← '+t('back'));
+  const toolbar=el('header',undefined,'game-toolbar'),back=button('←',home,'back');
   const reset=button('',()=>{},'reset-game');reset.disabled=true;
-  const resetIcon=el('span','↻','reset-icon');resetIcon.setAttribute('aria-hidden','true');
-  reset.append(resetIcon,el('span',t('reset_game')));
-  toolbar.append(back,el('h1',t(game.nameKey)),reset);
+  const title=el('h1'),resetIcon=el('span','↻','reset-icon'),resetLabel=el('span');resetIcon.setAttribute('aria-hidden','true');reset.append(resetIcon,resetLabel);
+  toolbar.append(back,title,reset);
   const content=el('section',undefined,'game-content'),help=el('details',undefined,'how-to-play');
-  const summary=el('summary',t('how_to_play')),instructions=el('div',undefined,'how-to-body');
-  const guide=gameInstructions(game.id,host.language);
-  if(guide){const steps=el('ol');for(const step of guide[0])steps.append(el('li',step));instructions.append(steps,el('p',guide[1],'game-caveat'));}
-  instructions.append(el('p',t('daily_caveat'),'daily-caveat'));
-  help.append(summary,instructions);root.append(toolbar,content,help);
+  const summary=el('summary'),instructions=el('div',undefined,'how-to-body'),policy=el('p',undefined,'notice');
+  help.append(summary,instructions);root.append(toolbar,content,policy,help);
+  refreshLabels=()=>{
+    title.textContent=t(game.nameKey);back.setAttribute('aria-label','← '+t('back'));resetLabel.textContent=t('reset_game');summary.textContent=t('how_to_play');
+    instructions.replaceChildren();const guide=gameInstructions(game.id,host.language);
+    if(guide){const steps=el('ol');for(const step of guide[0])steps.append(el('li',step));instructions.append(steps,el('p',guide[1],'game-caveat'));}
+    instructions.append(el('p',t('daily_caveat'),'daily-caveat'));
+    policy.hidden=!game.id.startsWith('word_')||record?.contentLanguage===localeOf(host.language).language;
+    policy.textContent=t('pinned_content');
+    if(content.firstElementChild?.tagName==='P')content.firstElementChild.remove();
+    const notice=root.querySelector('.storage-notice');if(notice)notice.textContent=t('storage_error');
+  };
+  refreshLabels();
   try {
-    // The validated catalog route is a local module within the games directory.
     const module=await import(`./games/${game.path}.mjs`);
     if(ticket!==generation)return;
     active=game;
-    emit('onGameStarted',game.id);
-    function mountPuzzle(){
-      cleanup?.();cleanup=null;content.replaceChildren();
-      cleanup=module.mount(content,{date:host.date,language:host.language,t,
-        progress:result=>{if(checkDay())window.dispatchEvent(new CustomEvent('games:progress',{detail:{gameId:game.id,date:host.date,...result}}));},
-        complete:result=>complete(game,result),canPlay:checkDay});
-      // Modules keep a plain instruction fallback; the shared panel replaces it.
-      if(content.firstElementChild?.tagName==='P')content.firstElementChild.remove();
-      const fallbackNotice=content.querySelector(':scope > .notice');
-      if(fallbackNotice){if(!instructions.querySelector('.notice'))instructions.append(fallbackNotice);else fallbackNotice.remove();}
-    }
-    mountPuzzle();reset.disabled=false;
-    reset.addEventListener('click',()=>{
-      if(ticket!==generation||!checkDay()||completed(game.id))return;
-      mountPuzzle();help.open=false;
-      window.dispatchEvent(new CustomEvent('games:progress',{detail:{gameId:game.id,date:host.date,reset:true,done:0}}));
-      reset.focus({preventScroll:true});
-    });
+    record ||= {...newPuzzle(game.id,host.date,host.language),started:false,status:'playing',completionDispatched:false,result:null};
+    const isCurrent=()=>ticket===generation&&active?.id===game.id&&checkDay();
+    controller=module.mount(content,{date:host.date,language:record.contentLanguage,t,puzzle:record.puzzle,snapshot:record.state?record:null,
+      changed:value=>{if(isCurrent()&&controller){Object.assign(record,value);snapshots.write(game.id,record);showStorageNotice();}},
+      progress:result=>{if(isCurrent())window.dispatchEvent(new CustomEvent('games:progress',{detail:{gameId:game.id,date:host.date,...result}}));},
+      complete:result=>{if(isCurrent())complete(game,result);},canPlay:()=>isCurrent()&&!completed(game.id)});
+    help.open=Boolean(record.helpOpen);help.addEventListener('toggle',()=>{if(isCurrent()&&record){record.helpOpen=help.open;save();}});
+    const started=record.started;record.started=true;save();if(!started)emit('onGameStarted',game.id);
+    refreshLabels();reset.disabled=false;
+    reset.addEventListener('click',()=>{if(!isCurrent()||completed(game.id))return;controller.reset();help.open=false;refreshLabels();window.dispatchEvent(new CustomEvent('games:progress',{detail:{gameId:game.id,date:host.date,reset:true,done:0}}));reset.focus({preventScroll:true});});
     focusHeading();
-  } catch(error) {
+  } catch {
     if(ticket!==generation)return;
-    leave();emit('onError',game.id,{code:'GAME_LOAD_FAILED'});showError('load_error',route);
+    leave();emit('onError',game.id,{code:'GAME_LOAD_FAILED'});showError('load_error',()=>route());
   }
 }
 async function boot() {
+  const ticket=++bootGeneration;
   try {
     const response=await fetch(new URL('./games.json',import.meta.url),{cache:'no-cache'});
     if(!response.ok)throw new Error('CATALOG_LOAD_FAILED');
-    const raw=await response.json();validateCatalog(raw,host || {});rawCatalog=raw;await route();
-  } catch {emit('onError',undefined,{code:'CATALOG_LOAD_FAILED'});showError();}
+    const raw=await response.json();if(ticket!==bootGeneration)return;
+    validateCatalog(raw,host||{});rawCatalog=raw;await route({restore:true});
+  } catch {if(ticket!==bootGeneration)return;emit('onError',undefined,{code:'CATALOG_LOAD_FAILED'});showError();}
 }
 window.SmartUpGames=Object.freeze({
   version:VERSION,
@@ -196,19 +213,25 @@ window.SmartUpGames=Object.freeze({
     if(!embedded)return false;
     try {
       const next=validateHost(typeof input==='string' ? JSON.parse(input) : input);
-      // Exit the old session while its authoritative date still applies.
-      generation++;leave();
-      if(next.date!==host?.date || next.appId!==host?.appId)pending={};
-      host=next;completions=next.completions;t=translator(next.language);staleDay=false;
-      applyTheme(next.theme,true);if(rawCatalog)route();return true;
+      const same=host&&next.date===host.date&&next.appId===host.appId;
+      if(!same){generation++;leave();pending={};snapshots=null;}
+      const confirmed=same?{...next.completions,...Object.fromEntries(Object.entries(completions).filter(([,date])=>date===next.date))}:next.completions;
+      host=next;completions=confirmed;t=translator(next.language);staleDay=false;applyLocale();
+      applyTheme(next.theme,true);
+      if(same&&active){
+        if(completions[active.id]===host.date){save();controller?.dispose();controller=null;showFinished(active);}
+        else if(controller){controller.updateLocale(t);refreshLabels?.();}
+        else showFinished(active);
+      } else if(rawCatalog){if(same&&root.classList.contains('screen-game')){refreshLabels?.();}else route({restore:!same});}
+      return true;
     } catch {generation++;leave();host=null;heading(t('games'),t('host_error'));emit('onError',undefined,{code:'INVALID_HOST'});return false;}
   },
   back(){home();}
 });
-window.addEventListener('hashchange',route);
-window.addEventListener('pagehide',leave);
-window.addEventListener('pageshow',event=>{if(event.persisted)route();});
+window.addEventListener('hashchange',()=>route());
+window.addEventListener('pagehide',save);
+window.addEventListener('pageshow',event=>{if(event.persisted){checkDay();}});
 window.addEventListener('storage',()=>{if(!embedded){completions=persistence.read();if(!active || completed(active.id))route();}});
-document.addEventListener('visibilitychange',()=>{if(!document.hidden)checkDay();});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)save();else checkDay();});
 if(!embedded)setInterval(checkDay,30000);
 emit('onReady');boot();

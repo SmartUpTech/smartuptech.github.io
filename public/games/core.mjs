@@ -1,7 +1,8 @@
-export const VERSION = '0.0.8';
+import {localeOf} from './locale.mjs';
+export const VERSION = '0.0.9';
 export const catalogTones = ['words','letters','numbers','patterns','paths','focus'];
 export const safeId = value => typeof value === 'string' && /^[a-z][a-z0-9_]{0,47}$/.test(value);
-export const languageOf = value => String(value || 'en').toLowerCase().split(/[-_]/)[0];
+export const languageOf = value => localeOf(value).language;
 export function validDate(value) {
   return typeof value === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value) &&
     Number.isFinite(Date.parse(value)) && new Date(value).toISOString().slice(0, 10) === value;
@@ -52,12 +53,11 @@ export function validateCatalog(raw, host = {}) {
 export function validateHost(input) {
   if (!input || typeof input !== 'object' || !Number.isInteger(input.bridgeVersion) || input.bridgeVersion < 1 ||
     typeof input.appId !== 'string' || !/^[\w.-]{1,100}$/.test(input.appId) ||
-    !validDate(input.date) || typeof input.timezone !== 'string' ||
-    typeof input.language !== 'string' || !/^[a-zA-Z]{2,3}([-_][a-zA-Z0-9]{2,8})*$/.test(input.language)) throw new Error('INVALID_HOST');
+    !validDate(input.date) || typeof input.timezone !== 'string') throw new Error('INVALID_HOST');
   try { new Intl.DateTimeFormat('en', {timeZone:input.timezone}); } catch { throw new Error('INVALID_TIMEZONE'); }
   const completions = Object.create(null);
   for (const [id,date] of Object.entries(input.completions || {})) if (safeId(id) && validDate(date)) completions[id] = date;
-  return {...input, completions};
+  return {...input, language:localeOf(input.language).locale, completions};
 }
 export function completionStore(storage) {
   const key = 'smartup.games.completions.v1';

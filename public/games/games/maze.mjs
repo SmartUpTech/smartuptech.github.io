@@ -1,9 +1,12 @@
 import {el,button,setFeedback} from '../ui.mjs';
-import {mazeChallenge,mazeMove,directions} from './puzzles.mjs';
+import {mazeMove,directions} from './puzzles.mjs';
 const NS='http://www.w3.org/2000/svg';
 function svgNode(tag,attributes){const node=document.createElementNS(NS,tag);for(const [key,value]of Object.entries(attributes))node.setAttribute(key,String(value));return node;}
-export function mount(root,{date,t,progress,complete,canPlay}) {
-  const maze=mazeChallenge(date);let at=maze.start,moves=0,disposed=false;
+import {session} from './session.mjs';
+export function mount(root,options) {
+  const maze=options.puzzle;let at=options.snapshot?.state.at??maze.start,moves=options.snapshot?.state.moves||0;
+  return session(root,options,()=>({at,moves}),()=>{
+    const {t,progress,complete,canPlay}=options;let disposed=false;
   const events=new AbortController();root.append(el('p',t('maze_help')));
   const status=el('p','','progress'),feedback=el('p','','feedback'),board=el('div',undefined,'maze-board'),controls=el('div',undefined,'maze-controls');
   board.tabIndex=0;board.setAttribute('role','group');board.setAttribute('aria-label',t('maze_help'));feedback.setAttribute('role','status');
@@ -35,4 +38,6 @@ export function mount(root,{date,t,progress,complete,canPlay}) {
     if(d>=0)move(d);
   },{signal:events.signal});render();
   return ()=>{disposed=true;events.abort();};
+
+  },()=>{at=maze.start;moves=0;});
 }

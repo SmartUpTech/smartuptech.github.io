@@ -1,7 +1,10 @@
 import {el,button,setFeedback} from '../ui.mjs';
-import {sudokuChallenge,sudokuCandidates,sudokuComplete} from './puzzles.mjs';
-export function mount(root,{date,t,progress,complete,canPlay}) {
-  const {puzzle}=sudokuChallenge(date),board=[...puzzle];let selected=board.indexOf(0),disposed=false;
+import {sudokuCandidates,sudokuComplete} from './puzzles.mjs';
+import {session} from './session.mjs';
+export function mount(root,options) {
+  const {puzzle}=options.puzzle;let board=options.snapshot?.state.board||[...puzzle],selected=options.snapshot?.state.selected??board.indexOf(0);
+  return session(root,options,()=>({board,selected}),()=>{
+    const {t,progress,complete,canPlay}=options;let disposed=false;
   root.append(el('p',t('sudoku_help')));
   const count=el('p','','progress'),grid=el('div',undefined,'sudoku-board'),pad=el('div',undefined,'number-pad'),feedback=el('p','','feedback');
   grid.setAttribute('role','group');grid.setAttribute('aria-label',t('mini_sudoku'));feedback.setAttribute('role','status');
@@ -27,4 +30,6 @@ export function mount(root,{date,t,progress,complete,canPlay}) {
   for(const n of [1,2,3,4])pad.append(button(String(n),()=>enter(n),'digit-key'));
   const clear=button(t('clear_cell'),()=>enter(0),'erase-key');pad.append(clear);render();
   return ()=>{disposed=true;};
+
+  },()=>{board=[...puzzle];selected=board.indexOf(0);});
 }

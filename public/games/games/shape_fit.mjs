@@ -1,7 +1,13 @@
 import {el,button,setFeedback} from '../ui.mjs';
-import {shapeChallenge,shapeCells,shapePlacement,shapeReference,shapeAnchor} from './new-puzzles.mjs';
-export function mount(root,{date,t,progress,complete,canPlay}) {
-  const pieces=shapeChallenge(date),placements=pieces.map(()=>null);let selected=0,disposed=false,drag=null,suppressClick=false;
+import {shapeCells,shapePlacement,shapeReference,shapeAnchor} from './new-puzzles.mjs';
+import {session} from './session.mjs';
+export function mount(root,options) {
+  const pieces=options.puzzle;let placements=options.snapshot?.state.placements||pieces.map(()=>null),selected=options.snapshot?options.snapshot.state.selected:0;
+  return session(root,options,()=>({placements,selected}),()=>{
+    const {t,progress,complete,canPlay}=options;let disposed=false;
+let drag=null,suppressClick=false;
+
+
   root.append(el('p',t('shape_help')));
   const board=el('div',undefined,'shape-board'),tray=el('div',undefined,'shape-tray'),feedback=el('p',t('shape_selected',{number:1}),'feedback');feedback.setAttribute('role','status');
   const cells=Array.from({length:16},(_,i)=>{const b=button('',()=>{if(disposed||!canPlay())return;place(i);},'shape-cell');b.dataset.cell=i;b.setAttribute('aria-label',t('maze_position',{row:Math.floor(i/4)+1,col:i%4+1}));board.append(b);return b;});
@@ -25,4 +31,6 @@ export function mount(root,{date,t,progress,complete,canPlay}) {
   root.append(board,tray,feedback);
   function render(){cells.forEach(c=>{c.textContent='';c.classList.remove('filled');});placements.forEach((at,id)=>{if(at!==null)for(const cell of shapeCells(pieces[id],at)){cells[cell].textContent=String(id+1);cells[cell].classList.add('filled');}});buttons.forEach((b,id)=>b.setAttribute('aria-pressed',String(id===selected)));setFeedback(feedback,selected===null?'':t('shape_selected',{number:selected+1}));}
   render();return()=>{disposed=true;drag=null;};
+
+  },()=>{placements=pieces.map(()=>null);selected=0;});
 }

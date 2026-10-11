@@ -1,10 +1,11 @@
 import {el,button,setFeedback} from '../ui.mjs';
-import {matchChallenge,isMatch} from './words.mjs';
-import {languageOf} from '../core.mjs';
-export function mount(root,{date,language,t,progress,complete,canPlay}) {
-  const challenge=matchChallenge(date,language), matched=new Set();let left=null,right=null,disposed=false;
+import {isMatch} from './words.mjs';
+import {session} from './session.mjs';
+export function mount(root,options) {
+  const challenge=options.puzzle; let matched=new Set(options.snapshot?.state.matched||[]),left=options.snapshot?.state.left??null,right=options.snapshot?.state.right??null;
+  return session(root,options,()=>({matched:[...matched],left,right}),()=>{
+    const {t,progress,complete,canPlay}=options;let disposed=false;
   root.append(el('p',t('match_help')));
-  if(challenge.language!==languageOf(language))root.append(el('p',t('english_content'),'notice'));
   const count=el('p','','progress'),board=el('div',undefined,'pairs'),feedback=el('p','','feedback');
   feedback.setAttribute('role','status');root.append(count,board,feedback);
   function render() {
@@ -14,6 +15,7 @@ export function mount(root,{date,language,t,progress,complete,canPlay}) {
       for(const pair of challenge[side]) {
         const text=side==='left' ? pair.word : pair.meaning;
         const b=button((matched.has(pair.id)?'✓ ':'')+text,()=>select(side,pair.id));
+        b.lang=challenge.language;
         b.disabled=matched.has(pair.id);b.dataset.pair=String(pair.id);b.dataset.side=side;
         if(b.disabled)b.classList.add('matched');
         b.setAttribute('aria-pressed',String((side==='left'?left:right)===pair.id));col.append(b);
@@ -35,4 +37,6 @@ export function mount(root,{date,language,t,progress,complete,canPlay}) {
     board.querySelector(`[data-side="${next}"]:not(:disabled)`)?.focus({preventScroll:true});
   }
   render();return ()=>{disposed=true;};
+
+  },()=>{matched=new Set();left=null;right=null;});
 }
