@@ -1,4 +1,8 @@
-# Web Games release 0.0.8
+# Web Games
+
+See [localization and durable progress](GAMES-LOCALIZATION.md) for the current
+ten-language contract, snapshot schema, compatibility evidence, release gates,
+and the separate acknowledgement/date-refresh proposals.
 
 Phases 1, 2, 4 and 5 add a small static application at `/games/` to the existing Astro
 site. Astro copies `public/games` into its output; no framework, third-party
@@ -13,8 +17,8 @@ one small Games link above its existing footer.
 - Word Scramble: solve three clued words by selecting shuffled letter tiles.
 - Daily completion badges, themed result screen, reduced-motion support,
   loading failures with retry, and standalone local-storage persistence.
-- English, Hindi and Marathi UI/content. All other requested language codes
-  fall back to English; missing individual UI strings also fall back to English.
+- Ten-language UI/content: en, hi, fr, de, it, nl, pt, el, ro and es. Other language
+  codes fall back to English. Native-language review remains a release gate.
 - Mini Sudoku: a 4 × 4 board with 2 × 2 boxes, fixed clues, uniqueness checking,
   conflict feedback and editable/erasable answers using an on-screen keypad.
 - Sequence: three multiple-choice patterns with explicit rule-family hints.
@@ -50,7 +54,7 @@ rounds, and preserves other completion badges. It does not emit another start
 or completion event or unlock a completed game. Answer/cell clearing stays local
 to its keypad with an explicit label, distinct from resetting the entire game.
 A collapsed How to play box below the puzzle contains three numbered steps,
-game-specific caveats and the daily/reset rules in English, Hindi and Marathi.
+game-specific guidance and the daily/reset rules in all ten supported languages.
 Expanding it reveals instructions inline; long instructions scroll within the
 panel and short viewports may scroll while expanded. Collapse it to restore
 the full no-scroll playing surface. CSS sizes boards against the actual viewport height
@@ -96,13 +100,12 @@ Optional `tone` selects a validated decorative category token. Standalone themes
 provide six subdued palettes. Embedded hosts can supply category Accent/Surface
 tokens; otherwise these derive from the host accent and surface.
 
-`words-1` datasets have six distinct daily sets per language per game. A
+`words-2` datasets have six distinct daily sets per language per game. A
 date-indexed rotation selects a set without adjacent-day repeats; a seed derived
 from game ID, date, content version and language shuffles its order. Thus sets
 cycle after six days, while tile/order arrangements vary. Expand the datasets
 in a new content version when adding longer-term variety. Unicode grapheme
-segmentation keeps vowel signs and conjuncts together. Engines without
-`Intl.Segmenter` use English puzzles. Hints define the intended scramble answer.
+segmentation keeps vowel signs and conjuncts together. Stored explicit tile boundaries support engines without `Intl.Segmenter`. Hints define the intended scramble answer.
 
 `puzzles-1` generates the four numeric/spatial games from game ID, date and
 generator version. Sudoku removes clues only while retaining one solution;
@@ -118,10 +121,10 @@ directly in this directory; game implementations and icons have their own
 subdirectories. The catalog is fetched with revalidation. Dataset/generator
 versions remain independent of release branches to control daily puzzle content.
 
-## Future native bridge contract
+## Embedded bridge v1 contract
 
-Phase 3 still needs the Android module, secure WebView configuration,
-rewarded-ad gate, native persistence and testing in all five apps.
+Android integrations are maintained separately. This source repository defines
+the existing web side of the contract; actual host build validation is required.
 
 Load `/games/?embedded=1`. Embedded mode waits for native configuration and
 does not read browser storage or browser dates for completion entitlement.
@@ -168,13 +171,14 @@ session and native persistence must also be idempotent across reloads.
 
 The host must persist completion on callback and include the current mapping
 in every configuration after reload. Web memory provides an immediate badge
-until native state is received; browser persistence is only for standalone
-testing. Exiting or opening a game never marks it complete. Partial answers
-reset on reload/re-entry. Clearing browser storage resets standalone history.
+until native state is received; completion persistence is used only in standalone mode. Embedded unfinished
+puzzles and results use a separate scoped snapshot store. Exiting, opening or
+rehydrating a game never marks it complete. Clearing browser storage loses web
+snapshots and standalone history, but cannot clear native completions.
 
 Native date changes should send a fresh configuration. Configuration exits an
 active game under its previous date before switching to the new day; theme or
-language reconfiguration also restarts partial play. Standalone midnight shows
+language reconfiguration retains the active puzzle and moves while updating UI labels. Standalone midnight shows
 an explicit refresh prompt and rejects old-day completion. Native lifecycle,
 clock policy and runtime updates belong to Phase 3.
 
@@ -193,7 +197,7 @@ route from S to E wins; unused pipes need not connect. Code Breaker uses four
 distinct digits from 1–6, unlimited guesses, exact/misplaced clues and the last
 three guesses in a fixed-height history. No game needs a native keyboard.
 All three reuse daily completion, host events, semantic themes and localized
-English/Hindi/Marathi UI (other languages use the existing English fallback).
+ten-language UI (other languages use English fallback).
 Generator tests cover 800 dates; browser checks play all nine games to completion,
 including dragging, and check the new surfaces at 320×440 and larger WebViews.
 

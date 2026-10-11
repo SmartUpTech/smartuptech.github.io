@@ -1,7 +1,10 @@
 import {el,button,setFeedback} from '../ui.mjs';
-import {codeChallenge,codeClue} from './new-puzzles.mjs';
-export function mount(root,{date,t,progress,complete,canPlay}) {
-  const secret=codeChallenge(date);let guess=[],attempts=0,disposed=false;
+import {codeClue} from './new-puzzles.mjs';
+import {session} from './session.mjs';
+export function mount(root,options) {
+  const secret=options.puzzle;let guess=options.snapshot?.state.guess||[],attempts=options.snapshot?.state.attempts||0,historyRows=options.snapshot?.state.history||[];
+  return session(root,options,()=>({guess,attempts,history:historyRows}),()=>{
+    const {t,progress,complete,canPlay}=options;let disposed=false;
   root.append(el('p',t('code_help')));
   const history=el('ol',undefined,'code-history'),answer=el('output','','code-answer'),feedback=el('p',t('code_legend'),'feedback');
   answer.setAttribute('aria-label',t('answer'));answer.setAttribute('aria-live','polite');feedback.setAttribute('role','status');
@@ -12,10 +15,13 @@ export function mount(root,{date,t,progress,complete,canPlay}) {
   const check=button(t('check_code'),()=>{
     if(disposed||!canPlay())return;const clue=codeClue(secret,guess);if(!clue)return;
     attempts++;if(clue.exact===4){complete({attempts});return;}
-    const row=el('li');row.append(el('span',`${attempts}. ${guess.join(' ')}`),el('span',t('code_feedback',clue)));history.append(row);
-    if(history.children.length>3)history.firstElementChild.remove();
+    historyRows.push({attempt:attempts,guess:[...guess]});historyRows=historyRows.slice(-3);renderHistory();
     setFeedback(feedback,t('code_feedback',clue));progress({attempts,...clue});guess=[];render();
   },'primary');actions.append(erase,check);root.append(history,answer,pad,actions,feedback);
+  function renderHistory(){history.replaceChildren();for(const entry of historyRows){const row=el('li');row.append(el('span',`${entry.attempt}. ${entry.guess.join(' ')}`),el('span',t('code_feedback',codeClue(secret,entry.guess))));history.append(row);}}
+  renderHistory();
   function render(){answer.textContent=Array.from({length:4},(_,i)=>guess[i]??'·').join(' ');keys.forEach((k,i)=>{k.disabled=guess.includes(i+1)||guess.length===4;});check.disabled=guess.length!==4;erase.disabled=!guess.length;}
   render();return()=>{disposed=true;};
+
+  },()=>{guess=[];attempts=0;historyRows=[];});
 }
