@@ -1,7 +1,10 @@
 import {el,button,setFeedback} from '../ui.mjs';
-import {numberGridChallenge,numberGridCorrect} from './puzzles.mjs';
-export function mount(root,{date,t,progress,complete,canPlay}) {
-  const values=numberGridChallenge(date);let next=1,disposed=false;
+import {numberGridCorrect} from './puzzles.mjs';
+import {session} from './session.mjs';
+export function mount(root,options) {
+  const values=options.puzzle;let next=options.snapshot?.state.next||1;
+  return session(root,options,()=>({next}),()=>{
+    const {t,progress,complete,canPlay}=options;let disposed=false;
   root.append(el('p',t('grid_help')));
   const prompt=el('p','','progress game-hint'),grid=el('div',undefined,'number-grid'),feedback=el('p','','feedback');
   grid.setAttribute('role','group');grid.setAttribute('aria-label',t('number_grid'));feedback.setAttribute('role','status');root.append(prompt,grid,feedback);
@@ -12,6 +15,8 @@ export function mount(root,{date,t,progress,complete,canPlay}) {
     cell.disabled=true;cell.classList.add('found');cell.textContent='✓';cell.setAttribute('aria-label',`${n}, ${t('found')}`);
     next++;setFeedback(feedback,'');progress({done:next-1,total:16});
     if(next===17){complete({found:16,total:16});return;}render();grid.querySelector('button:not(:disabled)')?.focus({preventScroll:true});
-  });cell.dataset.number=String(n);grid.append(cell);}
+  });cell.dataset.number=String(n);if(n<next){cell.disabled=true;cell.classList.add('found');cell.textContent='✓';cell.setAttribute('aria-label',`${n}, ${t('found')}`);}grid.append(cell);}
   render();return ()=>{disposed=true;};
+
+  },()=>{next=1;});
 }

@@ -50,7 +50,8 @@ test('translations and word datasets fall back without exposing raw keys',()=>{
 test('host validation accepts generic future game IDs and filters invalid records',()=>{
   const config={bridgeVersion:1,appId:'net.example.app',language:'hi-IN',date:'2026-10-05',timezone:'Asia/Kolkata',completions:{future_game:'2026-10-05','../bad':'2026-10-05',wrong:'bad'}};
   assert.deepEqual({...validateHost(config).completions},{future_game:'2026-10-05'});
-  for(const change of [{date:'2026-02-30'},{timezone:'invalid'},{bridgeVersion:0},{language:'<script>'}])assert.throws(()=>validateHost({...config,...change}));
+  for(const change of [{date:'2026-02-30'},{timezone:'invalid'},{bridgeVersion:0}])assert.throws(()=>validateHost({...config,...change}));
+  assert.equal(validateHost({...config,language:'<script>'}).language,'en');
 });
 test('completion storage survives reload, rejects corrupt records and handles blocked storage',()=>{
   let saved='invalid';const store=completionStore({getItem:()=>saved,setItem:(_,value)=>{saved=value;}});

@@ -1,0 +1,6 @@
+{
+  "provenance": "Synthetic deterministic fixtures based on the documented bridge-v1 payload. Not device recordings or evidence of a particular Android build.",
+  "oldSiteRevision": "0cf1dbb41430f1fa88aa60ae69aa9392925fae94",
+  "oldHost": {"bridgeVersion":1,"appId":"net.test.host","appVersion":"fixture-old","language":"en","date":"2026-10-11","timezone":"Asia/Kolkata","theme":{"mode":"light"},"completions":{}},
+  "newHost": {"bridgeVersion":1,"appId":"net.test.host","appVersion":"fixture-new","language":"fr-CA","date":"2026-10-11","timezone":"America/Toronto","theme":{"mode":"dark"},"completions":{}}
+}
