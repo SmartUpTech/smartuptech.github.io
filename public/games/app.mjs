@@ -17,7 +17,7 @@ let t = translator(host?.language), catalog = [], rawCatalog, active, cleanup, g
 let completions = embedded ? {} : persistence.read(), pending = {}, storageFailed = false, staleDay = false;
 let snapshots,record,controller,refreshLabels,bootGeneration=0;
 function storageFailure(){storageFailed=true;showStorageNotice();}
-function showStorageNotice(){if(storageFailed&&!root.querySelector('.storage-notice'))root.append(el('p',t('storage_error'),'notice storage-notice'));}
+function showStorageNotice(){if(storageFailed&&root.classList.contains('screen-game')&&!root.querySelector('.storage-notice'))root.append(el('p',t('storage_error'),'notice storage-notice'));}
 function openStore(){snapshots=snapshotStore(storage,embedded?'embedded':'standalone',host.appId,host.date,storageFailure);snapshots.prune();}
 function save(){if(record&&controller){Object.assign(record,controller.snapshot());snapshots.write(record.gameId,record);showStorageNotice();}}
 function applyLocale(){document.documentElement.lang=localeOf(host?.language).locale;document.title=t('games')+' · SmartUp Tech';}
@@ -73,9 +73,7 @@ function checkDay() {
 }
 function showFinished(game,justCompleted=false) {
   const confirmed=completions[game.id]===host.date;
-  const panel=resultScreen(confirmed&&!justCompleted?t(game.nameKey):t('well_done'),confirmed&&!justCompleted?t('completed'):t('result'));
-  if(embedded&&!confirmed)panel.append(el('p',t('unconfirmed'),'notice'));
-  showStorageNotice();
+  resultScreen(confirmed&&!justCompleted?t(game.nameKey):t('well_done'),confirmed&&!justCompleted?t('completed'):t('result'));
 }
 function complete(game, result) {
   if (!checkDay() || !active || active.id !== game.id || completed(game.id)) return;
@@ -140,7 +138,6 @@ function landing() {
   root.append(grid);
   if(!catalog.length) root.append(el('p',t('empty')));
   if(catalog.length>0 && doneCount===catalog.length)root.append(el('p',t('play_again_tomorrow'),'footer'));
-  if(storageFailed)root.append(el('p',t('storage_error'),'notice'));
   settings();
 }
 async function route({restore=false}={}) {
@@ -153,7 +150,7 @@ async function route({restore=false}={}) {
   if(restore&&!path){path=snapshots.route()||'';if(path&&catalog.some(g=>g.path===path))history.replaceState(null,'','#'+path);}
   const game=catalog.find(g=>g.path===path);
   snapshots.saveRoute(game?.path||'');
-  if(!game){landing();showStorageNotice();return;}
+  if(!game){landing();return;}
   const saved=snapshots.read(game.id);
   record=validSnapshot(saved,game.id,host.date)?saved:null;
   if(saved&&!record)storageFailure();

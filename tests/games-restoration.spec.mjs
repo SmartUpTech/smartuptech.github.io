@@ -81,7 +81,7 @@ try {
   check(game.id+': move / six locale changes / reload / new document / lifecycle / reset');
  }
  let page=await fresh();await open(page,'number_grid');for(let n=1;n<=16;n++)await page.locator(`[data-number="${n}"]`).click();await page.waitForSelector('.screen-result');assert.deepEqual(await counts(page),{starts:1,completes:1});
- await page.reload();await configure(page);await page.waitForSelector('.screen-result');assert.deepEqual(await counts(page),{starts:0,completes:0});assert.ok((await page.locator('.screen-result').textContent()).includes(translator('en')('unconfirmed')));
+ await page.reload();await configure(page);await page.waitForSelector('.screen-result');assert.deepEqual(await counts(page),{starts:0,completes:0});assert.equal(await page.locator('.screen-result .notice').count(),0);
  for(const language of languages){await configure(page,{...fixtures.oldHost,language,completions:{number_grid:'2026-10-11'}});await page.waitForSelector('.screen-result');assert.equal(await page.locator('.reset-game').count(),0);assert.deepEqual(await counts(page),{starts:0,completes:0});}
  // An incomplete completion map during same-day language refresh cannot remove a confirmed game.
  await configure(page,{...fixtures.oldHost,language:'fr'});assert.ok((await page.locator('.screen-result').textContent()).includes(translator('fr')('completed')));
@@ -99,7 +99,9 @@ try {
  }
  check('corrupt, oversized, incompatible, wrong-identity and invalid-value snapshots');
  page=await fresh();await context.addInitScript(()=>{Storage.prototype.setItem=function(){throw new DOMException('Quota','QuotaExceededError');};});await open(page,'number_grid');await page.locator('[data-number="1"]').click();await configure(page,{...fixtures.oldHost,language:'hi'});assert.equal(await page.locator('[data-number="1"]').isDisabled(),true);assert.equal(await page.locator('.storage-notice').count(),1);assert.equal((await counts(page)).completes,0);
- check('quota failure keeps current progress usable');
+ await page.evaluate(()=>window.SmartUpGames.back());await page.waitForSelector('.screen-landing');assert.equal(await page.locator('.screen-landing .notice').count(),0);
+ await configure(page,{...fixtures.oldHost,language:'en'});assert.equal(await page.locator('.screen-landing .notice').count(),0);
+ check('quota failure keeps current progress usable without home screen storage notices');
 
  // Chromium renderer crash + browser-profile relaunch, not an Android claim.
  await context.close();const profile=await mkdtemp(resolve(output,'profile-'));
