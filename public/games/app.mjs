@@ -18,7 +18,7 @@ let completions = embedded ? {} : persistence.read(), pending = {}, storageFaile
 let snapshots,record,controller,refreshLabels,bootGeneration=0;
 function storageFailure(){storageFailed=true;showStorageNotice();}
 function showStorageNotice(){if(storageFailed&&root.classList.contains('screen-game')&&!root.querySelector('.storage-notice'))root.append(el('p',t('storage_error'),'notice storage-notice'));}
-function openStore(){snapshots=snapshotStore(storage,embedded?'embedded':'standalone',host.appId,host.date,storageFailure);snapshots.prune();}
+function openStore(){snapshots=snapshotStore(storage,embedded?'embedded':'standalone',host.appId,host.date,storageFailure,host.bonusRound||0);snapshots.prune();}
 function save(){if(record&&controller){Object.assign(record,controller.snapshot());snapshots.write(record.gameId,record);showStorageNotice();}}
 function applyLocale(){document.documentElement.lang=localeOf(host?.language).locale;document.title=t('games')+' · SmartUp Tech';}
 let standaloneTheme = params.get('theme') === 'dark' ? 'dark' : 'light';
@@ -33,7 +33,7 @@ export function button(text, action, className) {
 }
 function emit(type, gameId, result) {
   if (gameId !== undefined && !safeId(gameId)) return;
-  const event = {type, bridgeVersion:1, ...(gameId ? {gameId} : {}), date:host?.date,
+  const event = {type, bridgeVersion:1, ...(gameId ? {gameId} : {}), date:host?.date, round:host?.bonusRound||0,
     ...(result ? (type === 'onError' ? {errorCode:result.code} : {result}) : {})};
   window.dispatchEvent(new CustomEvent('games:event',{detail:event}));
   if (embedded && window.AndroidGames?.postMessage) {
@@ -73,7 +73,20 @@ function checkDay() {
 }
 function showFinished(game,justCompleted=false) {
   const confirmed=completions[game.id]===host.date;
-  resultScreen(confirmed&&!justCompleted?t(game.nameKey):t('well_done'),confirmed&&!justCompleted?t('completed'):t('result'));
+  const allBonusDone=host.bonusRound===1&&catalog.every(g=>completed(g.id));
+  resultScreen(confirmed&&!justCompleted?t(game.nameKey):t('well_done'),allBonusDone&&host.bonus?.finished?host.bonus.finished:confirmed&&!justCompleted?t('completed'):t('result'));
+  rewardCard();
+}
+function rewardCard() {
+  const offer=host?.bonus;
+  if(!embedded||host.bonusRound!==0||!offer?.enabled||!offer.eligible||!catalog.length||!catalog.every(g=>completed(g.id)))return;
+  const card=el('section',undefined,'bonus-card');
+  card.setAttribute('aria-label',offer.title);
+  const text=el('div',undefined,'bonus-copy');text.append(el('h2',offer.title),el('p',offer.message));
+  const watch=button(offer.watch,()=>{
+    if(watch.disabled)return;watch.disabled=true;card.setAttribute('aria-busy','true');emit('onBonusRequested');
+  },'primary');
+  watch.disabled=offer.busy;card.setAttribute('aria-busy',String(offer.busy));card.append(text,watch);root.append(card);
 }
 function complete(game, result) {
   if (!checkDay() || !active || active.id !== game.id || completed(game.id)) return;
@@ -137,7 +150,9 @@ function landing() {
   }
   root.append(grid);
   if(!catalog.length) root.append(el('p',t('empty')));
-  if(catalog.length>0 && doneCount===catalog.length)root.append(el('p',t('play_again_tomorrow'),'footer'));
+  if(catalog.length>0 && doneCount===catalog.length&&!(host.bonusRound===0&&host.bonus?.enabled&&host.bonus.eligible))
+    root.append(el('p',host.bonusRound===1&&host.bonus?.finished?host.bonus.finished:t('play_again_tomorrow'),'footer'));
+  rewardCard();
   settings();
 }
 async function route({restore=false}={}) {
@@ -145,6 +160,7 @@ async function route({restore=false}={}) {
   if(!host){heading(t('games'),t('waiting'));return;}
   if(!checkDay())return;
   applyLocale();catalog=validateCatalog(rawCatalog||[],host);
+  if(embedded)emit('onCatalogReady',undefined,{gameIds:catalog.map(g=>g.id)});
   if(!snapshots)openStore();
   let path=location.hash.slice(1);
   if(restore&&!path){path=snapshots.route()||'';if(path&&catalog.some(g=>g.path===path))history.replaceState(null,'','#'+path);}
@@ -152,7 +168,7 @@ async function route({restore=false}={}) {
   snapshots.saveRoute(game?.path||'');
   if(!game){landing();return;}
   const saved=snapshots.read(game.id);
-  record=validSnapshot(saved,game.id,host.date)?saved:null;
+  record=validSnapshot(saved,game.id,host.date,host.bonusRound||0)?saved:null;
   if(saved&&!record)storageFailure();
   if(completions[game.id]===host.date){active=game;record=null;showFinished(game);return;}
   if(record?.status==='finished'){active=game;pending[game.id]=host.date;showFinished(game);return;}
@@ -179,7 +195,7 @@ async function route({restore=false}={}) {
     const module=await import(`./games/${game.path}.mjs`);
     if(ticket!==generation)return;
     active=game;
-    record ||= {...newPuzzle(game.id,host.date,host.language),started:false,status:'playing',completionDispatched:false,result:null};
+    record ||= {...newPuzzle(game.id,host.date,host.language,host.bonusRound||0),started:false,status:'playing',completionDispatched:false,result:null};
     const isCurrent=()=>ticket===generation&&active?.id===game.id&&checkDay();
     controller=module.mount(content,{date:host.date,language:record.contentLanguage,t,puzzle:record.puzzle,snapshot:record.state?record:null,
       changed:value=>{if(isCurrent()&&controller){Object.assign(record,value);snapshots.write(game.id,record);showStorageNotice();}},
@@ -210,11 +226,13 @@ window.SmartUpGames=Object.freeze({
     if(!embedded)return false;
     try {
       const next=validateHost(typeof input==='string' ? JSON.parse(input) : input);
-      const same=host&&next.date===host.date&&next.appId===host.appId;
+      const same=host&&next.date===host.date&&next.appId===host.appId&&(next.bonusRound||0)===(host.bonusRound||0);
+      const newRound=host&&next.date===host.date&&next.appId===host.appId&&(next.bonusRound||0)!==(host.bonusRound||0);
       if(!same){generation++;leave();pending={};snapshots=null;}
       const confirmed=same?{...next.completions,...Object.fromEntries(Object.entries(completions).filter(([,date])=>date===next.date))}:next.completions;
       host=next;completions=confirmed;t=translator(next.language);staleDay=false;applyLocale();
       applyTheme(next.theme,true);
+      if(newRound)history.replaceState(null,'',location.pathname+location.search);
       if(same&&active){
         if(completions[active.id]===host.date){save();controller?.dispose();controller=null;showFinished(active);}
         else if(controller){controller.updateLocale(t);refreshLabels?.();}
@@ -232,3 +250,4 @@ window.addEventListener('storage',()=>{if(!embedded){completions=persistence.rea
 document.addEventListener('visibilitychange',()=>{if(document.hidden)save();else checkDay();});
 if(!embedded)setInterval(checkDay,30000);
 emit('onReady');boot();
+

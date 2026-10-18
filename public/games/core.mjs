@@ -1,5 +1,5 @@
 import {localeOf} from './locale.mjs';
-export const VERSION = '0.0.9';
+export const VERSION = '0.0.10';
 export const catalogTones = ['words','letters','numbers','patterns','paths','focus'];
 export const safeId = value => typeof value === 'string' && /^[a-z][a-z0-9_]{0,47}$/.test(value);
 export const languageOf = value => localeOf(value).language;
@@ -57,7 +57,14 @@ export function validateHost(input) {
   try { new Intl.DateTimeFormat('en', {timeZone:input.timezone}); } catch { throw new Error('INVALID_TIMEZONE'); }
   const completions = Object.create(null);
   for (const [id,date] of Object.entries(input.completions || {})) if (safeId(id) && validDate(date)) completions[id] = date;
-  return {...input, language:localeOf(input.language).locale, completions};
+  const bonusRound = input.bonusRound === undefined ? 0 : input.bonusRound;
+  if (bonusRound !== 0 && bonusRound !== 1) throw new Error('INVALID_ROUND');
+  // Optional capability: older hosts and standalone play never receive reward UI.
+  const bonus = input.bonus;
+  if (bonus !== undefined && (!bonus || typeof bonus !== 'object' ||
+      ['title','message','watch'].some(k => typeof bonus[k] !== 'string' || bonus[k].length > 1000))) throw new Error('INVALID_BONUS');
+  return {...input, language:localeOf(input.language).locale, completions, bonusRound,
+    bonus:bonus ? {...bonus, enabled:bonus.enabled === true, eligible:bonus.eligible === true, busy:bonus.busy === true} : undefined};
 }
 export function completionStore(storage) {
   const key = 'smartup.games.completions.v1';
@@ -66,3 +73,4 @@ export function completionStore(storage) {
     write(value) { try { storage.setItem(key,JSON.stringify(value)); return true; } catch { return false; } }
   };
 }
+

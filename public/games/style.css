@@ -59,6 +59,28 @@ button[aria-pressed="true"],.primary { border:2px solid var(--accent); color:var
 .badge { position:absolute; right:-3px; bottom:-3px; background:var(--surface); border:2px solid var(--accent); color:var(--accent); border-radius:50%; width:20px; height:20px; font-size:12px; display:grid; place-items:center; }
 .game-name { font-weight:600; font-size:.8rem; line-height:1.2; min-height:2.4em; display:flex; align-items:flex-start; justify-content:center; }
 .footer { text-align:center; font-size:.75rem; line-height:1.4; margin:8px 0 0; }
+.bonus-card { display:flex; flex-direction:column; gap:8px; margin-top:12px; padding:16px; background:var(--surface); border:1px solid var(--divider); border-radius:12px; }
+.bonus-card h2 { margin:0 0 4px; font-size:1rem; }
+.bonus-card p { margin:0; font-size:.85rem; line-height:1.4; }
+.bonus-card button { width:100%; min-height:48px; }
+.bonus-card button:disabled { opacity:.6; }
+.screen-result:has(.bonus-card) .result-mark { width:48px; height:48px; font-size:24px; margin:0 auto 8px; }
+.screen-result:has(.bonus-card) .result { padding:4px 0; }
+.screen-result:has(.bonus-card) .result h1 { margin:8px 0; }
+.screen-result:has(.bonus-card) .result button { margin-top:12px; }
+@media (max-height:580px) {
+  .bonus-card { padding:8px 12px; gap:6px; margin-top:8px; }
+  .screen-landing:has(.bonus-card) .catalog { row-gap:4px; }
+  .screen-landing:has(.bonus-card) .icon-wrap { width:32px; height:32px; flex-shrink:0; }
+  .screen-landing:has(.bonus-card) .game-card { flex-direction:row; gap:4px; min-height:48px; text-align:start; }
+  .screen-landing:has(.bonus-card) .game-name { min-height:0; align-items:center; font-size:.7rem; }
+}
+@media (orientation:landscape) and (max-height:500px) {
+  .screen-landing:has(.bonus-card) .daily-ring { width:40px; height:40px; }
+  .screen-result:has(.bonus-card) { display:grid; grid-template-columns:1fr 1fr; gap:12px; align-items:center; }
+  .screen-result:has(.bonus-card) .result { padding:8px; }
+  .screen-result:has(.bonus-card) .bonus-card { margin:0; }
+}
 .back { border:0; padding-left:0; background:transparent; color:var(--secondaryText); font-size:.85rem; }
 .progress { margin:0; color:var(--accent); font-size:.85rem; font-weight:600; }
 .pairs { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:10px; align-items:start; }
@@ -170,3 +192,4 @@ button[aria-pressed="true"],.primary { border:2px solid var(--accent); color:var
   .game-content p:not(.feedback) { font-size:.8rem; line-height:1.4; }
   .game-content .notice { margin:0; }
 }
+
