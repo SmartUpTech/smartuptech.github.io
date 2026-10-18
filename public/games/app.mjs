@@ -179,7 +179,7 @@ async function route({restore=false}={}) {
   toolbar.append(back,title,reset);
   const content=el('section',undefined,'game-content'),help=el('details',undefined,'how-to-play');
   const summary=el('summary'),instructions=el('div',undefined,'how-to-body'),policy=el('p',undefined,'notice');
-  help.append(summary,instructions);root.append(toolbar,content,policy,help);
+  help.append(summary,instructions);root.append(toolbar,policy,content,help);
   refreshLabels=()=>{
     title.textContent=t(game.nameKey);back.setAttribute('aria-label','← '+t('back'));resetLabel.textContent=t('reset_game');summary.textContent=t('how_to_play');
     instructions.replaceChildren();const guide=gameInstructions(game.id,host.language);
