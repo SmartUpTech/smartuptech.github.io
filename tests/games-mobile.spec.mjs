@@ -213,16 +213,21 @@ try {
   await page.locator('.tiles button').first().click();const partial=await page.locator('.answer').textContent();
   await page.setViewportSize({width:320,height:440});assert.equal(await page.locator('.answer').textContent(),partial);
   // Reset remounts the same puzzle without new session events or removing badges.
+  // Restored feedback has serialization metadata that a fresh default label may omit.
+  // Keep comparing every visible board/control attribute and text, excluding only that metadata.
+  const boardSignature=()=>page.locator('.game-content').evaluate(el=>{
+    const copy=el.cloneNode(true);copy.querySelectorAll('[data-message]').forEach(node=>node.removeAttribute('data-message'));return copy.innerHTML;
+  });
   for(const [id,selector]of screens.filter(([id])=>id)){
     await page.goto(base+`?embedded=1#${id}`);await page.waitForFunction(()=>Boolean(window.SmartUpGames));
     await page.evaluate(c=>{window.events=[];window.addEventListener('games:event',e=>window.events.push(e.detail));window.SmartUpGames.configure(c);},{...config,date:'2026-10-05',completions:{}});
     await page.waitForSelector(selector);
-    const initial=await page.locator('.game-content').innerHTML();
+    const initial=await boardSignature();
     const startsBefore=await page.evaluate(()=>window.events.filter(e=>e.type==='onGameStarted').length);
     if(id==='maze')await page.locator('.maze-controls button[aria-disabled="false"]').first().click();
     else await page.locator('.game-content button:not(:disabled)').first().click();
     await page.locator('.reset-game').click();
-    assert.equal(await page.locator('.game-content').innerHTML(),initial,`${id} resets original daily board`);
+    assert.equal(await boardSignature(),initial,`${id} resets original daily board`);
     assert.equal(await page.evaluate(()=>window.events.filter(e=>e.type==='onGameStarted').length),startsBefore);
     assert.equal(await page.evaluate(()=>window.events.filter(e=>e.type==='onGameCompleted').length),0);
   }
@@ -245,3 +250,4 @@ try {
   }
   assert.deepEqual(errors,[]);console.log('PASS: nine games, mobile gameplay, compact WebViews without page scrolling or clipped controls, collapsible instructions, consistent reset, resize state, themes, locales, focus, persistence and bridge configuration; no page errors.');
 } finally {await browser.close();await new Promise(r=>server.close(r));}
+
