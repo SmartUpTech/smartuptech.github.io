@@ -58,13 +58,16 @@ export const apps: App[] = [
       { question: "Is the app free to use?", answer: "Yes, Anant Panchang is free to download and use with all essential features." }
     ],
     screenshots: [
-      { file: "screenshot-panchang-1.webp", title: "Daily Panchang with Mahurats", description: "Muhurat Precision. Master the cosmic influences of Tithi and Nakshatra to find the exact moment for every auspicious beginning." },
-      { file: "screenshot-panchang-2.webp", title: "Modern Calendar View", description: "Modern Heritage. A beautifully clean interpretation of the traditional Hindu calendar." },
-      { file: "screenshot-panchang-5.webp", title: "Accurate Sun & Moon Timings", description: "Celestial Sync. High-precision data for localized sun and moon timings." },
+      { file: "screenshot-panchang-1.webp", title: "Daily Panchang", description: "Complete Panchang at a glance—Tithi, Nakshatra, Yoga, Karana, sunrise, sunset, and festivals for your location." },
+      { file: "screenshot-panchang-2.webp", title: "Modern Calendar View", description: "Modern Heritage. A beautifully clean interpretation of the traditional Hindu calendar with festivals and lunar months." },
+      { file: "screenshot-panchang-5.webp", title: "Accurate Sun & Moon Timings", description: "Celestial Sync. High-precision data for localized sun and moon timings, Brahma Muhurta, and next Purnima and Amavasya." },
       { file: "screenshot-panchang-3.webp", title: "Day & Night Choghadiya", description: "Daily Flow. Master the cosmic influences of Choghadiya throughout the day and night." },
       { file: "screenshot-panchang-4.webp", title: "Live Hindu Clock (Ghadi)", description: "Live Ghadi. The heartbeat of tradition, pulsing in real-time on your device." },
-      { file: "screenshot-panchang-6.webp", title: "Upcoming festivals", description: "Festival Guide. Your essential companion for every cultural celebration." },
-      { file: "screenshot-panchang-7.webp", title: "Support multiple languages", description: "Global Wisdom. Authentic Hindu math, accessible in every major language." }
+      { file: "screenshot-panchang-6.webp", title: "Upcoming Festivals", description: "Festival Guide. Your essential companion for every cultural celebration, with quick reminders." },
+      { file: "screenshot-panchang-7.webp", title: "Festivals by Month", description: "Browse Hindu festivals and observances month by month, with dates and reminder controls." },
+      { file: "screenshot-panchang-8.webp", title: "Shubh & Ashubh Muhurat", description: "Muhurat Precision. See auspicious windows like Abhijit and Amrit Kaal alongside Rahu Kaal, Yamaganda, and Gulik Kaal." },
+      { file: "screenshot-panchang-9.webp", title: "Panchang Timeline", description: "Follow the day on a visual timeline—muhurats, tithi changes, moonrise, and sunset in chronological order." },
+      { file: "screenshot-panchang-10.webp", title: "Vrat Reminder", description: "Set daily and weekly fasting reminders so you never miss an observance." }
     ]
   },
   {
