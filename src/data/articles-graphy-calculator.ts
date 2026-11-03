@@ -4,21 +4,21 @@ export const graphyCalculatorArticles: Article[] = [
 	{
 		slug: 'graphy-calculator-app-guide',
 		appId: 'graphy-calculator',
-		title: 'Graphy Calculator: Calculate Fast, Understand Deeply',
+		title: 'Calculator+: Calculate Fast, Understand Deeply',
 		excerpt: 'The smart calculator that preserves your fast workflows and adds Graphy — visual explanations showing exactly how every answer was built.',
 		coverImage: '/blog/graphy-calculator/graphy-calculator-app-guide-cover.webp',
 		publishDate: '2026-09-06',
 		category: 'App Guide',
-		seoTitle: 'Graphy Calculator App | Visual Math, Unit Conversion & Graphy Engine',
-		seoDescription: 'Graphy Calculator combines fast calculations, 100+ unit conversions, and Graphy visual explanations. See flowcharts, blocks, and charts for every result.',
+		seoTitle: 'Calculator+ App | Visual Math, Unit Conversion & Graphy Engine',
+		seoDescription: 'Calculator+ combines fast calculations, 100+ unit conversions, and Graphy visual explanations. See flowcharts, blocks, and charts for every result.',
 		content: `
 			<h2>More Than a Calculator — A Visual Math Companion</h2>
-			<p><strong>Graphy Calculator</strong> is SmartUp Tech's next evolution of everyday calculation. It keeps everything you already rely on — a fast calculator, comprehensive unit converter, scientific keypad, and offline-ready performance — and adds something entirely new: <strong>Graphy</strong>, a visual explanation engine that shows you <em>how</em> every answer was produced.</p>
+			<p><strong>Calculator+</strong> is SmartUp Tech's next evolution of everyday calculation. It keeps everything you already rely on — a fast calculator, comprehensive unit converter, scientific keypad, and offline-ready performance — and adds something entirely new: <strong>Graphy</strong>, a visual explanation engine that shows you <em>how</em> every answer was produced.</p>
 
 			<p>The core promise is simple: <strong>Existing calculation → same result → optional Graphy explanation.</strong> Your calculator workflows stay exactly as fast as before. When you want deeper understanding, open Graphy and watch your result transform into a clear visual story.</p>
 
 			<h2>Five Tabs, One Unified Experience</h2>
-			<p>Graphy Calculator is organized around five intuitive sections:</p>
+			<p>Calculator+ is organized around five intuitive sections:</p>
 			<ul>
 				<li><strong>Calculate</strong> — Percentage, BMI, GST, Discount, EMI, Scientific, and more specialized calculators</li>
 				<li><strong>Convert</strong> — Length, weight, temperature, area, volume, currency, and 100+ measurement categories</li>
@@ -28,7 +28,7 @@ export const graphyCalculatorArticles: Article[] = [
 			</ul>
 
 			<h2>The Graphy Engine: Visual Explanations for Every Result</h2>
-			<p>At the heart of Graphy Calculator is the <strong>Graphy Engine</strong> — a shared visual layer that transforms any calculation result into structured, semantic visualizations. Graphy never recalculates your answer. It consumes the same evaluated model as the calculator and renders it through your choice of visual renderer.</p>
+			<p>At the heart of Calculator+ is the <strong>Graphy Engine</strong> — a shared visual layer that transforms any calculation result into structured, semantic visualizations. Graphy never recalculates your answer. It consumes the same evaluated model as the calculator and renders it through your choice of visual renderer.</p>
 
 			<h3>Available Renderers</h3>
 			<ul>
@@ -40,10 +40,10 @@ export const graphyCalculatorArticles: Article[] = [
 			</ul>
 
 			<h2>One Calculation Path — Zero Drift</h2>
-			<p>A foundational rule of Graphy Calculator: <strong>calculator and Graphy share one calculation path.</strong> Graphy visualizes the same BigDecimal-precision result. It never independently computes a different number. This guarantees that what you see in the result field is exactly what Graphy explains — building trust and making verification effortless.</p>
+			<p>A foundational rule of Calculator+: <strong>calculator and Graphy share one calculation path.</strong> Graphy visualizes the same BigDecimal-precision result. It never independently computes a different number. This guarantees that what you see in the result field is exactly what Graphy explains — building trust and making verification effortless.</p>
 
 			<h2>Built for Students, Professionals, and Everyday Life</h2>
-			<p>Whether you are a student checking a percentage problem, a traveler converting kilometers to miles, a health-conscious user tracking BMI, or a homebuyer evaluating EMI options — Graphy Calculator meets you where you are. Fast when you need speed. Visual when you need clarity.</p>
+			<p>Whether you are a student checking a percentage problem, a traveler converting kilometers to miles, a health-conscious user tracking BMI, or a homebuyer evaluating EMI options — Calculator+ meets you where you are. Fast when you need speed. Visual when you need clarity.</p>
 
 			<h3>Key Features</h3>
 			<ul>
@@ -56,14 +56,14 @@ export const graphyCalculatorArticles: Article[] = [
 			</ul>
 
 			<div class="bg-gray-50 p-8 rounded-3xl my-8 border border-gray-100">
-				<h3 class="mt-0">Try Graphy Calculator Today</h3>
+				<h3 class="mt-0">Try Calculator+ Today</h3>
 				<p>Calculate as you always have. Then open Graphy and see the math come alive.</p>
 				<a href="https://play.google.com/store/apps/details?id=net.smartlogic.unitconverter" target="_blank" rel="noopener noreferrer" class="inline-block bg-black text-white px-8 py-3 rounded-full font-bold hover:bg-gray-800 transition-colors">Get it on Google Play Store</a>
 			</div>
 
-			<p>Explore more on the <a href="/apps/graphy-calculator">Graphy Calculator website</a> or read our guides: <a href="/articles/graphy-calculator/graphy-calculator-usage-guide">How to Use Graphy Calculator</a>, <a href="/articles/graphy-calculator/what-is-graphy">What Is Graphy?</a>, and <a href="/articles/graphy-calculator/graphy-calculation-examples">Graphy Calculation Examples</a>.</p>
+			<p>Explore more on the <a href="/apps/graphy-calculator">Calculator+ website</a> or read our guides: <a href="/articles/graphy-calculator/graphy-calculator-usage-guide">How to Use Calculator+</a>, <a href="/articles/graphy-calculator/what-is-graphy">What Is Graphy?</a>, and <a href="/articles/graphy-calculator/graphy-calculation-examples">Graphy Calculation Examples</a>.</p>
 
-			<p><strong>Graphy Calculator — Calculate fast. Understand deeply.</strong></p>
+			<p><strong>Calculator+ — Calculate fast. Understand deeply.</strong></p>
 		`
 	},
 	{
@@ -78,7 +78,7 @@ export const graphyCalculatorArticles: Article[] = [
 		seoDescription: 'Learn how Graphy turns calculation results into flowcharts, blocks, gauges, and charts. One calculation path, multiple visual renderers, zero independent math.',
 		content: `
 			<h2>Making the Invisible Visible</h2>
-			<p>Every calculator gives you an answer. <strong>Graphy</strong> shows you the journey. It is the visual explanation layer inside Graphy Calculator that transforms a finished calculation into a structured, semantic diagram — so you can see, verify, and truly understand how a result was produced.</p>
+			<p>Every calculator gives you an answer. <strong>Graphy</strong> shows you the journey. It is the visual explanation layer inside Calculator+ that transforms a finished calculation into a structured, semantic diagram — so you can see, verify, and truly understand how a result was produced.</p>
 
 			<p>Graphy is not a separate calculator. It is a <strong>renderer</strong> — a visual interpreter that takes the same evaluated calculation model the app already computed and presents it through your choice of visual format.</p>
 
@@ -95,7 +95,7 @@ export const graphyCalculatorArticles: Article[] = [
 			<p><strong>Critical rule:</strong> Graphy never calculates independently. If the calculator says 25%, Graphy explains 25% — not 24.9% or 25.1%.</p>
 
 			<h2>Renderer 1: Flowchart — The Universal Fallback</h2>
-			<p>Every calculator in Graphy Calculator has a meaningful flowchart representation. Rounded node cards, circular operation markers, thin connectors, and generous whitespace make even complex formulas readable at a glance.</p>
+			<p>Every calculator in Calculator+ has a meaningful flowchart representation. Rounded node cards, circular operation markers, thin connectors, and generous whitespace make even complex formulas readable at a glance.</p>
 
 			<p>Here is how a <strong>20% of 500</strong> percentage calculation looks in Graphy flowchart form:</p>
 
@@ -184,7 +184,7 @@ export const graphyCalculatorArticles: Article[] = [
 			</ul>
 
 			<h3>Conclusion</h3>
-			<p>Graphy is what separates Graphy Calculator from every other calculator on the Play Store. It does not replace fast calculation — it elevates it. Download <a href="https://play.google.com/store/apps/details?id=net.smartlogic.unitconverter" target="_blank" rel="noopener noreferrer">Graphy Calculator on Google Play</a> and experience math you can actually see.</p>
+			<p>Graphy is what separates Calculator+ from every other calculator on the Play Store. It does not replace fast calculation — it elevates it. Download <a href="https://play.google.com/store/apps/details?id=net.smartlogic.unitconverter" target="_blank" rel="noopener noreferrer">Calculator+ on Google Play</a> and experience math you can actually see.</p>
 		`
 	},
 	{
@@ -196,13 +196,13 @@ export const graphyCalculatorArticles: Article[] = [
 		publishDate: '2026-09-06',
 		category: 'Examples',
 		seoTitle: 'Graphy Calculation Examples: Percentage, BMI & EMI Visualized',
-		seoDescription: 'See Graphy Calculator in action with percentage, BMI, and EMI examples. Flowcharts, gauges, and bar charts that make complex math instantly understandable.',
+		seoDescription: 'See Calculator+ in action with percentage, BMI, and EMI examples. Flowcharts, gauges, and bar charts that make complex math instantly understandable.',
 		content: `
 			<h2>Three Calculations, Three Visual Stories</h2>
 			<p>Theory is useful, but Graphy truly shines when you see it applied to real problems. Below are three worked examples — the kind you will encounter daily — each shown through Graphy's visual renderers. These represent the MVP showcase calculators: <strong>Percentage</strong>, <strong>BMI</strong>, and <strong>EMI</strong>.</p>
 
 			<h2>Example 1: Percentage Calculator — "What is 15% off ₹2,400?"</h2>
-			<p>You are shopping and see a 15% discount on an item priced at ₹2,400. Instead of mental math, Graphy Calculator computes the discount and shows the full breakdown.</p>
+			<p>You are shopping and see a 15% discount on an item priced at ₹2,400. Instead of mental math, Calculator+ computes the discount and shows the full breakdown.</p>
 
 			<table>
 				<tr><th>Input</th><th>Value</th></tr>
@@ -240,7 +240,7 @@ export const graphyCalculatorArticles: Article[] = [
 			<p>The flowchart makes it obvious: original price flows through the discount rate to produce savings, then subtracts to the final amount. No hidden steps.</p>
 
 			<h2>Example 2: BMI Calculator — "Am I in a healthy range?"</h2>
-			<p>Body Mass Index combines weight and height into a single health indicator. Graphy Calculator computes BMI and uses the <strong>Gauge renderer</strong> to show exactly where you fall on the WHO scale.</p>
+			<p>Body Mass Index combines weight and height into a single health indicator. Calculator+ computes BMI and uses the <strong>Gauge renderer</strong> to show exactly where you fall on the WHO scale.</p>
 
 			<table>
 				<tr><th>Input</th><th>Value</th></tr>
@@ -287,7 +287,7 @@ export const graphyCalculatorArticles: Article[] = [
 			</div>
 
 			<h2>Example 3: EMI Calculator — "What will my home loan cost?"</h2>
-			<p>Equated Monthly Installment (EMI) is one of the most complex everyday calculations. Graphy Calculator's EMI tool computes the monthly payment and uses <strong>bar charts</strong> to reveal how much goes to principal versus interest over the loan tenure.</p>
+			<p>Equated Monthly Installment (EMI) is one of the most complex everyday calculations. Calculator+'s EMI tool computes the monthly payment and uses <strong>bar charts</strong> to reveal how much goes to principal versus interest over the loan tenure.</p>
 
 			<table>
 				<tr><th>Input</th><th>Value</th></tr>
@@ -340,7 +340,7 @@ export const graphyCalculatorArticles: Article[] = [
 			<p>The bar chart instantly reveals a sobering truth: over 20 years at 8.5%, you pay more in interest than the original loan amount. Graphy makes this visible — not buried in a number you might ignore.</p>
 
 			<h2>Unit Conversion with Graphy Blocks</h2>
-			<p>Graphy Calculator preserves the full unit conversion experience from its predecessor. Converting units generates the same instant results, now with optional Graphy Blocks showing the conversion factor applied step by step.</p>
+			<p>Calculator+ preserves the full unit conversion experience from its predecessor. Converting units generates the same instant results, now with optional Graphy Blocks showing the conversion factor applied step by step.</p>
 
 			<div class="graphy-demo my-10">
 				<div class="graphy-demo-title">Graphy Blocks — Celsius to Fahrenheit (100°C)</div>
@@ -365,11 +365,11 @@ export const graphyCalculatorArticles: Article[] = [
 			</div>
 
 			<h2>The Graphy Difference</h2>
-			<p>These three examples — percentage, BMI, and EMI — represent the MVP showcase of Graphy Calculator. Each exercises a different renderer: flowchart for sequential logic, gauge for bounded ranges, and bar charts for comparative breakdowns. Together, they prove the architecture: <strong>one calculation engine, many visual stories.</strong></p>
+			<p>These three examples — percentage, BMI, and EMI — represent the MVP showcase of Calculator+. Each exercises a different renderer: flowchart for sequential logic, gauge for bounded ranges, and bar charts for comparative breakdowns. Together, they prove the architecture: <strong>one calculation engine, many visual stories.</strong></p>
 
 			<div class="bg-gray-50 p-8 rounded-3xl my-8 border border-gray-100">
 				<h3 class="mt-0">Experience Graphy Yourself</h3>
-				<p>Download Graphy Calculator and try these calculations with live Graphy visualizations.</p>
+				<p>Download Calculator+ and try these calculations with live Graphy visualizations.</p>
 				<a href="https://play.google.com/store/apps/details?id=net.smartlogic.unitconverter" target="_blank" rel="noopener noreferrer" class="inline-block bg-black text-white px-8 py-3 rounded-full font-bold hover:bg-gray-800 transition-colors">Get it on Google Play Store</a>
 			</div>
 
@@ -388,19 +388,19 @@ export const graphyCalculatorArticles: Article[] = [
 	{
 		slug: 'graphy-calculator-usage-guide',
 		appId: 'graphy-calculator',
-		title: 'How to Use Graphy Calculator: A Complete Usage Guide',
+		title: 'How to Use Calculator+: A Complete Usage Guide',
 		excerpt: 'Step-by-step guide to calculating, converting units, opening Graphy visual explanations, and using favorites and history — without slowing down your workflow.',
 		coverImage: '/blog/graphy-calculator/graphy-calculator-usage-guide-cover.webp',
 		publishDate: '2026-09-06',
 		category: 'Usage Guide',
-		seoTitle: 'How to Use Graphy Calculator | Step-by-Step Usage Guide',
-		seoDescription: 'Learn how to use Graphy Calculator: five-tab navigation, fast calculations, unit conversion, optional Graphy visual explanations, favorites, and history.',
+		seoTitle: 'How to Use Calculator+ | Step-by-Step Usage Guide',
+		seoDescription: 'Learn how to use Calculator+: five-tab navigation, fast calculations, unit conversion, optional Graphy visual explanations, favorites, and history.',
 		content: `
 			<h2>Calculate Fast — Understand When You Want To</h2>
-			<p><strong>Graphy Calculator</strong> is built around one principle: your existing calculator and unit converter workflows stay exactly as fast as before. Graphy is an optional layer you open when you want to <em>see</em> how an answer was produced. This guide walks you through every part of the app — from your first calculation to switching visual renderers and revisiting past results.</p>
+			<p><strong>Calculator+</strong> is built around one principle: your existing calculator and unit converter workflows stay exactly as fast as before. Graphy is an optional layer you open when you want to <em>see</em> how an answer was produced. This guide walks you through every part of the app — from your first calculation to switching visual renderers and revisiting past results.</p>
 
 			<h2>Getting Started</h2>
-			<p>Download Graphy Calculator from Google Play and open the app. You land on the main screen with five tabs along the bottom. No account is required for core functionality — calculate, convert, and explore offline.</p>
+			<p>Download Calculator+ from Google Play and open the app. You land on the main screen with five tabs along the bottom. No account is required for core functionality — calculate, convert, and explore offline.</p>
 
 			<ol>
 				<li>Install the app from <a href="https://play.google.com/store/apps/details?id=net.smartlogic.unitconverter" target="_blank" rel="noopener noreferrer">Google Play</a></li>
@@ -410,7 +410,7 @@ export const graphyCalculatorArticles: Article[] = [
 			</ol>
 
 			<h2>The Five Tabs</h2>
-			<p>Graphy Calculator organizes everything into five intuitive sections:</p>
+			<p>Calculator+ organizes everything into five intuitive sections:</p>
 
 			<table>
 				<tr><th>Tab</th><th>What It Does</th><th>When to Use It</th></tr>
@@ -422,7 +422,7 @@ export const graphyCalculatorArticles: Article[] = [
 			</table>
 
 			<h2>Using the Calculator</h2>
-			<p>The basic calculator and scientific keypad work exactly as you expect. Expression display, memory controls, and keypad behavior are unchanged from the established app — Graphy Calculator does not rebuild or replace this foundation.</p>
+			<p>The basic calculator and scientific keypad work exactly as you expect. Expression display, memory controls, and keypad behavior are unchanged from the established app — Calculator+ does not rebuild or replace this foundation.</p>
 
 			<h3>Quick Calculation Workflow</h3>
 			<ol>
@@ -460,7 +460,7 @@ export const graphyCalculatorArticles: Article[] = [
 			</div>
 
 			<h2>Opening Graphy Visual Explanations</h2>
-			<p>Graphy is the visual explanation engine inside Graphy Calculator. After any calculation or conversion, you can open the collapsible <strong>Graphy panel</strong> to see how the answer was built — without triggering a new calculation.</p>
+			<p>Graphy is the visual explanation engine inside Calculator+. After any calculation or conversion, you can open the collapsible <strong>Graphy panel</strong> to see how the answer was built — without triggering a new calculation.</p>
 
 			<h3>How to Open Graphy</h3>
 			<ol>
@@ -523,8 +523,8 @@ export const graphyCalculatorArticles: Article[] = [
 				<li><strong>Dark mode:</strong> Graphy visualizations follow the same theme tokens in light and dark mode for consistent readability.</li>
 			</ul>
 
-			<h2>What Graphy Calculator Is Not (Yet)</h2>
-			<p>Graphy Calculator MVP focuses on adding visual explanations to existing functionality. The following are planned for future releases but not part of the current experience:</p>
+			<h2>What Calculator+ Is Not (Yet)</h2>
+			<p>Calculator+ MVP focuses on adding visual explanations to existing functionality. The following are planned for future releases but not part of the current experience:</p>
 			<ul>
 				<li>Coins, timeline, and XY graph renderers (coming progressively)</li>
 				<li>AI-powered insights and what-if suggestions</li>
@@ -535,7 +535,7 @@ export const graphyCalculatorArticles: Article[] = [
 			<div class="bg-gray-50 p-8 rounded-3xl my-8 border border-gray-100">
 				<h3 class="mt-0">Ready to Try It?</h3>
 				<p>Calculate as you always have. Open Graphy when you want to understand the math behind the number.</p>
-				<a href="https://play.google.com/store/apps/details?id=net.smartlogic.unitconverter" target="_blank" rel="noopener noreferrer" class="inline-block bg-black text-white px-8 py-3 rounded-full font-bold hover:bg-gray-800 transition-colors">Get Graphy Calculator on Google Play</a>
+				<a href="https://play.google.com/store/apps/details?id=net.smartlogic.unitconverter" target="_blank" rel="noopener noreferrer" class="inline-block bg-black text-white px-8 py-3 rounded-full font-bold hover:bg-gray-800 transition-colors">Get Calculator+ on Google Play</a>
 			</div>
 
 			<p>Want to go deeper? Read <a href="/articles/graphy-calculator/what-is-graphy">What Is Graphy?</a> for the visual engine explained, or see <a href="/articles/graphy-calculator/graphy-calculation-examples">Graphy Calculation Examples</a> with percentage, BMI, and EMI walkthroughs.</p>
@@ -552,7 +552,7 @@ export const graphyCalculatorArticles: Article[] = [
 				</table>
 			</section>
 
-			<p><strong>Graphy Calculator — Calculate fast. Understand deeply.</strong></p>
+			<p><strong>Calculator+ — Calculate fast. Understand deeply.</strong></p>
 		`
 	}
 ];

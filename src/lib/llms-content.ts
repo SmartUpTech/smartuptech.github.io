@@ -29,17 +29,12 @@ export function buildLlmsTxt(): string {
 	];
 
 	for (const app of apps) {
-<<<<<<< HEAD
 		const rating = getPlayStoreRating(app.id);
 		const ratingText = rating
 			? ` Google Play: ${formatPlayStoreScore(rating.score)}★ (${rating.ratings} ratings).`
 			: '';
 		lines.push(
 			`- [${app.name}](${SITE}/apps/${app.id}): ${app.shortDescription}${ratingText} Keywords: ${app.seoKeywords.slice(0, 6).join(', ')}. Play Store: ${app.playStoreUrl} (package \`${playPackageId(app.playStoreUrl)}\`).`,
-=======
-		lines.push(
-			`- [${app.name}](${SITE}/apps/${app.id}): ${app.shortDescription} Keywords: ${app.seoKeywords.slice(0, 6).join(', ')}. Play Store: ${app.playStoreUrl} (package \`${playPackageId(app.playStoreUrl)}\`).`,
->>>>>>> origin/main
 		);
 	}
 
