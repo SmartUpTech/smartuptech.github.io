@@ -132,7 +132,12 @@ const { type, article, app, appArticles } = Astro.props;
 	</Layout>
 ) : (
 	<Layout title={`${app.topicName} Articles`}>
-		<SEO slot="head" title={`${app.topicName} Articles | SmartUp Tech`} description={`Explore educational guides and articles about ${app.topicName.toLowerCase()}.`} />
+		<SEO
+			slot="head"
+			app={app}
+			title={`${app.topicName} Guides & Articles | ${app.name}`}
+			description={`Expert articles about ${app.topicName.toLowerCase()}—features, culture, and how-to guides. Related to ${app.name} on Android. ${app.seoKeywords.slice(0, 4).join(', ')}.`}
+		/>
 		<Navbar />
 		<main class="pt-24">
 			<section class="py-16 md:py-24 bg-gray-50/30">
