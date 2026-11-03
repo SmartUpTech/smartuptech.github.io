@@ -391,5 +391,97 @@ export const panchangArticles: Article[] = [
 				</table>
 			</section>
 		`
+	},
+	{
+		slug: 'brahma-muhurta-abhijit-amrit-kaal',
+		appId: 'panchang',
+		title: 'Brahma Muhurta, Abhijit & Amrit Kaal: Daily Sacred Timings Explained',
+		excerpt: 'Learn how Brahma Muhurta, Abhijit Muhurta, and Amrit Kaal are calculated from local sunrise and sunset—and how to use them alongside Rahu Kaal in daily life.',
+		coverImage: '/screenshots/panchang/screenshot-panchang-5.webp',
+		publishDate: '2026-11-03',
+		category: 'Auspicious Timings',
+		seoTitle: 'Brahma Muhurta, Abhijit & Amrit Kaal Times | Anant Panchang Guide',
+		seoDescription: 'Understand Brahma Muhurta before sunrise, midday Abhijit Muhurta, and Amrit Kaal. Location-based calculation, daily use, and how Anant Panchang shows them for your city.',
+		content: `
+			<h2>Three Windows That Shape the Hindu Day</h2>
+			<p>Most people who open a <strong>Hindu Panchang</strong> look first at Tithi, Nakshatra, or Rahu Kaal. Yet some of the most practical guidance on the page sits in shorter, repeating intervals tied to the sun: the quiet hour before dawn, the brief strength at local midday, and the nectar-like span known as <strong>Amrit Kaal</strong>. Together with inauspicious periods such as Rahu Kaal, Yamaganda, and Gulik Kaal, these timings form a daily rhythm—ideal for prayer, focused work, or simply knowing when to pause before starting something new.</p>
+			<p>This guide explains what each window means, how it is calculated from your local sunrise and sunset, and how you can use them without becoming overwhelmed by astrology jargon.</p>
+
+			<h2>Brahma Muhurta: The Hour of Creation</h2>
+			<p><strong>Brahma Muhurta</strong> (literally “the time of Brahma, the creator”) is the period immediately before sunrise. Classical texts describe it as especially conducive to meditation, study, yoga, and mantra japa because the mind is rested and the world is still.</p>
+
+			<h3>How Long Is Brahma Muhurta?</h3>
+			<p>Tradition defines the night—from sunset to the next sunrise—as lasting <strong>30 Muhurtas</strong>, each Muhurta being 48 minutes. Brahma Muhurta occupies the <strong>last two Muhurtas</strong> of that night, roughly <strong>96 minutes before sunrise</strong>. Some teachers round this to “about an hour and a half,” but precise apps calculate the exact interval from your coordinates.</p>
+
+			<h3>Why Location Matters</h3>
+			<p>Because Brahma Muhurta ends at sunrise, its clock time shifts every day and differs by city. Winter sunrises later than summer; Mumbai’s sunrise is not Delhi’s. A printed calendar for one city will mislead you elsewhere. GPS-based Panchang tools solve this by computing sunrise for your spot each day.</p>
+
+			<h3>What People Do During Brahma Muhurta</h3>
+			<ul>
+				<li>Silent meditation or pranayama</li>
+				<li>Reading scripture or revising for exams</li>
+				<li>Light yoga or walking before heat and noise build</li>
+				<li>Setting intention for the day rather than checking notifications</li>
+			</ul>
+			<p>It is not a rule that everyone must wake before dawn. Many treat it as an aspirational window—useful when life allows, not a source of guilt when it does not.</p>
+
+			<h2>Abhijit Muhurta: Midday’s “Victory” Moment</h2>
+			<p><strong>Abhijit Muhurta</strong> is a short auspicious period around local solar noon. Its name suggests victory (<em>Abhijit</em>). In many regional traditions it is considered strong enough to support important tasks even when other Panchang factors are mixed—hence the common advice to schedule interviews, signatures, or travel starts during Abhijit when a full electional Muhurat is not available.</p>
+
+			<h3>How Abhijit Is Calculated</h3>
+			<p>The day from sunrise to sunset is divided into <strong>15 parts</strong>. Abhijit corresponds to the <strong>8th part</strong>, centered on midday, and lasts about <strong>48 minutes</strong> (one traditional Muhurta). The exact start and end depend on when the sun rises and sets at your location—not on 12:00 on your wall clock if it differs from solar time.</p>
+
+			<h3>Practical Uses</h3>
+			<ul>
+				<li>Starting a meeting or signing documents when Rahu Kaal or other doshas fall elsewhere in the day</li>
+				<li>Short puja or gratitude practice at lunch break</li>
+				<li>Launching a small business step (website go-live, first customer call) when a full priest-calculated Muhurat is impractical</li>
+			</ul>
+			<p>Abhijit is a daily tool, not only for weddings or griha pravesh. Think of it as a recurring “green light” in the afternoon sky.</p>
+
+			<h2>Amrit Kaal: The “Nectar” Span</h2>
+			<p><strong>Amrit Kaal</strong> (also written Amrit Kalam) is another favorable slice of the day derived from dividing the sunrise–sunset span. The name evokes <em>amrita</em> (nectar)—a time when activities started may flow more smoothly. Panchang listings often show Amrit Kaal alongside Shubh periods and contrast it with Ashubh spans like Rahu Kaal.</p>
+
+			<h3>Relationship to Other Muhurats</h3>
+			<p>Where Abhijit is fixed to the solar midday structure, Amrit Kaal’s placement follows Panchang algorithms used in your regional tradition (North Indian vs South Indian tables can differ slightly). What matters for daily use is consistency: follow one trusted source for your lineage or region rather than mixing charts.</p>
+
+			<h2>Balancing the Sacred and the Cautionary</h2>
+			<p>A complete day on <strong>Anant Panchang</strong> typically shows both supportive and cautionary bands on one timeline:</p>
+			<ul>
+				<li><strong>Brahma Muhurta</strong> — inward, spiritual, preparatory</li>
+				<li><strong>Amrit Kaal & Abhijit</strong> — outward action when the sky is said to cooperate</li>
+				<li><strong>Rahu Kaal, Yamaganda, Gulik Kaal</strong> — intervals often avoided for new beginnings (each tied to a weekday segment between sunrise and sunset)</li>
+			</ul>
+			<p>Using them together is simpler than it sounds: reserve Rahu Kaal for routine or reflection; place meaningful starts in Abhijit or Amrit Kaal when possible; protect morning depth in Brahma Muhurta when you can wake early.</p>
+
+			<h2>Why Apps Beat Static Charts</h2>
+			<p>All of these intervals change daily with sunrise and sunset. DST, travel, and latitude alter them noticeably. The <strong>Anant Panchang Android app</strong> computes Brahma Muhurta, Abhijit, Amrit Kaal, and inauspicious kaals for your GPS location, with sun and moon timings and a visual Panchang timeline so you see the day in order—not as scattered notes in a book.</p>
+			<p>Explore the full feature set on the <a href="/apps/panchang">Anant Panchang app page</a>, or install it from the <a href="https://play.google.com/store/apps/details?id=net.smartlogic.hinducalendar" target="_blank" rel="noopener noreferrer">Google Play Store</a>.</p>
+
+			<section>
+				<h3>Daily Sacred Timings FAQs</h3>
+				<table>
+					<tr>
+						<th>Question</th>
+						<th>Answer</th>
+					</tr>
+					<tr>
+						<td>Is Brahma Muhurta the same every day?</td>
+						<td>No. It always ends at local sunrise, so its clock time shifts seasonally and by latitude.</td>
+					</tr>
+					<tr>
+						<td>Can I work during Rahu Kaal if Abhijit is unavailable?</td>
+						<td>Yes. Rahu Kaal mainly cautions against <em>starting</em> new ventures; ongoing work is fine. Use Abhijit when you need an auspicious start.</td>
+					</tr>
+					<tr>
+						<td>Do I need all three every day?</td>
+						<td>No. Pick what fits your life—many users check Abhijit for scheduling and Brahma Muhurta when focusing on spiritual practice.</td>
+					</tr>
+				</table>
+			</section>
+
+			<h3>Conclusion</h3>
+			<p>Brahma Muhurta, Abhijit, and Amrit Kaal are not mystical curiosities—they are a structured way to align human attention with the sun’s daily arc. Paired with cautionary kaals, they turn the Panchang from a festival calendar into a living schedule for mindful action.</p>
+		`
 	}
 ];

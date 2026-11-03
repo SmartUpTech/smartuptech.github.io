@@ -188,5 +188,104 @@ export const todayArticles: Article[] = [
 				</table>
 			</section>
 		`
+	},
+	{
+		slug: 'on-this-day-history-birthdays-memorials',
+		appId: 'today',
+		title: 'Beyond Awareness Days: History, Birthdays & Memorials on “Today”',
+		excerpt: 'International days are only part of the story. Learn how “on this day” history, famous birthdays, and memorials differ—and how the Today app surfaces them each morning.',
+		coverImage: '/screenshots/today/screenshot-today-10.webp',
+		publishDate: '2026-11-03',
+		category: 'Daily Discoveries',
+		seoTitle: 'On This Day in History, Birthdays & Memorials | Today App Guide',
+		seoDescription: 'Go beyond UN awareness days. Understand historical milestones, legendary birthdays, and solemn memorials—and how the Today Android app curates them daily.',
+		content: `
+			<h2>More Than “What Awareness Day Is It?”</h2>
+			<p>Search for “what day is today” and you will find World Health Day, National Coffee Day, or dozens of hashtags. Those <strong>international and awareness observances</strong> matter—but they are only one layer of what makes a date meaningful. Every day also carries <strong>historical milestones</strong> (treaties signed, missions launched, movements begun), <strong>birthdays</strong> of people who shaped science and culture, and <strong>memorials</strong> that invite reflection on loss and legacy.</p>
+			<p>The <strong>Today app</strong> was built to show all of these side by side: not just campaigns, but the full texture of the calendar. This article explains the difference between those categories and how you can use them for learning, conversation, and quiet curiosity.</p>
+
+			<h2>Historical Milestones: Echoes of Time</h2>
+			<p>When historians say “on this day,” they mean events whose effects still ripple forward—a constitution adopted, a spacecraft landing, a peace accord, a discovery announced. These entries are not holidays in the festive sense; they are anchors for understanding how the present arrived.</p>
+			<h3>Why They Belong in a Daily App</h3>
+			<ul>
+				<li><strong>Context:</strong> A headline about space travel lands differently when you know the anniversary of a first launch.</li>
+				<li><strong>Education:</strong> Teachers and parents can spark five-minute discussions at breakfast.</li>
+				<li><strong>Perspective:</strong> Seeing decades of change on the same calendar date builds historical empathy.</li>
+			</ul>
+			<p>In Today, historical milestones appear as concise stories—enough to intrigue you, with room to search further if you want depth.</p>
+
+			<h2>Legendary Birthdays: Human Legacy</h2>
+			<p>Birthday lists in almanacs can feel like trivia. Used well, they are introductions to lives that changed art, medicine, politics, or sport. The point is not to celebrate every famous name equally, but to notice <em>patterns</em>: inventors clustered in one era, writers who shared a birth week, activists born into oppression who reshaped law.</p>
+			<h3>How to Use Birthday Features Mindfully</h3>
+			<ul>
+				<li>Pick one person per week to read about beyond the app summary.</li>
+				<li>Compare international figures with national heroes from your country’s calendar.</li>
+				<li>Share a birthday fact with a friend who cares about that field—not as spam, but as a genuine “thought you’d find this interesting.”</li>
+			</ul>
+
+			<h2>Solemn Memorials: Lasting Impact</h2>
+			<p>Memorial entries mark deaths, tragedies, or days of remembrance—Holocaust remembrance, disaster anniversaries, leaders assassinated, artists lost too soon. They differ from awareness days because the tone is reflective, not promotional.</p>
+			<p>Handled with care, memorials in a daily feed remind us that progress is uneven and that memory is an ethical act. They pair naturally with international days: a health awareness week hits harder when you also read about the researchers or patients who changed policy on a given date.</p>
+
+			<h2>International vs National vs “On This Day”</h2>
+			<p>It helps to keep three channels distinct:</p>
+			<table>
+				<tr>
+					<th>Type</th>
+					<th>Typical Source</th>
+					<th>Example</th>
+				</tr>
+				<tr>
+					<td><strong>International / UN days</strong></td>
+					<td>United Nations, global NGOs</td>
+					<td>World Water Day, International Literacy Day</td>
+				</tr>
+				<tr>
+					<td><strong>National days</strong></td>
+					<td>Governments, constitutions</td>
+					<td>Independence days, republic days, national heroes</td>
+				</tr>
+				<tr>
+					<td><strong>Historical / biographical</strong></td>
+					<td>Archives, almanacs, curated databases</td>
+					<td>First moonwalk anniversary, birthday of a Nobel laureate</td>
+				</tr>
+			</table>
+			<p>Our articles on <a href="/articles/today/why-do-we-celebrate-international-days">why we celebrate international days</a> and the <a href="/articles/today/most-important-international-days-of-the-year">month-by-month awareness guide</a> cover the first channel in depth. Today the app fills the rest—so you are not juggling three websites before coffee.</p>
+
+			<h2>Practical Ways to Use the Today App</h2>
+			<ul>
+				<li><strong>Morning scan:</strong> Check today’s observance plus one historical or birthday highlight.</li>
+				<li><strong>Social and classroom:</strong> Use verified summaries as prompts; link causes to real events and lives.</li>
+				<li><strong>Search:</strong> Look ahead for a friend’s interest (environment, sports, literature) and find related dates that month.</li>
+				<li><strong>Balance:</strong> Pair celebratory national days with memorials to avoid a feed that feels only cheerful or only heavy.</li>
+			</ul>
+			<p>Visit the <a href="/apps/today">Today app page</a> for screenshots of global observances, historical milestones, birthdays, and memorials—or install the app from the <a href="https://play.google.com/store/apps/details?id=net.smartlogic.three65days" target="_blank" rel="noopener noreferrer">Google Play Store</a>.</p>
+
+			<section>
+				<h3>Today App Content FAQs</h3>
+				<table>
+					<tr>
+						<th>Question</th>
+						<th>Answer</th>
+					</tr>
+					<tr>
+						<td>Are historical events verified?</td>
+						<td>Today curates from established reference sources; for academic work, still cite primary histories.</td>
+					</tr>
+					<tr>
+						<td>Is every birthday globally famous?</td>
+						<td>No. Lists mix widely known figures with niche contributors to keep discovery fresh.</td>
+					</tr>
+					<tr>
+						<td>How is this different from a generic “day of” website?</td>
+						<td>Today combines awareness days, national events, history, birthdays, and memorials in one distraction-free Android experience.</td>
+					</tr>
+				</table>
+			</section>
+
+			<h3>Conclusion</h3>
+			<p>A date is never “just” an awareness hashtag. It is also a stage where history happened, lives began, and losses are remembered. Opening Today is a small habit that widens how you see the world—one day, and many layers, at a time.</p>
+		`
 	}
 ];
