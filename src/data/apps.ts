@@ -110,18 +110,18 @@ export const apps: App[] = [
   },
   {
     id: "graphy-calculator",
-    name: "Graphy Calculator",
-    topicName: "Graphy Calculator",
-    tagline: "Calculate. Visualize. Understand.",
-    shortDescription: "Smart calculator with unit conversion, scientific math, and Graphy — visual explanations that show how every answer was built.",
-    longDescription: "Graphy Calculator combines fast everyday calculations, comprehensive unit conversion, and a breakthrough Graphy Engine that turns results into clear visual explanations. Use the calculator exactly as before — then open Graphy to see flowcharts, blocks, gauges, and charts that reveal how your answer was produced. From percentage and BMI to EMI and length conversion, every calculation becomes easier to understand, verify, and trust.",
+    name: "Calculator+",
+    topicName: "Calculator+",
+    tagline: "Calculate. Convert. Understand.",
+    shortDescription: "Smart calculator with unit conversion, scientific math, and Graphy visual explanations that show how every answer was built.",
+    longDescription: "Calculator+ combines fast everyday calculations, comprehensive unit conversion, and the Graphy Engine that turns results into clear visual explanations. Use the calculator exactly as before — then open Graphy to see flowcharts, blocks, gauges, and charts that reveal how your answer was produced. From percentage and BMI to EMI and length conversion, every calculation becomes easier to understand, verify, and trust.",
     themeColor: "#14B8A6", // Teal
     category: "Productivity",
     playStoreUrl: "https://play.google.com/store/apps/details?id=net.smartlogic.unitconverter",
     icon: "/graphy-calculator.webp",
-    seoTitle: "Graphy Calculator App | Visual Math & Unit Conversion | SmartUp Tech",
-    features: ["Graphy Visual Engine", "Unit Conversion", "Scientific Calculator", "Percentage & BMI", "EMI & Finance", "History & Favorites", "Offline Mode"],
-    seoKeywords: ["Graphy Calculator", "Visual Calculator", "Unit Converter", "Percentage Calculator", "BMI Calculator", "EMI Calculator", "Graphy Engine"],
+    seoTitle: "Calculator+ App | Visual Math, Unit Conversion & Graphy | SmartUp Tech",
+    features: ["Graphy Visual Explanations", "Unit Conversion", "Scientific Calculator", "Percentage & BMI", "EMI & Finance", "History & Favorites", "Offline Mode"],
+    seoKeywords: ["Calculator+", "Calculator Plus", "Graphy Calculator", "Visual Calculator", "Unit Converter", "Percentage Calculator", "BMI Calculator", "EMI Calculator", "Graphy Engine"],
     benefits: [
       "See how every answer was built with optional Graphy visual explanations.",
       "Convert units across 100+ categories with instant, accurate results.",
@@ -130,7 +130,8 @@ export const apps: App[] = [
       "Fast calculator workflows preserved; Graphy is an optional insight panel, not a replacement."
     ],
     faqs: [
-      { question: "What is Graphy?", answer: "Graphy is a visual explanation layer that transforms your calculation result into flowcharts, blocks, gauges, or charts — showing exactly how the answer was produced." },
+      { question: "What is Calculator+?", answer: "Calculator+ is SmartUp Tech's all-in-one calculator and unit converter with optional Graphy visual explanations for every result." },
+      { question: "What is Graphy?", answer: "Graphy is the visual explanation layer inside Calculator+ that transforms your calculation result into flowcharts, blocks, gauges, or charts — showing exactly how the answer was produced." },
       { question: "Does Graphy change my calculation result?", answer: "No. Graphy and the calculator share one calculation path. Graphy visualizes the same evaluated result; it never calculates independently." },
       { question: "Which calculators support Graphy?", answer: "Graphy is rolling out across calculators including Percentage, BMI, EMI, Length Converter, and more. Flowchart is the universal fallback for every calculator." },
       { question: "Can I still use it as a regular calculator?", answer: "Yes. Your existing fast calculator and unit conversion workflows are preserved. Graphy is optional — open it when you want to understand the math." },
