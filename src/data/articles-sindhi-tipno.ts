@@ -235,5 +235,87 @@ export const sindhiTipnoArticles: Article[] = [
 				</table>
 			</section>
 		`
+	},
+	{
+		slug: 'cheti-chand-sindhi-new-year',
+		appId: 'sindhi-tipno',
+		title: 'Cheti Chand: Sindhi New Year, Jhulelal, and Tipno Dates',
+		excerpt: 'Why the Sindhi community celebrates Cheti Chand on the second day of Chet, how Jhulelal’s birth is honored, and how to find the date in Sindhi Tipno wherever you live.',
+		coverImage: '/blog/sindhi-tipno/festivals-guide.webp',
+		publishDate: '2026-11-03',
+		category: 'Festivals',
+		seoTitle: 'Cheti Chand 2026 Guide | Sindhi New Year, Jhulelal & Tipno Dates',
+		seoDescription: 'Cheti Chand is the Sindhi New Year marking Jhulelal’s birth. Learn rituals, Behrano Sahib, langar, diaspora celebrations, and how Sindhi Tipno shows the lunar date.',
+		content: `
+			<h2>The Heart of the Sindhi Calendar</h2>
+			<p>For Sindhis worldwide, <strong>Cheti Chand</strong> is more than a holiday on a list—it is the New Year and the birthday of <strong>Jhulelal</strong> (Uderolal), the community’s beloved Ishtadev who emerged from the Indus to protect faith and identity. The name itself comes from the Sindhi month <strong>Chet</strong> (Chaitra): “Cheti Chand” means the <strong>second day (Dwitiya)</strong> of that month in the traditional lunar reckoning used in the <strong>Tipno</strong>.</p>
+			<p>Whether you grew up with a paper Tipno on the kitchen wall or are discovering these dates for the first time, understanding Cheti Chand connects you to centuries of river-bank devotion, post-Partition resilience, and the joyful cry: <em>Jayo Jhulelal, Beda Payo!</em></p>
+
+			<h2>History: Jhulelal and the Indus</h2>
+			<p>Medieval Sindh faced pressure on Hindu practice under ruler Mirkshah. Legend tells of forty days of prayer on the Indus, culminating in the divine promise of a savior. Jhulelal appeared as an infant to Ratan Rai and Devki, growing into the saint-king who defended the community through miracles and moral courage rather than violence alone.</p>
+			<p>Cheti Chand commemorates his <strong>birth</strong> (and, in spirit, the renewal of Sindhi life each spring). After 1947, when many Sindhis migrated to India and beyond, the festival became an anchor of identity—proof that culture could survive displacement when dates, food, and gathering places were preserved.</p>
+
+			<h2>When Is Cheti Chand? Lunar Dates vs the English Calendar</h2>
+			<p>Cheti Chand falls on <strong>Dwitiya Tithi</strong> in the month of <strong>Chet (Chaitra)</strong>, typically shortly after the spring equinox. Because the Tipno follows the moon, the English calendar date <strong>changes every year</strong>—much like Diwali or Easter. Two cities may share the same festival name but need confirmation for their local sunset and Tithi end times.</p>
+			<p>This is why families rely on the Tipno rather than guessing from last year’s date. The <strong>Sindhi Tipno app</strong> marks Cheti Chand on the traditional calendar and sends reminders so diaspora families in Dubai, London, or Mumbai all observe the correct day.</p>
+
+			<h2>How the Community Celebrates</h2>
+			<h3>Processions and Behrano Sahib</h3>
+			<p>Morning often begins at the <strong>Baharana Sahib</strong> or community altar: a decorated tray with oil lamp, sugar, rice, fruits, and cardamom offered to Jhulelal. Devotees carry <strong>Behrano Sahib</strong> in procession toward a river, lake, or symbolic water body, singing bhajans and performing <strong>Dhamal</strong>—the rhythmic devotional dance that fills Tikana halls worldwide.</p>
+
+			<h3>Langar and Prasad</h3>
+			<p>Cheti Chand is incomplete without <strong>langar</strong>, the communal meal. <strong>Tahiri</strong> (sweet rice) and <strong>Sai Bhaji</strong> are classic pairings; volunteers serve everyone regardless of background, embodying Jhulelal’s inclusive message. If you want to explore these dishes in depth, see our article on <a href="/articles/sindhi-tipno/sindhi-festival-cuisine">Sindhi festival cuisine</a>.</p>
+
+			<h3>Home Observances</h3>
+			<ul>
+				<li>Cleaning the home and wearing fresh clothes</li>
+				<li>Lighting a diya before Jhulelal’s image or calendar</li>
+				<li>Chanting “Jayo Jhulelal” and reading brief passages on Uderolal’s life</li>
+				<li>Charity—food, clothes, or support for community kitchens</li>
+			</ul>
+
+			<h2>Cheti Chand Across the Diaspora</h2>
+			<p>In Ulhasnagar, Pune, Ahmedabad, Jakarta, or Hong Kong, Sindhi samaj halls replicate the Indus-facing ritual with whatever water is near—a reminder that Jhulelal is tied to <em>water as life</em>, not only one geography. Youth programs, cultural shows, and business networking often cluster around the same weekend, turning the religious New Year into a reunion of families separated by visas and time zones.</p>
+
+			<h2>Using Sindhi Tipno for Cheti Chand and the Year Ahead</h2>
+			<p>Beyond this single day, the Tipno tracks <strong>Thadri</strong>, <strong>Chaliho Sahib</strong>, Teej-related observances, and daily Tithi and Muhurat. For Cheti Chand specifically, the app helps you:</p>
+			<ul>
+				<li>See the exact festival date for your selected city</li>
+				<li>Set a reminder before Behrano preparation or langar seva</li>
+				<li>Cross-check moon phase and Tithi transitions if you follow strict fasting rules</li>
+			</ul>
+			<p>Download from the <a href="https://play.google.com/store/apps/details?id=net.smartlogic.sindhitipno" target="_blank" rel="noopener noreferrer">Google Play Store</a> or read more on the <a href="/apps/sindhi-tipno">Sindhi Tipno website</a>.</p>
+
+			<div class="bg-gray-50 p-8 rounded-3xl my-8 border border-gray-100">
+				<h3 class="mt-0">Never Miss Cheti Chand Again</h3>
+				<p>Keep the lunar New Year—and every Sindhi festival—on your phone with accurate Tipno dates and reminders.</p>
+				<a href="https://play.google.com/store/apps/details?id=net.smartlogic.sindhitipno" target="_blank" rel="noopener noreferrer" class="inline-block bg-black text-white px-8 py-3 rounded-full font-bold hover:bg-gray-800 transition-colors">Get Sindhi Tipno on Google Play</a>
+			</div>
+
+			<section>
+				<h3>Cheti Chand FAQs</h3>
+				<table>
+					<tr>
+						<th>Question</th>
+						<th>Answer</th>
+					</tr>
+					<tr>
+						<td>Is Cheti Chand only a New Year?</td>
+						<td>It is both the Sindhi New Year (month of Chet) and the birth anniversary of Jhulelal.</td>
+					</tr>
+					<tr>
+						<td>Why does the date move on the English calendar?</td>
+						<td>The Tipno is lunar. Cheti Chand follows Tithi and month, not fixed January 1-style dates.</td>
+					</tr>
+					<tr>
+						<td>Can I celebrate without a nearby river?</td>
+						<td>Yes. Communities use any clean water body or symbolic offering; devotion matters more than geography.</td>
+					</tr>
+				</table>
+			</section>
+
+			<h3>Conclusion</h3>
+			<p>Cheti Chand gathers memory, faith, and hope at the start of every Sindhi year. With an accurate Tipno—on paper or in the Sindhi Tipno app—you honor Jhulelal on the right day and pass the tradition to the next generation.</p>
+		`
 	}
 ];

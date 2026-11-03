@@ -133,6 +133,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.smartuptech.in/articles/panchang/brahma-muhurta-abhijit-amrit-kaal</loc>
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.smartuptech.in/articles/today/why-do-we-celebrate-international-days</loc>
     <lastmod>2026-08-28</lastmod>
     <changefreq>monthly</changefreq>
@@ -141,6 +147,12 @@
   <url>
     <loc>https://www.smartuptech.in/articles/today/most-important-international-days-of-the-year</loc>
     <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.smartuptech.in/articles/today/on-this-day-history-birthdays-memorials</loc>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -193,8 +205,8 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.smartuptech.in/articles/sindhi-tipno/sindhi-festivals-guide</loc>
-    <lastmod>2026-08-28</lastmod>
+    <loc>https://www.smartuptech.in/articles/sindhi-tipno/cheti-chand-sindhi-new-year</loc>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

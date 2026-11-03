@@ -195,6 +195,7 @@ const appsItemListJsonLd = (isHomePage || isAppsIndex) ? {
       "operatingSystem": "Android",
       "applicationCategory": applicationCategoryMap[entry.category] || "UtilitiesApplication",
       "description": entry.shortDescription,
+<<<<<<< HEAD
       ...((): Record<string, unknown> => {
         const rating = getPlayStoreRating(entry.id);
         if (!rating || rating.ratings <= 0) return {};
@@ -208,6 +209,8 @@ const appsItemListJsonLd = (isHomePage || isAppsIndex) ? {
           },
         };
       })(),
+=======
+>>>>>>> origin/main
     },
   })),
 } : null;
