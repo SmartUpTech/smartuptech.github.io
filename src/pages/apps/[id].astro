@@ -6,6 +6,7 @@ import SEO from '../../components/SEO.astro';
 import ScreenshotGallery from '../../components/ScreenshotGallery.astro';
 import FAQ from '../../components/FAQ.astro';
 import RelatedApps from '../../components/RelatedApps.astro';
+import PlayStoreRating from '../../components/PlayStoreRating.astro';
 import { apps } from '../../data/apps';
 import { articles } from '../../data/articles';
 
@@ -156,10 +157,7 @@ const relatedArticles = articles.filter(art => art.appId === app.id).slice(0, 4)
 							style={`background-color: ${app.themeColor}`}
 						></div>
 						<div class="relative aspect-square rounded-[4rem] border border-white/10 bg-white/5 backdrop-blur-3xl flex items-center justify-center">
-							<div class="text-center p-12">
-								<p class="text-6xl font-bold mb-4">4.5★</p>
-								<p class="text-gray-400 uppercase tracking-widest text-sm">Average Rating</p>
-							</div>
+							<PlayStoreRating appSlug={app.id} variant="hero" playStoreUrl={app.playStoreUrl} />
 						</div>
 					</div>
 				</div>

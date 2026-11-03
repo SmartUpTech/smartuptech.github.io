@@ -1,5 +1,6 @@
 ---
 import type { App } from '../data/apps';
+import PlayStoreRating from './PlayStoreRating.astro';
 
 interface Props {
 	app: App;
@@ -35,6 +36,7 @@ const { app } = Astro.props;
 	</div>
 
 	<div class="flex-grow">
+		<PlayStoreRating appSlug={app.id} variant="compact" />
 		<p class="text-gray-500 text-sm leading-relaxed mb-5 md:mb-8 line-clamp-3">
 			{app.shortDescription}
 		</p>

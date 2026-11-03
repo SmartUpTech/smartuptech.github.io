@@ -2,6 +2,7 @@
 import type { App } from '../data/apps';
 import type { Article } from '../data/articles';
 import { apps } from '../data/apps';
+import { getPlayStoreRating } from '../data/play-store-ratings';
 
 interface Props {
 	app?: App;
@@ -90,6 +91,7 @@ const organizationRef = {
 
 const appPageUrl = app ? new URL(`/apps/${app.id}`, siteUrl).href : null;
 const playPackage = app ? playPackageId(app.playStoreUrl) : null;
+const playStoreRating = app ? getPlayStoreRating(app.id) : undefined;
 
 const appJsonLd = app ? {
   "@context": "https://schema.org",
@@ -114,6 +116,16 @@ const appJsonLd = app ? {
     "availability": "https://schema.org/InStock",
     "url": app.playStoreUrl,
   },
+  ...(playStoreRating && playStoreRating.ratings > 0 ? {
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": playStoreRating.score,
+      "ratingCount": playStoreRating.ratings,
+      "reviewCount": playStoreRating.reviews,
+      "bestRating": 5,
+      "worstRating": 1,
+    },
+  } : {}),
   "description": app.longDescription,
   "featureList": app.features,
   "keywords": app.seoKeywords.join(", "),
@@ -183,6 +195,19 @@ const appsItemListJsonLd = (isHomePage || isAppsIndex) ? {
       "operatingSystem": "Android",
       "applicationCategory": applicationCategoryMap[entry.category] || "UtilitiesApplication",
       "description": entry.shortDescription,
+      ...((): Record<string, unknown> => {
+        const rating = getPlayStoreRating(entry.id);
+        if (!rating || rating.ratings <= 0) return {};
+        return {
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: rating.score,
+            ratingCount: rating.ratings,
+            bestRating: 5,
+            worstRating: 1,
+          },
+        };
+      })(),
     },
   })),
 } : null;
