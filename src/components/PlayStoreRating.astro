@@ -1,0 +1,42 @@
+---
+import {
+	formatPlayStoreRatingCount,
+	formatPlayStoreScore,
+	getPlayStoreRating,
+} from '../data/play-store-ratings';
+
+interface Props {
+	appSlug: string;
+	variant?: 'hero' | 'compact';
+	playStoreUrl?: string;
+}
+
+const { appSlug, variant = 'hero', playStoreUrl } = Astro.props;
+const rating = getPlayStoreRating(appSlug);
+---
+
+{rating && variant === 'hero' && (
+	<div class="text-center p-12">
+		<p class="text-6xl font-bold mb-4">{formatPlayStoreScore(rating.score)}★</p>
+		<p class="text-gray-400 uppercase tracking-widest text-sm mb-2">Google Play rating</p>
+		<p class="text-gray-500 text-sm">
+			{formatPlayStoreRatingCount(rating.ratings)} ratings
+		</p>
+	</div>
+)}
+
+{!rating && variant === 'hero' && playStoreUrl && (
+	<div class="text-center p-12">
+		<p class="text-gray-400 text-sm uppercase tracking-widest">Ratings on</p>
+		<a href={playStoreUrl} target="_blank" rel="noopener noreferrer" class="text-xl font-bold text-white mt-2 inline-block hover:underline">
+			Google Play
+		</a>
+	</div>
+)}
+
+{rating && variant === 'compact' && (
+	<p class="text-sm text-gray-500 flex items-center gap-1.5 mb-4 md:mb-6">
+		<span class="font-bold text-gray-800">{formatPlayStoreScore(rating.score)}★</span>
+		<span>· {formatPlayStoreRatingCount(rating.ratings)} on Google Play</span>
+	</p>
+)}

@@ -1,0 +1,35 @@
+{
+  "fetchedAt": "2026-11-03T18:36:46.693Z",
+  "apps": {
+    "panchang": {
+      "score": 4.09,
+      "ratings": 578,
+      "reviews": 224,
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=net.smartlogic.hinducalendar&hl=en&gl=in"
+    },
+    "today": {
+      "score": 4.26,
+      "ratings": 588,
+      "reviews": 153,
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=net.smartlogic.three65days&hl=en&gl=in"
+    },
+    "graphy-calculator": {
+      "score": 4.463768,
+      "ratings": 322,
+      "reviews": 42,
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=net.smartlogic.unitconverter&hl=en&gl=in"
+    },
+    "citizen-calculator": {
+      "score": 4.23,
+      "ratings": 205,
+      "reviews": 68,
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=net.smartlogic.citizengstcalculator&hl=en&gl=in"
+    },
+    "sindhi-tipno": {
+      "score": 4.54,
+      "ratings": 236,
+      "reviews": 80,
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=net.smartlogic.sindhitipno&hl=en&gl=in"
+    }
+  }
+}

@@ -7,6 +7,8 @@
   },
   "scripts": {
     "dev": "astro dev",
+    "sync:ratings": "node --experimental-strip-types scripts/sync-play-store-ratings.ts",
+    "prebuild": "npm run sync:ratings",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
@@ -22,7 +24,7 @@
     "tailwindcss": "^4.0.0"
   },
   "devDependencies": {
+    "google-play-scraper": "^10.1.4",
     "playwright": "^1.52.0"
   }
 }
-

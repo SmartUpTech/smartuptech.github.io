@@ -2,6 +2,7 @@
 import type { App } from '../data/apps';
 import type { Article } from '../data/articles';
 import { apps } from '../data/apps';
+import { getPlayStoreRating } from '../data/play-store-ratings';
 
 interface Props {
 	app?: App;
@@ -10,13 +11,18 @@ interface Props {
 	description?: string;
 	ogImage?: string;
 	isHomePage?: boolean;
+	isAppsIndex?: boolean;
 }
 
-const { app, article, title, description, isHomePage = false } = Astro.props;
-let { ogImage = "/og-image.png" } = Astro.props;
+const { app, article, title, description, isHomePage = false, isAppsIndex = false } = Astro.props;
+let { ogImage = "/smart-up-tech.webp" } = Astro.props;
 
 if (article?.coverImage && !Astro.props.ogImage) {
   ogImage = article.coverImage;
+}
+
+if (app?.icon && !article && !Astro.props.ogImage) {
+  ogImage = app.icon;
 }
 
 const siteUrl = Astro.site || "https://www.smartuptech.in";
@@ -39,21 +45,34 @@ function normalizePath(pathname: string): string {
 	return path;
 }
 
+function playPackageId(playStoreUrl: string): string | null {
+	const match = playStoreUrl.match(/[?&]id=([^&]+)/);
+	return match?.[1] ?? null;
+}
+
 const normalizedPath = normalizePath(Astro.url.pathname);
 const canonicalURL = new URL(normalizedPath, siteUrl);
 const ogImageURL = new URL(ogImage, siteUrl);
 
 const seoTitle = article
-  ? article.title
-  : (app
-    ? (app.seoTitle || `${app.name} — ${app.tagline} | Android App`)
-    : (title ? title : "SmartUp Tech | Quality Android Applications for Everyday Life"));
+  ? (article.seoTitle || article.title)
+  : (title
+    ? title
+    : (app
+      ? (app.seoTitle || `${app.name} — ${app.tagline} | Android App`)
+      : "SmartUp Tech | Quality Android Applications for Everyday Life"));
 
 const seoDescription = article
-  ? article.excerpt
+  ? (article.seoDescription || article.excerpt)
   : (app
-    ? `${app.shortDescription} Download ${app.name} for Android on Google Play. ${app.features.slice(0, 3).join(', ')}.`
+    ? `${app.shortDescription} Download ${app.name} free on Google Play for Android. ${app.features.slice(0, 4).join(', ')}.`
     : (description || "SmartUp Tech develops high-impact Android applications focused on utility, cultural heritage, and daily productivity for millions of users worldwide."));
+
+const seoKeywords = app
+  ? app.seoKeywords.join(", ")
+  : (isHomePage || isAppsIndex
+    ? apps.flatMap((entry) => entry.seoKeywords).slice(0, 24).join(", ")
+    : undefined);
 
 const applicationCategoryMap: Record<string, string> = {
   "Finance": "FinanceApplication",
@@ -63,86 +82,158 @@ const applicationCategoryMap: Record<string, string> = {
   "Culture": "LifestyleApplication",
 };
 
-// Structured Data for App
+const organizationRef = {
+  "@type": "Organization",
+  "name": "SmartUp Tech",
+  "url": siteUrl.href,
+  "logo": new URL("/smart-up-tech.webp", siteUrl).href,
+};
+
+const appPageUrl = app ? new URL(`/apps/${app.id}`, siteUrl).href : null;
+const playPackage = app ? playPackageId(app.playStoreUrl) : null;
+const playStoreRating = app ? getPlayStoreRating(app.id) : undefined;
+
 const appJsonLd = app ? {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
+  "@type": "MobileApplication",
   "name": app.name,
-  "operatingSystem": "ANDROID",
+  "alternateName": app.seoKeywords.slice(0, 3),
+  "operatingSystem": "Android",
   "applicationCategory": applicationCategoryMap[app.category] || "UtilitiesApplication",
   "downloadUrl": app.playStoreUrl,
   "installUrl": app.playStoreUrl,
+  "url": appPageUrl,
   "image": new URL(app.icon, siteUrl).href,
-  "author": {
-    "@type": "Organization",
-    "name": "SmartUp Tech",
-    "url": siteUrl.href
-  },
+  "screenshot": app.screenshots.slice(0, 3).map((shot) =>
+    new URL(`/screenshots/${app.id}/${shot.file}`, siteUrl).href
+  ),
+  "author": organizationRef,
+  "publisher": organizationRef,
   "offers": {
     "@type": "Offer",
     "price": "0",
-    "priceCurrency": "USD"
+    "priceCurrency": "INR",
+    "availability": "https://schema.org/InStock",
+    "url": app.playStoreUrl,
   },
+  ...(playStoreRating && playStoreRating.ratings > 0 ? {
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": playStoreRating.score,
+      "ratingCount": playStoreRating.ratings,
+      "reviewCount": playStoreRating.reviews,
+      "bestRating": 5,
+      "worstRating": 1,
+    },
+  } : {}),
   "description": app.longDescription,
   "featureList": app.features,
-  "keywords": app.seoKeywords.join(", ")
+  "keywords": app.seoKeywords.join(", "),
+  "inLanguage": ["en", "hi"],
+  "countriesSupported": "IN",
 } : null;
 
-// Organization Schema for Home Page
+const faqJsonLd = app && app.faqs.length > 0 ? {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": app.faqs.map((faq) => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer,
+    },
+  })),
+} : null;
+
 const orgJsonLd = isHomePage ? {
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": "SmartUp Tech",
   "url": siteUrl.href,
   "logo": new URL("/smart-up-tech.webp", siteUrl).href,
-  "description": "SmartUp Tech develops useful Android applications for everyday life, including Anant Panchang, calculators, and cultural calendars.",
+  "description": "SmartUp Tech develops useful Android applications for everyday life, including Anant Panchang, Sindhi Tipno, Today, and calculator apps.",
+  "knowsAbout": apps.map((entry) => entry.topicName),
   "contactPoint": {
     "@type": "ContactPoint",
     "email": "smartlogic08@gmail.com",
-    "contactType": "customer service"
+    "contactType": "customer service",
+    "areaServed": "IN",
+    "availableLanguage": ["English", "Hindi"],
   },
   "sameAs": [
-    "https://play.google.com/store/apps/dev?id=6614685995890456247"
-  ]
+    "https://play.google.com/store/apps/dev?id=6614685995890456247",
+  ],
 } : null;
 
-// WebSite Schema for Home Page
 const websiteJsonLd = isHomePage ? {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "SmartUp Tech",
   "url": siteUrl.href,
   "description": seoDescription,
-  "publisher": {
-    "@type": "Organization",
-    "name": "SmartUp Tech"
-  }
+  "inLanguage": "en-IN",
+  "publisher": organizationRef,
 } : null;
 
-// Article Schema
+const appsItemListJsonLd = (isHomePage || isAppsIndex) ? {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "SmartUp Tech Android Apps",
+  "description": "Official landing pages for SmartUp Tech apps on Google Play.",
+  "numberOfItems": apps.length,
+  "itemListElement": apps.map((entry, index) => ({
+    "@type": "ListItem",
+    "position": index + 1,
+    "name": entry.name,
+    "url": new URL(`/apps/${entry.id}`, siteUrl).href,
+    "item": {
+      "@type": "MobileApplication",
+      "name": entry.name,
+      "url": new URL(`/apps/${entry.id}`, siteUrl).href,
+      "downloadUrl": entry.playStoreUrl,
+      "operatingSystem": "Android",
+      "applicationCategory": applicationCategoryMap[entry.category] || "UtilitiesApplication",
+      "description": entry.shortDescription,
+      ...((): Record<string, unknown> => {
+        const rating = getPlayStoreRating(entry.id);
+        if (!rating || rating.ratings <= 0) return {};
+        return {
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: rating.score,
+            ratingCount: rating.ratings,
+            bestRating: 5,
+            worstRating: 1,
+          },
+        };
+      })(),
+    },
+  })),
+} : null;
+
 const articleJsonLd = article ? {
   "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": article.title,
-  "description": article.excerpt,
+  "@type": "BlogPosting",
+  "headline": article.seoTitle || article.title,
+  "description": article.seoDescription || article.excerpt,
   "image": new URL(article.coverImage, siteUrl).href,
-  "author": {
-    "@type": "Organization",
-    "name": "SmartUp Tech",
-    "url": siteUrl.href
-  },
+  "author": organizationRef,
   "publisher": {
-    "@type": "Organization",
-    "name": "SmartUp Tech",
+    ...organizationRef,
     "logo": {
       "@type": "ImageObject",
-      "url": new URL("/smart-up-tech.webp", siteUrl).href
-    }
+      "url": new URL("/smart-up-tech.webp", siteUrl).href,
+    },
   },
-  "datePublished": article.publishDate
+  "datePublished": article.publishDate,
+  "dateModified": article.publishDate,
+  "mainEntityOfPage": canonicalURL.href,
+  "inLanguage": "en-IN",
+  "keywords": article.category,
+  "about": apps.find((entry) => entry.id === article.appId)?.name,
 } : null;
 
-// Breadcrumb Schema
 const breadcrumbs = [];
 const pathSegments = normalizedPath.split('/').filter(Boolean);
 if (pathSegments.length > 0) {
@@ -154,20 +245,22 @@ if (pathSegments.length > 0) {
 	});
 	pathSegments.forEach((segment, index) => {
 		const segmentPath = `/${pathSegments.slice(0, index + 1).join('/')}`;
-		const matchedApp = pathSegments[0] === 'apps'
-			? apps.find((entry) => entry.id === segment)
-			: undefined;
+		const parentSegment = pathSegments[index - 1];
+		const matchedApp =
+			(parentSegment === 'apps' || parentSegment === 'articles')
+				? apps.find((entry) => entry.id === segment)
+				: undefined;
 
 		breadcrumbs.push({
 			"@type": "ListItem",
 			"position": index + 2,
-			"name": matchedApp?.name || segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' '),
+			"name": matchedApp?.name || matchedApp?.topicName || segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' '),
 			"item": new URL(segmentPath, siteUrl).href
 		});
 	});
 }
 
-const breadcrumbJsonLd = breadcrumbs.length > 0 ? {
+const breadcrumbJsonLd = breadcrumbs.length > 1 ? {
 	"@context": "https://schema.org",
 	"@type": "BreadcrumbList",
 	"itemListElement": breadcrumbs
@@ -178,17 +271,36 @@ const breadcrumbJsonLd = breadcrumbs.length > 0 ? {
 <title>{seoTitle}</title>
 <meta name="title" content={seoTitle} />
 <meta name="description" content={seoDescription} />
+{seoKeywords && <meta name="keywords" content={seoKeywords} />}
+<meta name="author" content="SmartUp Tech" />
+<meta name="publisher" content="SmartUp Tech" />
 <link rel="canonical" href={canonicalURL} />
-<meta name="robots" content="index, follow" />
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+<link rel="alternate" type="text/plain" href={new URL("/llms.txt", siteUrl).href} title="LLMs.txt site summary for AI systems" />
+
+{playPackage && (
+  <meta name="google-play-app" content={`app-id=${playPackage}`} />
+)}
 
 <!-- Open Graph / Facebook -->
-<meta property="og:type" content={article ? "article" : (app ? "website" : "website")} />
+<meta property="og:type" content={article ? "article" : "website"} />
 <meta property="og:site_name" content="SmartUp Tech" />
 <meta property="og:locale" content="en_IN" />
 <meta property="og:url" content={canonicalURL} />
 <meta property="og:title" content={seoTitle} />
 <meta property="og:description" content={seoDescription} />
 <meta property="og:image" content={ogImageURL} />
+<meta property="og:image:alt" content={seoTitle} />
+{app && <meta property="og:see_also" content={app.playStoreUrl} />}
+
+{article && (
+  <>
+    <meta property="article:published_time" content={article.publishDate} />
+    <meta property="article:modified_time" content={article.publishDate} />
+    <meta property="article:author" content="SmartUp Tech" />
+    <meta property="article:section" content={article.category} />
+  </>
+)}
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
@@ -196,9 +308,14 @@ const breadcrumbJsonLd = breadcrumbs.length > 0 ? {
 <meta name="twitter:title" content={seoTitle} />
 <meta name="twitter:description" content={seoDescription} />
 <meta name="twitter:image" content={ogImageURL} />
+<meta name="twitter:image:alt" content={seoTitle} />
 
 {appJsonLd && (
   <script type="application/ld+json" is:inline set:html={JSON.stringify(appJsonLd)} />
+)}
+
+{faqJsonLd && (
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(faqJsonLd)} />
 )}
 
 {orgJsonLd && (
@@ -207,6 +324,10 @@ const breadcrumbJsonLd = breadcrumbs.length > 0 ? {
 
 {websiteJsonLd && (
   <script type="application/ld+json" is:inline set:html={JSON.stringify(websiteJsonLd)} />
+)}
+
+{appsItemListJsonLd && (
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(appsItemListJsonLd)} />
 )}
 
 {articleJsonLd && (
